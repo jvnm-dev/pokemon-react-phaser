@@ -42,47 +42,13 @@ export default class WorldScene extends Phaser.Scene {
   initializeTilemap(): void {
     this.tilemap = this.make.tilemap({ key: this.map });
 
-    const grounds_inside = this.tilemap.addTilesetImage(
-      Tilesets.GROUNDS_INSIDE,
-      Tilesets.GROUNDS_INSIDE
-    );
-    const grounds_outside = this.tilemap.addTilesetImage(
-      Tilesets.GROUNDS,
-      Tilesets.GROUNDS
-    );
-    const world = this.tilemap.addTilesetImage(Tilesets.WORLD, Tilesets.WORLD);
-    const world2 = this.tilemap.addTilesetImage(
-      Tilesets.WORLD2,
-      Tilesets.WORLD2
+    const all_tilesets = Object.values(Tilesets).map((tileset) =>
+      this.tilemap.addTilesetImage(tileset)
     );
 
-    const all_tilesets = [grounds_inside, grounds_outside, world, world2];
-
-    const belowLayer = this.tilemap.createLayer(
-      Layers.BELOW_PLAYER,
-      all_tilesets,
-      0,
-      0
-    );
-    const worldLayer = this.tilemap.createLayer(
-      Layers.WORLD,
-      all_tilesets,
-      0,
-      0
-    );
-    const aboveLayer = this.tilemap.createLayer(
-      Layers.ABOVE_PLAYER,
-      all_tilesets,
-      0,
-      0
-    );
-
-    worldLayer.setCollisionByProperty({ collides: true });
-    aboveLayer.setDepth(10);
-
-    belowLayer.scale = 1;
-    worldLayer.scale = 1;
-    aboveLayer.scale = 1;
+    Object.values(Layers).forEach((layer) => {
+      this.tilemap.createLayer(layer, all_tilesets);
+    });
   }
 
   handleObjectsOverlap(): void {

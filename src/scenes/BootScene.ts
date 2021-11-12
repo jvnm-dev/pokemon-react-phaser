@@ -31,14 +31,17 @@ export default class BootScene extends Phaser.Scene {
     this.sound.add(Audios.MUSIC);
     this.sound.add(Audios.DOOR);
 
-    // const musicConfig = {
-    //   mute: false,
-    //   volume: 0.1,
-    //   rate: 1,
-    //   detune: 0,
-    //   loop: true,
-    // };
-    // this.sound.play(Audios.MUSIC, musicConfig);
+    const musicConfig = {
+      mute: false,
+      volume: 0.1,
+      rate: 1,
+      detune: 0,
+      loop: true,
+    };
+    this.sound.play(Audios.MUSIC, musicConfig);
+
+    // TODO: remove
+    this.sound.volume = 0;
   }
 
   loadImages(): void {
