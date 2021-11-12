@@ -1,7 +1,6 @@
 import Phaser from "phaser";
 import { GridEngine } from "grid-engine";
 
-import UIScene from "./scenes/UIScene";
 import BootScene from "./scenes/BootScene";
 import TitleScene from "./scenes/TitleScene";
 import WorldScene from "./scenes/WorldScene";
@@ -21,7 +20,7 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [BootScene, TitleScene, UIScene, WorldScene],
+  scene: [BootScene, TitleScene, WorldScene],
   physics: {
     default: "arcade",
     arcade: {

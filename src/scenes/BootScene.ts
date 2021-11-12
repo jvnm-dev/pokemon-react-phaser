@@ -1,47 +1,26 @@
+import { PLAYER_SIZE } from "../constants/game";
 import { Audios, Maps } from "../constants/assets";
 import { Tilesets } from "../constants/assets";
+import { getAudioConfig } from "../utils/audio";
 
 export default class BootScene extends Phaser.Scene {
   text: Phaser.GameObjects.Text;
 
   constructor() {
-    super("Boot"); // Name of the scene
+    super("Boot");
   }
 
   preload(): void {
-    this.text = this.add.text(
-      this.scale.width / 2,
-      this.scale.height / 4,
-      "CHARGEMENT...",
-      {
-        fontSize: "54px",
-        color: "white",
-      }
-    );
-
-    this.text.setOrigin(0.5);
-
     this.loadImages();
     this.loadSpriteSheets();
     this.loadMaps();
   }
 
   create(): void {
-    this.scene.start("World");
+    this.scene.start("Title");
     this.sound.add(Audios.MUSIC);
     this.sound.add(Audios.DOOR);
-
-    const musicConfig = {
-      mute: false,
-      volume: 0.1,
-      rate: 1,
-      detune: 0,
-      loop: true,
-    };
-    this.sound.play(Audios.MUSIC, musicConfig);
-
-    // TODO: remove
-    this.sound.volume = 0;
+    this.sound.play(Audios.MUSIC, getAudioConfig(0.1));
   }
 
   loadImages(): void {
@@ -49,18 +28,13 @@ export default class BootScene extends Phaser.Scene {
     this.load.image("button1", "assets/images/ui/blue_button01.png");
     this.load.image("button2", "assets/images/ui/blue_button02.png");
 
-    // Tilesets
-    this.load.image(Tilesets.GROUNDS, "assets/images/tilesets/grounds.png");
-    this.load.image(Tilesets.WORLD, "assets/images/tilesets/structures.png");
-    this.load.image(Tilesets.WORLD2, "assets/images/tilesets/structures2.png");
-    this.load.image(
-      Tilesets.GROUNDS_INSIDE,
-      "assets/images/tilesets/grounds_inside.png"
-    );
+    Object.values(Tilesets).forEach((tileset) => {
+      this.load.image(tileset, `assets/images/tilesets/${tileset}.png`);
+    });
 
-    // Audio
-    this.load.audio(Audios.MUSIC, "assets/audio/music.ogg");
-    this.load.audio(Audios.DOOR, "assets/audio/door.ogg");
+    Object.values(Audios).forEach((audio) => {
+      this.load.audio(audio, `assets/audio/${audio}.ogg`);
+    });
   }
 
   loadMaps(): void {
@@ -73,8 +47,8 @@ export default class BootScene extends Phaser.Scene {
 
   loadSpriteSheets(): void {
     this.load.spritesheet("characters", "assets/images/characters/player.png", {
-      frameWidth: 64,
-      frameHeight: 64,
+      frameWidth: PLAYER_SIZE,
+      frameHeight: PLAYER_SIZE,
     });
   }
 }

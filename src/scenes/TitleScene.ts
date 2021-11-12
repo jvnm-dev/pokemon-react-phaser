@@ -1,4 +1,3 @@
-import { Maps } from "../constants/assets";
 import UIButton from "../prefabs/UIButton";
 
 export default class TitleScene extends Phaser.Scene {
@@ -6,31 +5,19 @@ export default class TitleScene extends Phaser.Scene {
   startGameButton;
 
   constructor() {
-    super("Title"); // Name of the scene
+    super("Title");
   }
 
   create(): void {
-    this.titleText = this.add.text(
-      this.scale.width / 2,
-      this.scale.height / 4,
-      "LE SUPER JEU",
-      {
-        fontSize: "54px",
-        color: "white",
-      }
-    );
-
-    this.titleText.setOrigin(0.5);
-
     this.startGameButton = new UIButton(
       this,
       this.scale.width / 2,
       this.scale.height / 2,
       "button1",
       "button2",
-      "Jouer",
+      "Play",
       () => {
-        this.scene.start(Maps.MAP);
+        this.scene.start("World");
       }
     );
   }

@@ -1,23 +1,15 @@
-import upperFirst from "lodash/upperFirst";
-import camelCase from "lodash/camelCase";
 import { Direction, GridEngine, GridEngineConfig } from "grid-engine";
 
 import { GAME_HEIGHT, GAME_WIDTH } from "../constants/game";
-import {
-  Sprites,
-  Layers,
-  Objects,
-  Tilesets,
-  Audios,
-  Maps,
-} from "../constants/assets";
+import { Sprites, Layers, Objects, Tilesets, Maps } from "../constants/assets";
+import { getObjectUnderPlayer, getSpawn, handleDoor } from "../utils/object";
 
 export default class WorldScene extends Phaser.Scene {
   gridEngine: GridEngine;
   player: Phaser.GameObjects.Sprite;
   tilemap: Phaser.Tilemaps.Tilemap;
-  receivedData: any;
   map: Maps = Maps.MAP;
+  receivedData: any;
 
   constructor() {
     super("World");
@@ -46,63 +38,20 @@ export default class WorldScene extends Phaser.Scene {
       this.tilemap.addTilesetImage(tileset)
     );
 
-    Object.values(Layers).forEach((layer) => {
-      this.tilemap.createLayer(layer, all_tilesets);
-    });
+    Object.values(Layers)
+      .filter((layer) => layer !== Layers.OBJECTS)
+      .forEach((layer) => {
+        this.tilemap.createLayer(layer, all_tilesets);
+      });
   }
 
   handleObjectsOverlap(): void {
-    const objects = this.tilemap
-      .getObjectLayer(Layers.OBJECTS)
-      .objects.map((object) => ({
-        ...object,
-        x: ~~(object.x / 48),
-        y: ~~(object.y / 48),
-      }));
+    const objectUnderPlayer = getObjectUnderPlayer(this);
 
-    const currentTile = this.tilemap.getTileAtWorldXY(
-      this.player.x,
-      this.player.y,
-      true,
-      this.cameras.main,
-      Layers.WORLD
-    );
-
-    const playerPosition = {
-      x: currentTile?.x + 1,
-      y: currentTile?.y + 1,
-    };
-
-    const objectBelowPlayer = objects.find(
-      ({ x, y }) => x === playerPosition.x && y === playerPosition.y
-    );
-
-    if (objectBelowPlayer) {
-      switch (objectBelowPlayer.name) {
+    if (objectUnderPlayer) {
+      switch (objectUnderPlayer.name) {
         case Objects.DOOR:
-          const nextMap = objectBelowPlayer.properties.find(
-            ({ name }) => name === "nextMap"
-          ).value;
-
-          const x = objectBelowPlayer.properties.find(
-            ({ name }) => name === "x"
-          )?.value;
-
-          const y = objectBelowPlayer.properties.find(
-            ({ name }) => name === "y"
-          )?.value;
-
-          const soundConfig: Phaser.Types.Sound.SoundConfig = {
-            mute: false,
-            volume: 0.5,
-            rate: 1,
-            detune: 0,
-            loop: false,
-          };
-          this.sound.play(Audios.DOOR, soundConfig);
-
-          this.map = nextMap;
-          this.scene.restart({ startPosition: { x, y } });
+          handleDoor(this, objectUnderPlayer);
           break;
       }
     }
@@ -116,14 +65,12 @@ export default class WorldScene extends Phaser.Scene {
   }
 
   initializeGrid(): void {
-    const spawnPoint = this.tilemap.findObject(
-      Layers.OBJECTS,
-      (obj) => obj.name === Objects.SPAWN
-    );
+    const { startPosition, facingDirection } = getSpawn(this);
 
-    const facingDirection = spawnPoint.properties?.find(
-      ({ name }) => name === "spriteDirection"
-    )?.value;
+    console.log(startPosition);
+    const finalStartPosition = this.receivedData?.startPosition?.x
+      ? this.receivedData?.startPosition
+      : startPosition;
 
     const gridEngineConfig = {
       collisionTilePropertyName: "collides",
@@ -132,14 +79,7 @@ export default class WorldScene extends Phaser.Scene {
           id: Sprites.PLAYER,
           sprite: this.player,
           walkingAnimationMapping: 0,
-          startPosition: {
-            x:
-              this.receivedData?.startPosition?.x ??
-              Math.floor(spawnPoint.x / 48),
-            y:
-              this.receivedData?.startPosition?.y ??
-              Math.floor(spawnPoint.y / 48),
-          },
+          startPosition: finalStartPosition,
           charLayer: "world",
           facingDirection,
         },
