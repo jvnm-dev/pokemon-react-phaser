@@ -22,3 +22,4 @@ yarn start
 Everything excepts maps and the game itself have been found on the web.
 
 - Tilesets & sprites: https://www.pokecommunity.com/showthread.php?t=445067
+- Project template (for easy hot reload setup): https://github.com/HanaDigital/phaser3-ts-hotreload-template
