@@ -27,18 +27,18 @@ export default class BootScene extends Phaser.Scene {
   }
 
   create(): void {
-    this.scene.start("Title");
+    this.scene.start("World");
     this.sound.add(Audios.MUSIC);
     this.sound.add(Audios.DOOR);
 
-    const musicConfig = {
-      mute: false,
-      volume: 0.1,
-      rate: 1,
-      detune: 0,
-      loop: true,
-    };
-    this.sound.play(Audios.MUSIC, musicConfig);
+    // const musicConfig = {
+    //   mute: false,
+    //   volume: 0.1,
+    //   rate: 1,
+    //   detune: 0,
+    //   loop: true,
+    // };
+    // this.sound.play(Audios.MUSIC, musicConfig);
   }
 
   loadImages(): void {
@@ -61,16 +61,11 @@ export default class BootScene extends Phaser.Scene {
   }
 
   loadMaps(): void {
-    this.load.tilemapTiledJSON(Maps.MAP, "assets/maps/map.json");
-    this.load.tilemapTiledJSON(Maps.BIG_HOUSE, "assets/maps/big_house.json");
-    this.load.tilemapTiledJSON(
-      Maps.MEDIUM_HOUSE,
-      "assets/maps/medium_house.json"
-    );
-    this.load.tilemapTiledJSON(
-      Maps.SMALL_HOUSE,
-      "assets/maps/small_house.json"
-    );
+    const maps = Object.values(Maps);
+
+    for (const map of maps) {
+      this.load.tilemapTiledJSON(map, `assets/maps/${map}.json`);
+    }
   }
 
   loadSpriteSheets(): void {

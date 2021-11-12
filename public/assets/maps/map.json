@@ -4782,6 +4782,19 @@
                         }]
                 }],
          "tilewidth":48
+        }, 
+        {
+         "columns":16,
+         "firstgid":705,
+         "image":"..\/images\/tilesets\/grounds_inside.png",
+         "imageheight":576,
+         "imagewidth":768,
+         "margin":0,
+         "name":"grounds_inside",
+         "spacing":0,
+         "tilecount":192,
+         "tileheight":48,
+         "tilewidth":48
         }],
  "tilewidth":48,
  "type":"map",

@@ -1,13 +1,11 @@
 import Phaser from "phaser";
 import { GridEngine } from "grid-engine";
 
-import BootScene from "./scenes/BootScene";
-import GameScene from "./scenes/GameScene";
-import TitleScene from "./scenes/TitleScene";
 import UIScene from "./scenes/UIScene";
-import BigHouseScene from "./scenes/BigHouseScene";
-import MediumHouseScene from "./scenes/MediumHouseScene";
-import SmallHouseScene from "./scenes/SmallHouseScene";
+import BootScene from "./scenes/BootScene";
+import TitleScene from "./scenes/TitleScene";
+import WorldScene from "./scenes/WorldScene";
+import { GAME_HEIGHT, GAME_WIDTH } from "./constants/game";
 
 declare global {
   interface Window {
@@ -17,21 +15,13 @@ declare global {
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
-  width: 1280,
-  height: 720,
+  width: GAME_WIDTH,
+  height: GAME_HEIGHT,
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [
-    BootScene,
-    TitleScene,
-    GameScene,
-    UIScene,
-    BigHouseScene,
-    MediumHouseScene,
-    SmallHouseScene,
-  ],
+  scene: [BootScene, TitleScene, UIScene, WorldScene],
   physics: {
     default: "arcade",
     arcade: {

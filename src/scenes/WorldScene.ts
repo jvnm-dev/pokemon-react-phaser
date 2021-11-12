@@ -1,25 +1,33 @@
-import { Direction, GridEngine, GridEngineConfig } from "grid-engine";
 import upperFirst from "lodash/upperFirst";
 import camelCase from "lodash/camelCase";
+import { Direction, GridEngine, GridEngineConfig } from "grid-engine";
 
 import { GAME_HEIGHT, GAME_WIDTH } from "../constants/game";
-import { Sprites, Layers, Objects, Audios } from "../constants/assets";
+import {
+  Sprites,
+  Layers,
+  Objects,
+  Tilesets,
+  Audios,
+  Maps,
+} from "../constants/assets";
 
-export default class DefaultScene extends Phaser.Scene {
+export default class WorldScene extends Phaser.Scene {
   gridEngine: GridEngine;
   player: Phaser.GameObjects.Sprite;
   tilemap: Phaser.Tilemaps.Tilemap;
   receivedData: any;
+  map: Maps = Maps.MAP;
 
-  constructor(name: string) {
-    super(name);
+  constructor() {
+    super("World");
   }
 
   init(data) {
     this.receivedData = data;
   }
 
-  create() {
+  create(): void {
     this.initializeTilemap();
     this.initializePlayer();
     this.initializeCamera();
@@ -28,11 +36,110 @@ export default class DefaultScene extends Phaser.Scene {
 
   update(): void {
     this.listenMoves();
-    this.handleObjects();
+    this.handleObjectsOverlap();
   }
 
   initializeTilemap(): void {
-    console.log("Tilemap initializer not overriden");
+    this.tilemap = this.make.tilemap({ key: this.map });
+
+    const grounds_inside = this.tilemap.addTilesetImage(
+      Tilesets.GROUNDS_INSIDE,
+      Tilesets.GROUNDS_INSIDE
+    );
+    const grounds_outside = this.tilemap.addTilesetImage(
+      Tilesets.GROUNDS,
+      Tilesets.GROUNDS
+    );
+    const world = this.tilemap.addTilesetImage(Tilesets.WORLD, Tilesets.WORLD);
+    const world2 = this.tilemap.addTilesetImage(
+      Tilesets.WORLD2,
+      Tilesets.WORLD2
+    );
+
+    const all_tilesets = [grounds_inside, grounds_outside, world, world2];
+
+    const belowLayer = this.tilemap.createLayer(
+      Layers.BELOW_PLAYER,
+      all_tilesets,
+      0,
+      0
+    );
+    const worldLayer = this.tilemap.createLayer(
+      Layers.WORLD,
+      all_tilesets,
+      0,
+      0
+    );
+    const aboveLayer = this.tilemap.createLayer(
+      Layers.ABOVE_PLAYER,
+      all_tilesets,
+      0,
+      0
+    );
+
+    worldLayer.setCollisionByProperty({ collides: true });
+    aboveLayer.setDepth(10);
+
+    belowLayer.scale = 1;
+    worldLayer.scale = 1;
+    aboveLayer.scale = 1;
+  }
+
+  handleObjectsOverlap(): void {
+    const objects = this.tilemap
+      .getObjectLayer(Layers.OBJECTS)
+      .objects.map((object) => ({
+        ...object,
+        x: ~~(object.x / 48),
+        y: ~~(object.y / 48),
+      }));
+
+    const currentTile = this.tilemap.getTileAtWorldXY(
+      this.player.x,
+      this.player.y,
+      true,
+      this.cameras.main,
+      Layers.WORLD
+    );
+
+    const playerPosition = {
+      x: currentTile?.x + 1,
+      y: currentTile?.y + 1,
+    };
+
+    const objectBelowPlayer = objects.find(
+      ({ x, y }) => x === playerPosition.x && y === playerPosition.y
+    );
+
+    if (objectBelowPlayer) {
+      switch (objectBelowPlayer.name) {
+        case Objects.DOOR:
+          const nextMap = objectBelowPlayer.properties.find(
+            ({ name }) => name === "nextMap"
+          ).value;
+
+          const x = objectBelowPlayer.properties.find(
+            ({ name }) => name === "x"
+          )?.value;
+
+          const y = objectBelowPlayer.properties.find(
+            ({ name }) => name === "y"
+          )?.value;
+
+          const soundConfig: Phaser.Types.Sound.SoundConfig = {
+            mute: false,
+            volume: 0.5,
+            rate: 1,
+            detune: 0,
+            loop: false,
+          };
+          this.sound.play(Audios.DOOR, soundConfig);
+
+          this.map = nextMap;
+          this.scene.restart({ startPosition: { x, y } });
+          break;
+      }
+    }
   }
 
   initializePlayer(): void {
@@ -124,72 +231,5 @@ export default class DefaultScene extends Phaser.Scene {
       },
       this
     );
-  }
-
-  handleObjects(): void {
-    const objects = this.tilemap
-      .getObjectLayer(Layers.OBJECTS)
-      .objects.map((object) => ({
-        ...object,
-        x: ~~(object.x / 48),
-        y: ~~(object.y / 48),
-      }));
-
-    const currentTile = this.tilemap.getTileAtWorldXY(
-      this.player.x,
-      this.player.y,
-      true,
-      this.cameras.main,
-      Layers.WORLD
-    );
-
-    const playerPosition = {
-      x: currentTile?.x + 1,
-      y: currentTile?.y + 1,
-    };
-
-    const objectBelowPlayer = objects.find(
-      ({ x, y }) => x === playerPosition.x && y === playerPosition.y
-    );
-
-    if (objectBelowPlayer) {
-      switch (objectBelowPlayer.name) {
-        case Objects.DOOR:
-          const nextMap = upperFirst(
-            camelCase(
-              objectBelowPlayer.properties.find(
-                ({ name }) => name === "nextMap"
-              ).value
-            )
-          );
-
-          let nextScene;
-
-          if (nextMap === "Map") {
-            nextScene = "Game";
-          } else {
-            nextScene = nextMap;
-          }
-
-          const x = objectBelowPlayer.properties.find(
-            ({ name }) => name === "x"
-          )?.value;
-
-          const y = objectBelowPlayer.properties.find(
-            ({ name }) => name === "y"
-          )?.value;
-
-          const soundConfig: Phaser.Types.Sound.SoundConfig = {
-            mute: false,
-            volume: 0.5,
-            rate: 1,
-            detune: 0,
-            loop: false,
-          };
-          this.sound.play(Audios.DOOR, soundConfig);
-          this.scene.start(nextScene, { startPosition: { x, y } });
-          break;
-      }
-    }
   }
 }

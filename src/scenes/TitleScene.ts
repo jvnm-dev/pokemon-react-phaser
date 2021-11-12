@@ -1,3 +1,4 @@
+import { Maps } from "../constants/assets";
 import UIButton from "../prefabs/UIButton";
 
 export default class TitleScene extends Phaser.Scene {
@@ -29,7 +30,7 @@ export default class TitleScene extends Phaser.Scene {
       "button2",
       "Jouer",
       () => {
-        this.scene.start("Game");
+        this.scene.start(Maps.MAP);
       }
     );
   }
