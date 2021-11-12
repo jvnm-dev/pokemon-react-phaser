@@ -1,0 +1,24 @@
+{
+  "name": "jvnm-dev-pokemon",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "snowpack build",
+    "test": "echo \"This template does not include a test runner by default.\" && exit 1",
+    "format": "prettier --write \"src/**/*.{ts,js}\"",
+    "lint": "prettier --check \"src/**/*.{ts,js}\""
+  },
+  "dependencies": {
+    "grid-engine": "^2.10.4",
+    "lodash": "^4.17.21",
+    "phaser": "^3.51.0"
+  },
+  "devDependencies": {
+    "@snowpack/plugin-typescript": "^1.1.1",
+    "@types/canvas-confetti": "^1.0.0",
+    "@types/snowpack-env": "^2.3.2",
+    "prettier": "^2.0.5",
+    "snowpack": "^2.18.4",
+    "typescript": "^4.0.0"
+  }
+}
