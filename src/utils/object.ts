@@ -36,8 +36,6 @@ export const getObjectUnderPlayer = (scene: WorldScene) => {
 };
 
 export const getObjectLookedAt = (scene: WorldScene) => {
-  const { tilemap } = scene;
-
   const currentTile = getCurrentPlayerTile(scene);
   const facingDirection = scene.gridEngine.getFacingDirection(Sprites.PLAYER);
 

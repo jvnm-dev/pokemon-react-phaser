@@ -1,4 +1,7 @@
 import Phaser from "phaser";
+import React from "react";
+import ReactDOM from "react-dom";
+
 import { GridEngine } from "grid-engine";
 
 import BootScene from "./scenes/BootScene";
@@ -6,13 +9,8 @@ import TitleScene from "./scenes/TitleScene";
 import WorldScene from "./scenes/WorldScene";
 import { GAME_HEIGHT, GAME_WIDTH } from "./constants/game";
 
-declare global {
-  interface Window {
-    game: Phaser.Game;
-  }
-}
-
 const gameConfig: Phaser.Types.Core.GameConfig = {
+  parent: "game",
   type: Phaser.AUTO,
   width: GAME_WIDTH,
   height: GAME_HEIGHT,
@@ -45,6 +43,14 @@ export default class Game extends Phaser.Game {
   }
 }
 
-window.onload = (): void => {
-  window.game = new Game(gameConfig);
+export const GameComponent = () => {
+  const game = new Game(gameConfig);
+  return (
+    <>
+      {/* <div id="ui"></div> */}
+      <div id="game" />
+    </>
+  );
 };
+
+ReactDOM.render(<GameComponent />, document.getElementById("root"));

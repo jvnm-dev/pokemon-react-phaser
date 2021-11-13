@@ -142,18 +142,32 @@ export default class WorldScene extends Phaser.Scene {
     this.input.on(
       "pointerup",
       (pointer) => {
-        const tile = this.tilemap.getTileAtWorldXY(
+        const getTile = (x: number, y: number, layer: Layers) => {
+          return this.tilemap.getTileAtWorldXY(
+            x,
+            y,
+            true,
+            this.cameras.main,
+            layer
+          );
+        };
+
+        const tileWorld = getTile(pointer.worldX, pointer.worldY, Layers.WORLD);
+        const tileWorld2 = getTile(
           pointer.worldX,
           pointer.worldY,
-          true,
-          this.cameras.main,
           Layers.WORLD2
         );
 
-        if (!tile.properties.collides) {
+        const targetX = tileWorld.x ?? tileWorld2.x ?? 0;
+        const targetY = tileWorld.y ?? tileWorld2.y ?? 0;
+        const targetCollides =
+          tileWorld.properties.collides ?? tileWorld2.properties.collides;
+
+        if (!targetCollides) {
           this.gridEngine.setPosition("player", {
-            x: tile.x,
-            y: tile.y,
+            x: targetX,
+            y: targetY,
           });
         }
       },
