@@ -23,6 +23,9 @@ export default class BootScene extends Phaser.Scene {
     this.sound.add(Audios.DOOR);
 
     this.sound.pauseOnBlur = false;
+
+    // To remove:
+    this.sound.mute = true;
   }
 
   loadImages(): void {

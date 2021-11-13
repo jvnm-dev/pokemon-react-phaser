@@ -1,10 +1,14 @@
 import type WorldScene from "../scenes/WorldScene";
 import { TILE_SIZE } from "../constants/game";
 import { getAudioConfig } from "./audio";
-import { Audios, Layers, Objects } from "../constants/assets";
+import { Audios, Layers, Objects, Sprites } from "../constants/assets";
 import { getCurrentPlayerTile } from "./map";
+import { Direction } from "grid-engine";
 
-export const getObjectUnderPlayer = (scene: WorldScene) => {
+export const findObjectByPosition = (
+  scene: WorldScene,
+  position: { x: number; y: number }
+) => {
   const { tilemap } = scene;
 
   const objects = tilemap
@@ -15,6 +19,12 @@ export const getObjectUnderPlayer = (scene: WorldScene) => {
       y: ~~(object.y / TILE_SIZE),
     })) as Phaser.Types.Tilemaps.TiledObject[];
 
+  return objects.find(
+    (object) => object.x === position.x && object.y === position.y
+  );
+};
+
+export const getObjectUnderPlayer = (scene: WorldScene) => {
   const currentTile = getCurrentPlayerTile(scene);
 
   const playerPosition = {
@@ -22,9 +32,31 @@ export const getObjectUnderPlayer = (scene: WorldScene) => {
     y: currentTile?.y + 1,
   };
 
-  return objects.find(
-    ({ x, y }) => x === playerPosition.x && y === playerPosition.y
-  );
+  return findObjectByPosition(scene, playerPosition);
+};
+
+export const getObjectLookedAt = (scene: WorldScene) => {
+  const { tilemap } = scene;
+
+  const currentTile = getCurrentPlayerTile(scene);
+  const facingDirection = scene.gridEngine.getFacingDirection(Sprites.PLAYER);
+
+  const lookingPosition = {
+    x: (currentTile?.x ?? 0) + 1,
+    y: (currentTile?.y ?? 0) + 1,
+  };
+
+  if (facingDirection === Direction.DOWN) {
+    lookingPosition.y += 1;
+  } else if (facingDirection === Direction.UP) {
+    lookingPosition.y -= 1;
+  } else if (facingDirection === Direction.LEFT) {
+    lookingPosition.x -= 1;
+  } else if (facingDirection === Direction.RIGHT) {
+    lookingPosition.x += 1;
+  }
+
+  return findObjectByPosition(scene, lookingPosition);
 };
 
 export const getTiledObjectProperty = (

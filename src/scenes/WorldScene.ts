@@ -2,7 +2,12 @@ import { Direction, GridEngine, GridEngineConfig } from "grid-engine";
 
 import { GAME_HEIGHT, GAME_WIDTH } from "../constants/game";
 import { Sprites, Layers, Objects, Tilesets, Maps } from "../constants/assets";
-import { getObjectUnderPlayer, getSpawn, handleDoor } from "../utils/object";
+import {
+  getObjectLookedAt,
+  getObjectUnderPlayer,
+  getSpawn,
+  handleDoor,
+} from "../utils/object";
 
 export default class WorldScene extends Phaser.Scene {
   gridEngine: GridEngine;
@@ -106,6 +111,9 @@ export default class WorldScene extends Phaser.Scene {
       switch (event.key.toUpperCase()) {
         case "M":
           this.sound.mute = !this.sound.mute;
+          break;
+        case "E":
+          console.log(getObjectLookedAt(this));
           break;
       }
     });
