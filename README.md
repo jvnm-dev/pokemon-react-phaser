@@ -1,7 +1,13 @@
-<h1>Pokemon made with Phaser and ReactJS (⚠️ WIP ⚠️)</h1>
+<p align='center'>
+    <img src="https://i.imgur.com/wgzCBvG.png" alt="game" width="500">
+</p>
 
 <p align='center'>
     <img src="https://i.imgur.com/xBIXfpI.gif" alt="game">
+</p>
+
+<p align='center'>
+    This project is still under development.
 </p>
 
 
