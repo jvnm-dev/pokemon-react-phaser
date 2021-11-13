@@ -1,11 +1,10 @@
-<h1 style="text-align: center;">
-    Pokemon made with Phaser and ReactJS<br/>
-    <img style="text-align: center;" src="https://i.imgur.com/xBIXfpI.gif" alt="game">
-<h1>
-
-<br/>
-<h2 style="text-align: center;" >⚠️ THIS IS A WIP PROJECT ⚠️</h2>
-<br/>
+<p align='center'>
+    <h1>Pokemon made with Phaser and ReactJS</h1>
+    <br/>
+    <img src="https://i.imgur.com/xBIXfpI.gif" alt="game">
+    <br/>
+    <h2>⚠️ THIS IS A WIP PROJECT ⚠️</h2>
+</p>
 
 ## Play
 
