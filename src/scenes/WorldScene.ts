@@ -17,13 +17,28 @@ import {
   handleDoor,
 } from "../utils/object";
 import { getAudioConfig } from "../utils/audio";
+import { getCurrentPlayerTile } from "../utils/map";
+
+interface WorldReceivedData {
+  facingDirection: Direction;
+  startPosition: {
+    x: number;
+    y: number;
+  };
+  onBicycle: boolean;
+}
 
 export default class WorldScene extends Phaser.Scene {
   gridEngine: GridEngine;
+
   player: Phaser.GameObjects.Sprite;
+  bicycle: Phaser.GameObjects.Sprite;
+
   tilemap: Phaser.Tilemaps.Tilemap;
+
   map: Maps = Maps.MAP;
-  receivedData: any;
+
+  receivedData: Partial<WorldReceivedData>;
 
   constructor() {
     super("World");
@@ -77,10 +92,14 @@ export default class WorldScene extends Phaser.Scene {
   }
 
   initializePlayer(): void {
-    this.player = this.add.sprite(0, 0, "characters");
-    this.player.setOrigin(0.5, 0.5);
-    this.player.setDepth(1);
-    this.player.setScale(1.25);
+    this.player = this.add.sprite(0, 0, Sprites.PLAYER);
+    this.bicycle = this.add.sprite(0, 0, Sprites.BICYCLE);
+
+    [this.player, this.bicycle].forEach((sprite) => {
+      sprite.setOrigin(0.5, 0.5);
+      sprite.setDepth(1);
+      sprite.setScale(1.25);
+    });
   }
 
   initializeGrid(): void {
@@ -90,16 +109,23 @@ export default class WorldScene extends Phaser.Scene {
       ? this.receivedData?.startPosition
       : startPosition;
 
+    if (this.receivedData.onBicycle) {
+      this.player.destroy();
+    } else {
+      this.bicycle.destroy();
+    }
+
     const gridEngineConfig = {
       collisionTilePropertyName: "collides",
       characters: [
         {
           id: Sprites.PLAYER,
-          sprite: this.player,
+          sprite: this.receivedData.onBicycle ? this.bicycle : this.player,
           walkingAnimationMapping: 0,
           startPosition: finalStartPosition,
           charLayer: Layers.WORLD2,
-          facingDirection,
+          facingDirection: this.receivedData.facingDirection ?? facingDirection,
+          speed: this.receivedData.onBicycle ? 10 : 5,
         },
       ],
     } as GridEngineConfig;
@@ -133,8 +159,18 @@ export default class WorldScene extends Phaser.Scene {
         case "ESCAPE":
           this.sound.play(Audios.CLICK, getAudioConfig(0.1, false));
           useUIStore.getState().toggleMenu();
-        default:
-          console.log(event.key.toUpperCase() + " has not handler");
+          break;
+        case " ":
+          const tile = getCurrentPlayerTile(this);
+
+          this.scene.restart({
+            startPosition: {
+              x: tile.x,
+              y: tile.y,
+            },
+            onBicycle: !this.receivedData.onBicycle,
+            facingDirection: this.gridEngine.getFacingDirection(Sprites.PLAYER),
+          } as WorldReceivedData);
           break;
       }
     });
@@ -143,12 +179,6 @@ export default class WorldScene extends Phaser.Scene {
   listenMoves(): void {
     const cursors = this.input.keyboard.createCursorKeys();
     const keys: any = this.input.keyboard.addKeys("W,S,A,D");
-
-    if (cursors.space.isDown) {
-      this.gridEngine.setSpeed("player", 10);
-    } else {
-      this.gridEngine.setSpeed("player", 5);
-    }
 
     if (cursors.left.isDown || keys.A.isDown) {
       this.gridEngine.move(Sprites.PLAYER, Direction.LEFT);

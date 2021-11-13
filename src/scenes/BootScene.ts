@@ -1,5 +1,5 @@
 import { PLAYER_SIZE } from "../constants/game";
-import { Audios, Maps } from "../constants/assets";
+import { Audios, Maps, Sprites } from "../constants/assets";
 import { Tilesets } from "../constants/assets";
 
 export default class BootScene extends Phaser.Scene {
@@ -56,9 +56,22 @@ export default class BootScene extends Phaser.Scene {
   }
 
   loadSpriteSheets(): void {
-    this.load.spritesheet("characters", "assets/images/characters/player.png", {
-      frameWidth: PLAYER_SIZE,
-      frameHeight: PLAYER_SIZE,
-    });
+    this.load.spritesheet(
+      Sprites.PLAYER,
+      "assets/images/characters/player.png",
+      {
+        frameWidth: PLAYER_SIZE,
+        frameHeight: PLAYER_SIZE,
+      }
+    );
+
+    this.load.spritesheet(
+      Sprites.BICYCLE,
+      "assets/images/characters/bicycle.png",
+      {
+        frameWidth: PLAYER_SIZE,
+        frameHeight: PLAYER_SIZE,
+      }
+    );
   }
 }

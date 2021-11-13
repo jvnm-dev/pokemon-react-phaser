@@ -28,8 +28,8 @@ export const getObjectUnderPlayer = (scene: WorldScene) => {
   const currentTile = getCurrentPlayerTile(scene);
 
   const playerPosition = {
-    x: currentTile?.x + 1,
-    y: currentTile?.y + 1,
+    x: currentTile?.x,
+    y: currentTile?.y,
   };
 
   return findObjectByPosition(scene, playerPosition);
@@ -40,8 +40,8 @@ export const getObjectLookedAt = (scene: WorldScene) => {
   const facingDirection = scene.gridEngine.getFacingDirection(Sprites.PLAYER);
 
   const lookingPosition = {
-    x: (currentTile?.x ?? 0) + 1,
-    y: (currentTile?.y ?? 0) + 1,
+    x: currentTile?.x ?? 0,
+    y: currentTile?.y ?? 0,
   };
 
   if (facingDirection === Direction.DOWN) {

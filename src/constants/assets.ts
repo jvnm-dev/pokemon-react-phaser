@@ -1,5 +1,6 @@
 export enum Sprites {
   PLAYER = "player",
+  BICYCLE = "bicycle",
 }
 
 export enum Tilesets {
