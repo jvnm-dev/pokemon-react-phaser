@@ -1,7 +1,6 @@
 import { PLAYER_SIZE } from "../constants/game";
 import { Audios, Maps } from "../constants/assets";
 import { Tilesets } from "../constants/assets";
-import { getAudioConfig } from "../utils/audio";
 
 export default class BootScene extends Phaser.Scene {
   text: Phaser.GameObjects.Text;

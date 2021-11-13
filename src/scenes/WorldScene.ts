@@ -84,7 +84,7 @@ export default class WorldScene extends Phaser.Scene {
           sprite: this.player,
           walkingAnimationMapping: 0,
           startPosition: finalStartPosition,
-          charLayer: "world",
+          charLayer: Layers.WORLD2,
           facingDirection,
         },
       ],
@@ -139,7 +139,7 @@ export default class WorldScene extends Phaser.Scene {
           pointer.worldY,
           true,
           this.cameras.main,
-          Layers.WORLD
+          Layers.WORLD2
         );
 
         if (!tile.properties.collides) {

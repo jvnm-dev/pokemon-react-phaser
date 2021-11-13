@@ -6,6 +6,7 @@ export enum Tilesets {
   GROUNDS = "grounds",
   WORLD = "world",
   WORLD2 = "world2",
+  INSIDE = "inside",
   GROUNDS_INSIDE = "grounds_inside",
 }
 
@@ -19,6 +20,7 @@ export enum Maps {
 export enum Layers {
   BELOW_PLAYER = "below_player",
   WORLD = "world",
+  WORLD2 = "world2",
   ABOVE_PLAYER = "above_player",
   OBJECTS = "objects",
 }
