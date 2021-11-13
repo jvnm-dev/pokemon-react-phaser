@@ -18,13 +18,20 @@ export default class BootScene extends Phaser.Scene {
 
   create(): void {
     this.scene.start("Title");
+
+    this.sound.add(Audios.OPENING);
     this.sound.add(Audios.MUSIC);
     this.sound.add(Audios.DOOR);
-    this.sound.play(Audios.MUSIC, getAudioConfig(0.1));
+
+    this.sound.pauseOnBlur = false;
   }
 
   loadImages(): void {
     // UI
+    this.load.image(
+      "title_background",
+      "assets/images/ui/title_background.png"
+    );
     this.load.image("button1", "assets/images/ui/blue_button01.png");
     this.load.image("button2", "assets/images/ui/blue_button02.png");
 

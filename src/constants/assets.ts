@@ -34,6 +34,7 @@ export enum AssetExtension {
 }
 
 export enum Audios {
+  OPENING = "opening",
   MUSIC = "music",
   DOOR = "door",
 }

@@ -24,6 +24,7 @@ export default class WorldScene extends Phaser.Scene {
     this.initializePlayer();
     this.initializeCamera();
     this.initializeGrid();
+    this.listenKeyboardControl();
   }
 
   update(): void {
@@ -34,9 +35,13 @@ export default class WorldScene extends Phaser.Scene {
   initializeTilemap(): void {
     this.tilemap = this.make.tilemap({ key: this.map });
 
-    const all_tilesets = Object.values(Tilesets).map((tileset) =>
-      this.tilemap.addTilesetImage(tileset)
-    );
+    const all_tilesets = Object.values(Tilesets)
+      .map((tileset) => {
+        if (this.tilemap.tilesets.find(({ name }) => name === tileset)) {
+          return this.tilemap.addTilesetImage(tileset);
+        }
+      })
+      .filter(Boolean);
 
     Object.values(Layers)
       .filter((layer) => layer !== Layers.OBJECTS)
@@ -67,7 +72,6 @@ export default class WorldScene extends Phaser.Scene {
   initializeGrid(): void {
     const { startPosition, facingDirection } = getSpawn(this);
 
-    console.log(startPosition);
     const finalStartPosition = this.receivedData?.startPosition?.x
       ? this.receivedData?.startPosition
       : startPosition;
@@ -95,6 +99,16 @@ export default class WorldScene extends Phaser.Scene {
     this.cameras.main.setZoom(1);
     this.cameras.main.startFollow(this.player, true);
     this.cameras.main.setFollowOffset(-this.player.width, -this.player.height);
+  }
+
+  listenKeyboardControl(): void {
+    this.input.keyboard.on("keyup", (event) => {
+      switch (event.key.toUpperCase()) {
+        case "M":
+          this.sound.mute = !this.sound.mute;
+          break;
+      }
+    });
   }
 
   listenMoves(): void {
