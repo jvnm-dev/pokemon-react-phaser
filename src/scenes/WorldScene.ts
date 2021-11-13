@@ -1,13 +1,21 @@
 import { Direction, GridEngine, GridEngineConfig } from "grid-engine";
 
 import { GAME_HEIGHT, GAME_WIDTH } from "../constants/game";
-import { Sprites, Layers, Objects, Tilesets, Maps } from "../constants/assets";
+import {
+  Sprites,
+  Layers,
+  Objects,
+  Tilesets,
+  Maps,
+  Audios,
+} from "../constants/assets";
 import {
   getObjectLookedAt,
   getObjectUnderPlayer,
   getSpawn,
   handleDoor,
 } from "../utils/object";
+import { getAudioConfig } from "../utils/audio";
 
 export default class WorldScene extends Phaser.Scene {
   gridEngine: GridEngine;
@@ -113,7 +121,13 @@ export default class WorldScene extends Phaser.Scene {
           this.sound.mute = !this.sound.mute;
           break;
         case "E":
-          console.log(getObjectLookedAt(this));
+          // "Use" button
+          const object = getObjectLookedAt(this);
+
+          if (object) {
+            this.sound.play(Audios.CLICK, getAudioConfig(0.1, false));
+          }
+
           break;
       }
     });
@@ -139,39 +153,47 @@ export default class WorldScene extends Phaser.Scene {
       this.gridEngine.move(Sprites.PLAYER, Direction.DOWN);
     }
 
-    this.input.on(
-      "pointerup",
-      (pointer) => {
-        const getTile = (x: number, y: number, layer: Layers) => {
-          return this.tilemap.getTileAtWorldXY(
-            x,
-            y,
-            true,
-            this.cameras.main,
-            layer
+    // Timeout to avoid moving the player when switching scenes
+    // (e.g. from the title to the game to the world scene by clicking on the start button)
+    setTimeout(() => {
+      this.input.on(
+        "pointerup",
+        (pointer) => {
+          const getTile = (x: number, y: number, layer: Layers) => {
+            return this.tilemap.getTileAtWorldXY(
+              x,
+              y,
+              true,
+              this.cameras.main,
+              layer
+            );
+          };
+
+          const tileWorld = getTile(
+            pointer.worldX,
+            pointer.worldY,
+            Layers.WORLD
           );
-        };
+          const tileWorld2 = getTile(
+            pointer.worldX,
+            pointer.worldY,
+            Layers.WORLD2
+          );
 
-        const tileWorld = getTile(pointer.worldX, pointer.worldY, Layers.WORLD);
-        const tileWorld2 = getTile(
-          pointer.worldX,
-          pointer.worldY,
-          Layers.WORLD2
-        );
+          const targetX = tileWorld.x ?? tileWorld2.x ?? 0;
+          const targetY = tileWorld.y ?? tileWorld2.y ?? 0;
+          const targetCollides =
+            tileWorld.properties.collides ?? tileWorld2.properties.collides;
 
-        const targetX = tileWorld.x ?? tileWorld2.x ?? 0;
-        const targetY = tileWorld.y ?? tileWorld2.y ?? 0;
-        const targetCollides =
-          tileWorld.properties.collides ?? tileWorld2.properties.collides;
-
-        if (!targetCollides) {
-          this.gridEngine.setPosition("player", {
-            x: targetX,
-            y: targetY,
-          });
-        }
-      },
-      this
-    );
+          if (!targetCollides) {
+            this.gridEngine.setPosition("player", {
+              x: targetX,
+              y: targetY,
+            });
+          }
+        },
+        this
+      );
+    }, 500);
   }
 }

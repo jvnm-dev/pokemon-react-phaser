@@ -18,9 +18,9 @@ export default class BootScene extends Phaser.Scene {
   create(): void {
     this.scene.start("Title");
 
-    this.sound.add(Audios.OPENING);
-    this.sound.add(Audios.MUSIC);
-    this.sound.add(Audios.DOOR);
+    Object.values(Audios).forEach((audio) => {
+      this.sound.add(audio);
+    });
 
     this.sound.pauseOnBlur = false;
 
@@ -30,6 +30,7 @@ export default class BootScene extends Phaser.Scene {
 
   loadImages(): void {
     // UI
+    this.load.image("logo", "assets/images/ui/logo.png");
     this.load.image(
       "title_background",
       "assets/images/ui/title_background.png"

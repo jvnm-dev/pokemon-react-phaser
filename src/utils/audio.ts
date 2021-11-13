@@ -1,7 +1,7 @@
 import type Phaser from "phaser";
 
 export const getAudioConfig = (
-  volume: number,
+  volume: number = 0.1,
   loop: boolean = true
 ): Phaser.Types.Sound.SoundConfig => ({
   mute: false,

@@ -126,6 +126,42 @@
                  "width":0,
                  "x":841.334,
                  "y":355.666
+                }, 
+                {
+                 "height":0,
+                 "id":27,
+                 "name":"dialog",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"content",
+                         "type":"string",
+                         "value":"Jason is very butiful"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":169,
+                 "y":260.5
+                }, 
+                {
+                 "height":0,
+                 "id":28,
+                 "name":"pokeball",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"pokemon_inside",
+                         "type":"string",
+                         "value":"Pikachu"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":119.5,
+                 "y":259.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -134,7 +170,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":27,
+ "nextobjectid":29,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",
