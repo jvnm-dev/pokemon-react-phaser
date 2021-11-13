@@ -1,5 +1,6 @@
 import { Direction, GridEngine, GridEngineConfig } from "grid-engine";
 
+import { useUIStore } from "../stores/ui";
 import { GAME_HEIGHT, GAME_WIDTH } from "../constants/game";
 import {
   Sprites,
@@ -128,6 +129,12 @@ export default class WorldScene extends Phaser.Scene {
             this.sound.play(Audios.CLICK, getAudioConfig(0.1, false));
           }
 
+          break;
+        case "ESCAPE":
+          this.sound.play(Audios.CLICK, getAudioConfig(0.1, false));
+          useUIStore.getState().toggleMenu();
+        default:
+          console.log(event.key.toUpperCase() + " has not handler");
           break;
       }
     });

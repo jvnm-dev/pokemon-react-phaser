@@ -8,6 +8,7 @@ import BootScene from "./scenes/BootScene";
 import TitleScene from "./scenes/TitleScene";
 import WorldScene from "./scenes/WorldScene";
 import { GAME_HEIGHT, GAME_WIDTH } from "./constants/game";
+import { UI } from "./ui/UI";
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
   parent: "game",
@@ -47,7 +48,7 @@ export const GameComponent = () => {
   const game = new Game(gameConfig);
   return (
     <>
-      {/* <div id="ui"></div> */}
+      <UI />
       <div id="game" />
     </>
   );
