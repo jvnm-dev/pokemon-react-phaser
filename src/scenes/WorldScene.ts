@@ -1,25 +1,18 @@
 import { Direction, GridEngine, GridEngineConfig } from "grid-engine";
 
-import { useUIStore } from "../stores/ui";
 import { GAME_HEIGHT, GAME_WIDTH } from "../constants/game";
-import {
-  Sprites,
-  Layers,
-  Objects,
-  Tilesets,
-  Maps,
-  Audios,
-} from "../constants/assets";
+import { Sprites, Layers, Tilesets, Maps, Audios } from "../constants/assets";
 import {
   getObjectLookedAt,
   getObjectUnderPlayer,
-  getSpawn,
-  handleDoor,
+  handleBicycle,
+  handleObject,
 } from "../utils/object";
 import { getAudioConfig } from "../utils/audio";
-import { getCurrentPlayerTile } from "../utils/map";
+import { getStartPosition } from "../utils/map";
+import { isDialogOpen, isUIOpen, toggleDialog } from "../utils/ui";
 
-interface WorldReceivedData {
+export interface WorldReceivedData {
   facingDirection: Direction;
   startPosition: {
     x: number;
@@ -31,8 +24,10 @@ interface WorldReceivedData {
 export default class WorldScene extends Phaser.Scene {
   gridEngine: GridEngine;
 
+  currentSprite: Phaser.GameObjects.Sprite;
   player: Phaser.GameObjects.Sprite;
   bicycle: Phaser.GameObjects.Sprite;
+  speed: number;
 
   tilemap: Phaser.Tilemaps.Tilemap;
 
@@ -57,6 +52,10 @@ export default class WorldScene extends Phaser.Scene {
   }
 
   update(): void {
+    if (isUIOpen()) {
+      return;
+    }
+
     this.listenMoves();
     this.handleObjectsOverlap();
   }
@@ -83,49 +82,43 @@ export default class WorldScene extends Phaser.Scene {
     const objectUnderPlayer = getObjectUnderPlayer(this);
 
     if (objectUnderPlayer) {
-      switch (objectUnderPlayer.name) {
-        case Objects.DOOR:
-          handleDoor(this, objectUnderPlayer);
-          break;
-      }
+      handleObject(this, objectUnderPlayer);
     }
   }
 
   initializePlayer(): void {
-    this.player = this.add.sprite(0, 0, Sprites.PLAYER);
-    this.bicycle = this.add.sprite(0, 0, Sprites.BICYCLE);
+    const player = this.add.sprite(0, 0, Sprites.PLAYER);
+    const bicycle = this.add.sprite(0, 0, Sprites.BICYCLE);
 
-    [this.player, this.bicycle].forEach((sprite) => {
-      sprite.setOrigin(0.5, 0.5);
-      sprite.setDepth(1);
-      sprite.setScale(1.25);
+    this.currentSprite = this.receivedData.onBicycle ? bicycle : player;
+    this.speed = this.receivedData.onBicycle ? 10 : 5;
+
+    this.currentSprite.setOrigin(0.5, 0.5);
+    this.currentSprite.setDepth(1);
+    this.currentSprite.setScale(1.25);
+
+    // Removing unused sprite from the world
+    [player, bicycle].forEach((sprite) => {
+      if (sprite.texture.key !== this.currentSprite.texture.key) {
+        sprite.destroy();
+      }
     });
   }
 
   initializeGrid(): void {
-    const { startPosition, facingDirection } = getSpawn(this);
-
-    const finalStartPosition = this.receivedData?.startPosition?.x
-      ? this.receivedData?.startPosition
-      : startPosition;
-
-    if (this.receivedData.onBicycle) {
-      this.player.destroy();
-    } else {
-      this.bicycle.destroy();
-    }
+    const { startPosition, facingDirection } = getStartPosition(this);
 
     const gridEngineConfig = {
       collisionTilePropertyName: "collides",
       characters: [
         {
           id: Sprites.PLAYER,
-          sprite: this.receivedData.onBicycle ? this.bicycle : this.player,
+          sprite: this.currentSprite,
           walkingAnimationMapping: 0,
-          startPosition: finalStartPosition,
+          startPosition,
           charLayer: Layers.WORLD2,
-          facingDirection: this.receivedData.facingDirection ?? facingDirection,
-          speed: this.receivedData.onBicycle ? 10 : 5,
+          facingDirection,
+          speed: this.speed,
         },
       ],
     } as GridEngineConfig;
@@ -137,8 +130,11 @@ export default class WorldScene extends Phaser.Scene {
     this.cameras.roundPixels = true;
     this.cameras.main.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
     this.cameras.main.setZoom(1);
-    this.cameras.main.startFollow(this.player, true);
-    this.cameras.main.setFollowOffset(-this.player.width, -this.player.height);
+    this.cameras.main.startFollow(this.currentSprite, true);
+    this.cameras.main.setFollowOffset(
+      -this.currentSprite.width,
+      -this.currentSprite.height
+    );
   }
 
   listenKeyboardControl(): void {
@@ -148,29 +144,34 @@ export default class WorldScene extends Phaser.Scene {
           this.sound.mute = !this.sound.mute;
           break;
         case "E":
+          if (isDialogOpen()) {
+            return toggleDialog();
+          }
+
           // "Use" button
           const object = getObjectLookedAt(this);
 
           if (object) {
             this.sound.play(Audios.CLICK, getAudioConfig(0.1, false));
+
+            if (object.name === "dialog") {
+              const content = object.properties.find(
+                ({ name }) => name === "content"
+              )?.value;
+
+              if (content) {
+                toggleDialog(content);
+              }
+            }
           }
 
           break;
         case "ESCAPE":
           this.sound.play(Audios.CLICK, getAudioConfig(0.1, false));
-          useUIStore.getState().toggleMenu();
+          // useUIStore.getState().toggleUI();
           break;
         case " ":
-          const tile = getCurrentPlayerTile(this);
-
-          this.scene.restart({
-            startPosition: {
-              x: tile.x,
-              y: tile.y,
-            },
-            onBicycle: !this.receivedData.onBicycle,
-            facingDirection: this.gridEngine.getFacingDirection(Sprites.PLAYER),
-          } as WorldReceivedData);
+          handleBicycle(this);
           break;
       }
     });

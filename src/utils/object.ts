@@ -1,9 +1,11 @@
 import type WorldScene from "../scenes/WorldScene";
-import { TILE_SIZE } from "../constants/game";
-import { getAudioConfig } from "./audio";
+import type { WorldReceivedData } from "../scenes/WorldScene";
 import { Audios, Layers, Objects, Sprites } from "../constants/assets";
+import { TILE_SIZE } from "../constants/game";
 import { getCurrentPlayerTile } from "./map";
+import { getAudioConfig } from "./audio";
 import { Direction } from "grid-engine";
+import { isDialogOpen, isUIOpen, toggleDialog } from "./ui";
 
 export const findObjectByPosition = (
   scene: WorldScene,
@@ -84,7 +86,17 @@ export const getSpawn = (scene: WorldScene) => {
   };
 };
 
-// Door
+export const handleObject = (
+  scene: WorldScene,
+  object: Phaser.Types.Tilemaps.TiledObject
+) => {
+  switch (object.name) {
+    case Objects.DOOR:
+      handleDoor(scene, object);
+      break;
+  }
+};
+
 export const handleDoor = (
   scene: WorldScene,
   door: Phaser.Types.Tilemaps.TiledObject
@@ -96,4 +108,40 @@ export const handleDoor = (
   scene.map = nextMap;
   scene.sound.play(Audios.DOOR, getAudioConfig(0.5, false));
   scene.scene.restart({ startPosition: { x, y } });
+};
+
+export const handleBicycle = (scene: WorldScene) => {
+  if (isDialogOpen()) {
+    return toggleDialog();
+  }
+
+  const mapProperties = scene.tilemap.properties as any;
+  const isIndoor =
+    mapProperties.find && mapProperties.find(({ name }) => name === "indoor");
+
+  if (isUIOpen()) {
+    return;
+  }
+
+  if (isIndoor) {
+    toggleDialog("No bicycle inside!");
+    return;
+  }
+
+  const onBicycle = scene.receivedData.onBicycle;
+
+  if (!onBicycle) {
+    scene.sound.play(Audios.BICYCLE, getAudioConfig(0.5, false));
+  }
+
+  const tile = getCurrentPlayerTile(scene);
+
+  scene.scene.restart({
+    startPosition: {
+      x: tile.x,
+      y: tile.y,
+    },
+    onBicycle: !onBicycle,
+    facingDirection: scene.gridEngine.getFacingDirection(Sprites.PLAYER),
+  } as WorldReceivedData);
 };

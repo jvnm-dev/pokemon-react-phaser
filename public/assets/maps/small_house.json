@@ -128,7 +128,7 @@
                         {
                          "name":"content",
                          "type":"string",
-                         "value":"Jason is very butiful"
+                         "value":"Hello! I am a book!"
                         }],
                  "rotation":0,
                  "type":"",
@@ -157,6 +157,12 @@
  "nextlayerid":9,
  "nextobjectid":32,
  "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"indoor",
+         "type":"bool",
+         "value":true
+        }],
  "renderorder":"right-down",
  "tiledversion":"1.7.2",
  "tileheight":48,

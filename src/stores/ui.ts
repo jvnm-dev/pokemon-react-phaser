@@ -1,11 +1,23 @@
-import create, { SetState } from "zustand";
+import create from "zustand";
 
 interface UIStore {
-  isMenuOpen: boolean;
-  toggleMenu: () => void;
+  dialog: {
+    isOpen: boolean;
+    content: string;
+  };
+  toggleDialog: (content?: string) => void;
 }
 
 export const useUIStore = create<UIStore>((set) => ({
-  isMenuOpen: false,
-  toggleMenu: () => set((state) => ({ isMenuOpen: !state.isMenuOpen })),
+  dialog: {
+    isOpen: false,
+    content: "",
+  },
+  toggleDialog: (content) =>
+    set((state) => ({
+      dialog: {
+        isOpen: !state.dialog.isOpen,
+        content,
+      },
+    })),
 }));

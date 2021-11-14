@@ -41,4 +41,5 @@ export enum Audios {
   MUSIC = "music",
   DOOR = "door",
   CLICK = "click",
+  BICYCLE = "bicycle",
 }

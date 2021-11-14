@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { isUIOpen } from "../utils/ui";
 import { useUIStore } from "../stores/ui";
 import { useWindowSize } from "./hooks/useWindowSize";
 
@@ -19,12 +20,19 @@ export const UI = () => {
     <div
       id="ui"
       style={{
-        display: store.isMenuOpen ? "block" : "none",
+        display: isUIOpen() ? "block" : "none",
         width: size.width,
         height: size.height,
       }}
     >
-      <div className="test">Hello, React!</div>
+      <div
+        className="dialog"
+        style={{
+          opacity: store.dialog.isOpen ? 1 : 0,
+        }}
+      >
+        {store.dialog.content}
+      </div>
     </div>
   );
 };
