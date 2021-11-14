@@ -29,6 +29,9 @@ export enum Layers {
 export enum Objects {
   SPAWN = "spawn",
   DOOR = "door",
+  DIALOG = "dialog",
+  POKEBALL = "pokeball",
+  POKEDEX = "pokedex",
 }
 
 export enum AssetExtension {
@@ -42,4 +45,5 @@ export enum Audios {
   DOOR = "door",
   CLICK = "click",
   BICYCLE = "bicycle",
+  GAIN = "gain",
 }

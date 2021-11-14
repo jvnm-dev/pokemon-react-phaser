@@ -162,6 +162,24 @@
                  "width":0,
                  "x":119.5,
                  "y":259.5
+                }, 
+                {
+                 "height":0,
+                 "id":29,
+                 "name":"dialog",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"content",
+                         "type":"string",
+                         "value":"The professor will beat the crap out of you if he finds out you're going through his mailbox.;You should go away."
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":311.333333333333,
+                 "y":353.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -170,7 +188,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":29,
+ "nextobjectid":30,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

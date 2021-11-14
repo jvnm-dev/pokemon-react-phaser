@@ -3,9 +3,14 @@ import type { WorldReceivedData } from "../scenes/WorldScene";
 import { Audios, Layers, Objects, Sprites } from "../constants/assets";
 import { TILE_SIZE } from "../constants/game";
 import { getCurrentPlayerTile } from "./map";
-import { getAudioConfig } from "./audio";
+import { getAudioConfig, playClick } from "./audio";
 import { Direction } from "grid-engine";
-import { isDialogOpen, isUIOpen, toggleDialog } from "./ui";
+import {
+  isDialogOpen,
+  isUIOpen,
+  openDialog,
+  triggerDialogNextStep,
+} from "./ui";
 
 export const findObjectByPosition = (
   scene: WorldScene,
@@ -66,7 +71,6 @@ export const getTiledObjectProperty = (
   return object.properties?.find((property) => property.name === name)?.value;
 };
 
-// Spawn
 export const getSpawn = (scene: WorldScene) => {
   const spawnPoint = scene.tilemap.findObject(
     Layers.OBJECTS,
@@ -86,7 +90,28 @@ export const getSpawn = (scene: WorldScene) => {
   };
 };
 
-export const handleObject = (
+export const handleClickOnObject = (scene: WorldScene) => {
+  if (isDialogOpen()) {
+    playClick(scene);
+    return triggerDialogNextStep();
+  }
+
+  const object = getObjectLookedAt(scene);
+
+  if (object) {
+    playClick(scene);
+
+    switch (object.name) {
+      case Objects.DIALOG:
+        handleDialogObject(object);
+        break;
+      case Objects.POKEBALL:
+        handlePokeball(scene, object);
+    }
+  }
+};
+
+export const handleOverlappableObject = (
   scene: WorldScene,
   object: Phaser.Types.Tilemaps.TiledObject
 ) => {
@@ -110,9 +135,36 @@ export const handleDoor = (
   scene.scene.restart({ startPosition: { x, y } });
 };
 
+export const handleDialogObject = (
+  dialog: Phaser.Types.Tilemaps.TiledObject
+) => {
+  const content = dialog.properties.find(
+    ({ name }) => name === "content"
+  )?.value;
+
+  if (content) {
+    openDialog(content);
+  }
+};
+
+export const handlePokeball = (
+  scene: Phaser.Scene,
+  pokeball: Phaser.Types.Tilemaps.TiledObject
+) => {
+  const pokemonInside = pokeball.properties.find(
+    ({ name }) => name === "pokemon_inside"
+  )?.value;
+
+  if (pokemonInside) {
+    scene.sound.play(Audios.GAIN);
+    openDialog(`You found a ${pokemonInside} inside this pokeball!`);
+  }
+};
+
 export const handleBicycle = (scene: WorldScene) => {
   if (isDialogOpen()) {
-    return toggleDialog();
+    playClick(scene);
+    return triggerDialogNextStep();
   }
 
   const mapProperties = scene.tilemap.properties as any;
@@ -124,7 +176,8 @@ export const handleBicycle = (scene: WorldScene) => {
   }
 
   if (isIndoor) {
-    toggleDialog("No bicycle inside!");
+    playClick(scene);
+    openDialog("No bicycle inside!");
     return;
   }
 

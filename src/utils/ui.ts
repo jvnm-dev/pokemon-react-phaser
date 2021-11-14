@@ -1,3 +1,4 @@
+import { DialogEvents } from "../constants/events";
 import { useUIStore } from "../stores/ui";
 
 export const isUIOpen = (): boolean => {
@@ -8,6 +9,10 @@ export const isDialogOpen = (): boolean => {
   return useUIStore.getState().dialog.isOpen;
 };
 
-export const toggleDialog = (content?: string): void => {
+export const openDialog = (content: string): void => {
   return useUIStore.getState().toggleDialog(content);
+};
+
+export const triggerDialogNextStep = (): void => {
+  window.dispatchEvent(new Event(DialogEvents.NEXT_STEP));
 };

@@ -1,16 +1,16 @@
 import { Direction, GridEngine, GridEngineConfig } from "grid-engine";
 
 import { GAME_HEIGHT, GAME_WIDTH } from "../constants/game";
-import { Sprites, Layers, Tilesets, Maps, Audios } from "../constants/assets";
+import { Sprites, Layers, Tilesets, Maps } from "../constants/assets";
 import {
-  getObjectLookedAt,
   getObjectUnderPlayer,
   handleBicycle,
-  handleObject,
+  handleClickOnObject,
+  handleOverlappableObject,
 } from "../utils/object";
-import { getAudioConfig, playClick } from "../utils/audio";
+import { playClick } from "../utils/audio";
 import { getStartPosition } from "../utils/map";
-import { isDialogOpen, isUIOpen, toggleDialog } from "../utils/ui";
+import { isUIOpen } from "../utils/ui";
 
 export interface WorldReceivedData {
   facingDirection: Direction;
@@ -82,7 +82,7 @@ export default class WorldScene extends Phaser.Scene {
     const objectUnderPlayer = getObjectUnderPlayer(this);
 
     if (objectUnderPlayer) {
-      handleObject(this, objectUnderPlayer);
+      handleOverlappableObject(this, objectUnderPlayer);
     }
   }
 
@@ -144,31 +144,10 @@ export default class WorldScene extends Phaser.Scene {
           this.sound.mute = !this.sound.mute;
           break;
         case "E":
-          if (isDialogOpen()) {
-            return toggleDialog();
-          }
-
-          // "Use" button
-          const object = getObjectLookedAt(this);
-
-          if (object) {
-            playClick(this);
-
-            if (object.name === "dialog") {
-              const content = object.properties.find(
-                ({ name }) => name === "content"
-              )?.value;
-
-              if (content) {
-                toggleDialog(content);
-              }
-            }
-          }
-
+          handleClickOnObject(this);
           break;
         case "ESCAPE":
           playClick(this);
-          // useUIStore.getState().toggleUI();
           break;
         case " ":
           handleBicycle(this);

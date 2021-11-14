@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { isUIOpen } from "../utils/ui";
 import { useUIStore } from "../stores/ui";
 import { useWindowSize } from "./hooks/useWindowSize";
+import { Dialog } from "./components/Dialog";
 
 export const UI = () => {
   const [size, setSize] = useState({ width: 0, height: 0 });
   const windowSize = useWindowSize();
-  const store = useUIStore();
+
+  useUIStore();
 
   useEffect(() => {
     const canvas = document.getElementsByTagName("canvas")?.[0];
@@ -25,17 +27,7 @@ export const UI = () => {
         height: size.height,
       }}
     >
-      <div
-        className="dialog"
-        style={{
-          opacity: store.dialog.isOpen ? 1 : 0,
-        }}
-      >
-        <div className="inner">
-          {store.dialog.content}
-          <span>▼</span>
-        </div>
-      </div>
+      <Dialog />
     </div>
   );
 };

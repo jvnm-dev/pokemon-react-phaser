@@ -1,6 +1,5 @@
 import type Phaser from "phaser";
 
-import type WorldScene from "../scenes/WorldScene";
 import { Audios } from "../constants/assets";
 
 export const getAudioConfig = (
