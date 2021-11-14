@@ -72,6 +72,28 @@ export const getTiledObjectProperty = (
   return object.properties?.find((property) => property.name === name)?.value;
 };
 
+export const removeObject = (
+  scene: WorldScene,
+  object: Phaser.Types.Tilemaps.TiledObject
+) => {
+  const removeTile = (layer: Layers) =>
+    scene.tilemap.removeTileAt(object.x, object.y, false, false, layer);
+
+  let removedTile = removeTile(Layers.WORLD2);
+
+  if (removedTile.index === -1) {
+    removedTile = removeTile(Layers.WORLD);
+  }
+
+  const objectLayer = scene.tilemap.objects[0];
+  const objects = objectLayer.objects;
+
+  const filteredObjects = objects.filter(({ id }) => id !== object.id);
+  objectLayer.objects = filteredObjects;
+
+  scene.tilemap.objects = [objectLayer];
+};
+
 export const getSpawn = (scene: WorldScene) => {
   const spawnPoint = scene.tilemap.findObject(
     Layers.OBJECTS,
@@ -156,13 +178,7 @@ export const handlePokeball = (
     ({ name }) => name === "pokemon_inside"
   )?.value;
 
-  scene.tilemap.removeTileAt(
-    pokeball.x,
-    pokeball.y,
-    false,
-    false,
-    Layers.WORLD
-  );
+  removeObject(scene, pokeball);
 
   if (pokemonInside) {
     scene.sound.play(Audios.GAIN, getAudioConfig(0.1, false));
