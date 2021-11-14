@@ -31,7 +31,10 @@ export const UI = () => {
           opacity: store.dialog.isOpen ? 1 : 0,
         }}
       >
-        {store.dialog.content}
+        <div className="inner">
+          {store.dialog.content}
+          <span>▼</span>
+        </div>
       </div>
     </div>
   );

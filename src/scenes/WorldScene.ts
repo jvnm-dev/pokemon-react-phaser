@@ -8,7 +8,7 @@ import {
   handleBicycle,
   handleObject,
 } from "../utils/object";
-import { getAudioConfig } from "../utils/audio";
+import { getAudioConfig, playClick } from "../utils/audio";
 import { getStartPosition } from "../utils/map";
 import { isDialogOpen, isUIOpen, toggleDialog } from "../utils/ui";
 
@@ -152,7 +152,7 @@ export default class WorldScene extends Phaser.Scene {
           const object = getObjectLookedAt(this);
 
           if (object) {
-            this.sound.play(Audios.CLICK, getAudioConfig(0.1, false));
+            playClick(this);
 
             if (object.name === "dialog") {
               const content = object.properties.find(
@@ -167,7 +167,7 @@ export default class WorldScene extends Phaser.Scene {
 
           break;
         case "ESCAPE":
-          this.sound.play(Audios.CLICK, getAudioConfig(0.1, false));
+          playClick(this);
           // useUIStore.getState().toggleUI();
           break;
         case " ":

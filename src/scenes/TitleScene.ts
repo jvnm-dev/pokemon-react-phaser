@@ -1,5 +1,5 @@
 import { Audios } from "../constants/assets";
-import { getAudioConfig } from "../utils/audio";
+import { getAudioConfig, playClick } from "../utils/audio";
 import UIButton from "../prefabs/UIButton";
 
 export default class TitleScene extends Phaser.Scene {
@@ -37,7 +37,7 @@ export default class TitleScene extends Phaser.Scene {
       "Play",
       () => {
         this.sound.stopAll();
-        this.sound.play(Audios.CLICK, getAudioConfig(0.1, false));
+        playClick(this);
         this.sound.play(Audios.MUSIC, getAudioConfig());
         this.scene.start("World");
       }

@@ -1,5 +1,8 @@
 import type Phaser from "phaser";
 
+import type WorldScene from "../scenes/WorldScene";
+import { Audios } from "../constants/assets";
+
 export const getAudioConfig = (
   volume: number = 0.1,
   loop: boolean = true
@@ -10,3 +13,7 @@ export const getAudioConfig = (
   detune: 0,
   loop,
 });
+
+export const playClick = (scene: Phaser.Scene) => {
+  scene.sound.play(Audios.CLICK, getAudioConfig(0.2, false));
+};
