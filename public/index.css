@@ -31,14 +31,18 @@ body {
 #ui .dialog .inner {
   color: #000;
   border: 2px inset #98c8f8;
-  font-size: 24px;
+  font-size: 5vh;
   border-radius: 14px;
   padding: 12px;
 }
 
-#ui .dialog .inner span {
+#ui .dialog .inner span.blink {
   color: rgb(180, 54, 54);
   animation: blinker 0.8s steps(1, end) infinite;
+}
+
+.gain {
+  color: green;
 }
 
 @keyframes blinker {

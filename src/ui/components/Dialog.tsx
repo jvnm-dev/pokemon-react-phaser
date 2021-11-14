@@ -58,8 +58,12 @@ export const Dialog = () => {
   return (
     <div className="dialog">
       <div className="inner">
-        {stateRef.current.steps[state.currentStepIndex]}
-        <span>▼</span>
+        <span
+          dangerouslySetInnerHTML={{
+            __html: stateRef.current.steps[state.currentStepIndex],
+          }}
+        ></span>
+        <span className="blink">▼</span>
       </div>
     </div>
   );

@@ -44,6 +44,7 @@ export const getObjectUnderPlayer = (scene: WorldScene) => {
 
 export const getObjectLookedAt = (scene: WorldScene) => {
   const currentTile = getCurrentPlayerTile(scene);
+
   const facingDirection = scene.gridEngine.getFacingDirection(Sprites.PLAYER);
 
   const lookingPosition = {
@@ -148,16 +149,26 @@ export const handleDialogObject = (
 };
 
 export const handlePokeball = (
-  scene: Phaser.Scene,
+  scene: WorldScene,
   pokeball: Phaser.Types.Tilemaps.TiledObject
 ) => {
   const pokemonInside = pokeball.properties.find(
     ({ name }) => name === "pokemon_inside"
   )?.value;
 
+  scene.tilemap.removeTileAt(
+    pokeball.x,
+    pokeball.y,
+    false,
+    false,
+    Layers.WORLD
+  );
+
   if (pokemonInside) {
-    scene.sound.play(Audios.GAIN);
-    openDialog(`You found a ${pokemonInside} inside this pokeball!`);
+    scene.sound.play(Audios.GAIN, getAudioConfig(0.1, false));
+    openDialog(
+      `You found a <span class="gain">${pokemonInside}</span> inside this pokeball!`
+    );
   }
 };
 
