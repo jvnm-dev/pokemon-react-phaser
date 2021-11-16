@@ -11,6 +11,15 @@ import {
   openDialog,
   triggerDialogNextStep,
 } from "./ui";
+import { useUserDataStore } from "../stores/userData";
+
+export const convertObjectPositionToTilePosition = (
+  object: Phaser.Types.Tilemaps.TiledObject
+) => ({
+  ...object,
+  x: ~~(object.x / TILE_SIZE),
+  y: ~~(object.y / TILE_SIZE),
+});
 
 export const findObjectByPosition = (
   scene: WorldScene,
@@ -20,11 +29,7 @@ export const findObjectByPosition = (
 
   const objects = tilemap
     .getObjectLayer(Layers.OBJECTS)
-    .objects.map((object) => ({
-      ...object,
-      x: ~~(object.x / TILE_SIZE),
-      y: ~~(object.y / TILE_SIZE),
-    })) as Phaser.Types.Tilemaps.TiledObject[];
+    .objects.map((object) => convertObjectPositionToTilePosition(object));
 
   return objects.find(
     (object) => object.x === position.x && object.y === position.y
@@ -81,7 +86,7 @@ export const removeObject = (
 
   let removedTile = removeTile(Layers.WORLD2);
 
-  if (removedTile.index === -1) {
+  if (removedTile?.index === -1) {
     removedTile = removeTile(Layers.WORLD);
   }
 
@@ -179,6 +184,8 @@ export const handlePokeball = (
   )?.value;
 
   removeObject(scene, pokeball);
+
+  useUserDataStore.getState().addObjectToInventory(pokeball.id);
 
   if (pokemonInside) {
     scene.sound.play(Audios.GAIN, getAudioConfig(0.1, false));

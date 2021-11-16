@@ -3,14 +3,17 @@ import { Direction, GridEngine, GridEngineConfig } from "grid-engine";
 import { GAME_HEIGHT, GAME_WIDTH } from "../constants/game";
 import { Sprites, Layers, Tilesets, Maps } from "../constants/assets";
 import {
+  convertObjectPositionToTilePosition,
   getObjectUnderPlayer,
   handleBicycle,
   handleClickOnObject,
   handleOverlappableObject,
+  removeObject,
 } from "../utils/object";
 import { playClick } from "../utils/audio";
 import { getStartPosition } from "../utils/map";
 import { isUIOpen } from "../utils/ui";
+import { useUserDataStore } from "../stores/userData";
 
 export interface WorldReceivedData {
   facingDirection: Direction;
@@ -49,6 +52,8 @@ export default class WorldScene extends Phaser.Scene {
     this.initializeCamera();
     this.initializeGrid();
     this.listenKeyboardControl();
+
+    this.applyUserData();
   }
 
   update(): void {
@@ -212,5 +217,17 @@ export default class WorldScene extends Phaser.Scene {
         this
       );
     }, 500);
+  }
+
+  applyUserData(): void {
+    const inventory = useUserDataStore.getState().inventory;
+    const userItemIds = inventory.map(({ objectId }) => objectId);
+
+    // Remove objects that has been already taken
+    this.tilemap.objects?.[0].objects.forEach((object) => {
+      if (userItemIds.includes(object.id)) {
+        removeObject(this, convertObjectPositionToTilePosition(object));
+      }
+    });
   }
 }
