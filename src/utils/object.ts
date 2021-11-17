@@ -154,10 +154,17 @@ export const handleDoor = (
   scene: WorldScene,
   door: Phaser.Types.Tilemaps.TiledObject
 ) => {
+  const userData = useUserDataStore.getState();
+
   const nextMap = getTiledObjectProperty("nextMap", door);
   const x = getTiledObjectProperty("x", door);
   const y = getTiledObjectProperty("y", door);
 
+  userData.setPosition({
+    x,
+    y,
+    map: nextMap,
+  });
   scene.map = nextMap;
   scene.sound.play(Audios.DOOR, getAudioConfig(0.5, false));
   scene.scene.restart({ startPosition: { x, y } });

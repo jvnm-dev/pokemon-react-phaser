@@ -11,7 +11,7 @@ import {
   removeObject,
 } from "../utils/object";
 import { playClick } from "../utils/audio";
-import { getStartPosition } from "../utils/map";
+import { getCurrentPlayerTile, getStartPosition } from "../utils/map";
 import { isUIOpen } from "../utils/ui";
 import { useUserDataStore } from "../stores/userData";
 
@@ -47,13 +47,13 @@ export default class WorldScene extends Phaser.Scene {
   }
 
   create(): void {
+    this.applyUserDataBeforeRender();
     this.initializeTilemap();
     this.initializePlayer();
     this.initializeCamera();
     this.initializeGrid();
     this.listenKeyboardControl();
-
-    this.applyUserData();
+    this.applyUserDataAfterRender();
   }
 
   update(): void {
@@ -164,6 +164,25 @@ export default class WorldScene extends Phaser.Scene {
   listenMoves(): void {
     const cursors = this.input.keyboard.createCursorKeys();
     const keys: any = this.input.keyboard.addKeys("W,S,A,D");
+    const userData = useUserDataStore.getState();
+
+    // If move finished & position different, save it
+    if (!this.gridEngine.isMoving(Sprites.PLAYER)) {
+      const currentTile = getCurrentPlayerTile(this);
+
+      if (
+        currentTile &&
+        (userData.position?.x !== currentTile.x ||
+          userData.position?.y !== currentTile.y ||
+          userData.position?.map !== this.map)
+      ) {
+        userData.setPosition({
+          x: currentTile.x,
+          y: currentTile.y,
+          map: this.map,
+        });
+      }
+    }
 
     if (cursors.left.isDown || keys.A.isDown) {
       this.gridEngine.move(Sprites.PLAYER, Direction.LEFT);
@@ -219,7 +238,15 @@ export default class WorldScene extends Phaser.Scene {
     }, 500);
   }
 
-  applyUserData(): void {
+  applyUserDataBeforeRender(): void {
+    const position = useUserDataStore.getState().position;
+
+    if (position?.map) {
+      this.map = position.map;
+    }
+  }
+
+  applyUserDataAfterRender(): void {
     const inventory = useUserDataStore.getState().inventory;
     const userItemIds = inventory.map(({ objectId }) => objectId);
 
