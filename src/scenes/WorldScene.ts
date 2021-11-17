@@ -21,7 +21,6 @@ export interface WorldReceivedData {
     x: number;
     y: number;
   };
-  onBicycle: boolean;
 }
 
 export default class WorldScene extends Phaser.Scene {
@@ -94,9 +93,10 @@ export default class WorldScene extends Phaser.Scene {
   initializePlayer(): void {
     const player = this.add.sprite(0, 0, Sprites.PLAYER);
     const bicycle = this.add.sprite(0, 0, Sprites.BICYCLE);
+    const onBicycle = useUserDataStore.getState().onBicycle;
 
-    this.currentSprite = this.receivedData.onBicycle ? bicycle : player;
-    this.speed = this.receivedData.onBicycle ? 10 : 5;
+    this.currentSprite = onBicycle ? bicycle : player;
+    this.speed = onBicycle ? 10 : 5;
 
     this.currentSprite.setOrigin(0.5, 0.5);
     this.currentSprite.setDepth(1);
@@ -176,10 +176,13 @@ export default class WorldScene extends Phaser.Scene {
           userData.position?.y !== currentTile.y ||
           userData.position?.map !== this.map)
       ) {
-        userData.setPosition({
-          x: currentTile.x,
-          y: currentTile.y,
-          map: this.map,
+        userData.update({
+          position: {
+            x: currentTile.x,
+            y: currentTile.y,
+            map: this.map,
+            facingDirection: this.gridEngine.getFacingDirection(Sprites.PLAYER),
+          },
         });
       }
     }

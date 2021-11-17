@@ -21,9 +21,9 @@ export const getStartPosition = (scene: WorldScene) => {
   const { startPosition: spawnPosition, facingDirection: spawnDirection } =
     getSpawn(scene);
 
-  const facingDirection = receivedData.facingDirection ?? spawnDirection;
-
   const position = useUserDataStore.getState().position;
+  const facingDirection =
+    receivedData.facingDirection ?? position.facingDirection ?? spawnDirection;
 
   // First, received position
   if (receivedData?.startPosition?.x && receivedData?.startPosition?.y) {

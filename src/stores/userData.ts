@@ -1,12 +1,15 @@
 import create from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
+import type { Direction } from "grid-engine";
+
 import type { Maps } from "../constants/assets";
 
 interface IPosition {
   map: Maps;
   x: number;
   y: number;
+  facingDirection: Direction;
 }
 
 interface IInventoryObject {
@@ -14,10 +17,11 @@ interface IInventoryObject {
 }
 
 interface IUserDataStore {
+  onBicycle: boolean;
   position?: IPosition;
-  setPosition: (position: IPosition) => void;
-
   inventory: IInventoryObject[];
+
+  update: (state: Partial<IUserDataStore>) => void;
   addObjectToInventory: (objectId: number) => void;
 }
 
@@ -25,10 +29,14 @@ export const useUserDataStore = create<IUserDataStore>(
   devtools(
     persist(
       (set) => ({
-        setPosition: (position: IPosition) => {
-          set((state) => ({ ...state, position }));
+        update: (updates: Partial<IUserDataStore>) => {
+          set((state) => ({
+            ...state,
+            ...updates,
+          }));
         },
 
+        onBicycle: Boolean(false),
         inventory: [],
         addObjectToInventory: (objectId: number) => {
           set((state) => ({

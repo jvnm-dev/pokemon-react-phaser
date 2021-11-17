@@ -160,10 +160,14 @@ export const handleDoor = (
   const x = getTiledObjectProperty("x", door);
   const y = getTiledObjectProperty("y", door);
 
-  userData.setPosition({
-    x,
-    y,
-    map: nextMap,
+  userData.update({
+    position: {
+      x,
+      y,
+      map: nextMap,
+      facingDirection: scene.gridEngine.getFacingDirection(Sprites.PLAYER),
+    },
+    onBicycle: false,
   });
   scene.map = nextMap;
   scene.sound.play(Audios.DOOR, getAudioConfig(0.5, false));
@@ -208,6 +212,7 @@ export const handleBicycle = (scene: WorldScene) => {
     return triggerDialogNextStep();
   }
 
+  const userData = useUserDataStore.getState();
   const mapProperties = scene.tilemap.properties as any;
   const isIndoor =
     mapProperties.find && mapProperties.find(({ name }) => name === "indoor");
@@ -222,7 +227,7 @@ export const handleBicycle = (scene: WorldScene) => {
     return;
   }
 
-  const onBicycle = scene.receivedData.onBicycle;
+  const onBicycle = userData.onBicycle;
 
   if (!onBicycle) {
     scene.sound.play(Audios.BICYCLE, getAudioConfig(0.5, false));
@@ -230,12 +235,15 @@ export const handleBicycle = (scene: WorldScene) => {
 
   const tile = getCurrentPlayerTile(scene);
 
+  userData.update({
+    onBicycle: !onBicycle,
+  });
+
   scene.scene.restart({
     startPosition: {
       x: tile.x,
       y: tile.y,
     },
-    onBicycle: !onBicycle,
     facingDirection: scene.gridEngine.getFacingDirection(Sprites.PLAYER),
   } as WorldReceivedData);
 };
