@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+
 import { isUIOpen } from "../utils/ui";
 import { useUIStore } from "../stores/ui";
 import { useWindowSize } from "./hooks/useWindowSize";
+import { Menu } from "./components/Menu";
 import { Dialog } from "./components/Dialog";
 
 export const UI = () => {
@@ -27,6 +29,7 @@ export const UI = () => {
         height: size.height,
       }}
     >
+      <Menu />
       <Dialog />
     </div>
   );

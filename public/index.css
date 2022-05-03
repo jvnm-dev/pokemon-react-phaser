@@ -45,6 +45,27 @@ body {
   color: green;
 }
 
+#ui #menu {
+  background: #fff;
+  border: 2px solid #98c8f8;
+  position: absolute;
+  right: 28px;
+  top: 28px;
+  padding: 16px;
+}
+
+#ui #menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 16px;
+  font-size: 32px;
+  line-height: 48px;
+}
+
+#ui #menu ul li.selected {
+  color: red;
+}
+
 @keyframes blinker {
   50% {
     opacity: 0;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { DialogEvents } from "../../constants/events";
+import { UIEvents } from "../../constants/events";
 import { useUIStore } from "../../stores/ui";
 
 interface IDialogState {
@@ -36,8 +36,8 @@ export const Dialog = () => {
   };
 
   useEffect(() => {
-    window.addEventListener(DialogEvents.NEXT_STEP, triggerNextStep);
-    () => window.removeEventListener(DialogEvents.NEXT_STEP, triggerNextStep);
+    window.addEventListener(UIEvents.NEXT_STEP, triggerNextStep);
+    () => window.removeEventListener(UIEvents.NEXT_STEP, triggerNextStep);
   }, []);
 
   useEffect(() => {
@@ -56,7 +56,12 @@ export const Dialog = () => {
   }, [store.dialog]);
 
   return (
-    <div className="dialog">
+    <div
+      className="dialog"
+      style={{
+        display: store.dialog.isOpen ? "block" : "none",
+      }}
+    >
       <div className="inner">
         <span
           dangerouslySetInnerHTML={{

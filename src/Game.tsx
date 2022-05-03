@@ -46,6 +46,7 @@ export default class Game extends Phaser.Game {
 
 export const GameComponent = () => {
   const game = new Game(gameConfig);
+
   return (
     <>
       <UI />

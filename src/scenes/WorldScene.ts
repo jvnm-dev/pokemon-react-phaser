@@ -12,8 +12,9 @@ import {
 } from "../utils/object";
 import { playClick } from "../utils/audio";
 import { getCurrentPlayerTile, getStartPosition } from "../utils/map";
-import { isUIOpen } from "../utils/ui";
+import { isUIOpen, openMenu, triggerUIDown, triggerUIUp } from "../utils/ui";
 import { useUserDataStore } from "../stores/userData";
+import { useUIStore } from "../stores/ui";
 
 export interface WorldReceivedData {
   facingDirection: Direction;
@@ -144,6 +145,9 @@ export default class WorldScene extends Phaser.Scene {
 
   listenKeyboardControl(): void {
     this.input.keyboard.on("keyup", (event) => {
+      const uiStore = useUIStore.getState();
+      const isOpen = uiStore.menu.isOpen || uiStore.dialog.isOpen;
+
       switch (event.key.toUpperCase()) {
         case "M":
           this.sound.mute = !this.sound.mute;
@@ -153,9 +157,22 @@ export default class WorldScene extends Phaser.Scene {
           break;
         case "ESCAPE":
           playClick(this);
+          openMenu();
           break;
         case " ":
           handleBicycle(this);
+          break;
+        case "ARROWDOWN":
+          if (isOpen) {
+            playClick(this);
+            triggerUIDown();
+          }
+          break;
+        case "ARROWUP":
+          if (isOpen) {
+            playClick(this);
+            triggerUIUp();
+          }
           break;
       }
     });
@@ -196,49 +213,6 @@ export default class WorldScene extends Phaser.Scene {
     } else if (cursors.down.isDown || keys.S.isDown) {
       this.gridEngine.move(Sprites.PLAYER, Direction.DOWN);
     }
-
-    // Timeout to avoid moving the player when switching scenes
-    // (e.g. from the title to the game to the world scene by clicking on the start button)
-    setTimeout(() => {
-      this.input.on(
-        "pointerup",
-        (pointer) => {
-          const getTile = (x: number, y: number, layer: Layers) => {
-            return this.tilemap.getTileAtWorldXY(
-              x,
-              y,
-              true,
-              this.cameras.main,
-              layer
-            );
-          };
-
-          const tileWorld = getTile(
-            pointer.worldX,
-            pointer.worldY,
-            Layers.WORLD
-          );
-          const tileWorld2 = getTile(
-            pointer.worldX,
-            pointer.worldY,
-            Layers.WORLD2
-          );
-
-          const targetX = tileWorld.x ?? tileWorld2.x ?? 0;
-          const targetY = tileWorld.y ?? tileWorld2.y ?? 0;
-          const targetCollides =
-            tileWorld.properties.collides ?? tileWorld2.properties.collides;
-
-          if (!targetCollides) {
-            this.gridEngine.setPosition("player", {
-              x: targetX,
-              y: targetY,
-            });
-          }
-        },
-        this
-      );
-    }, 500);
   }
 
   applyUserDataBeforeRender(): void {

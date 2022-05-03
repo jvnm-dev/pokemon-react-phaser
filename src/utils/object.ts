@@ -9,7 +9,9 @@ import {
   isDialogOpen,
   isUIOpen,
   openDialog,
-  triggerDialogNextStep,
+  triggerUINextStep,
+  triggerUIDown,
+  triggerUIUp,
 } from "./ui";
 import { useUserDataStore } from "../stores/userData";
 
@@ -121,7 +123,7 @@ export const getSpawn = (scene: WorldScene) => {
 export const handleClickOnObject = (scene: WorldScene) => {
   if (isDialogOpen()) {
     playClick(scene);
-    return triggerDialogNextStep();
+    return triggerUINextStep();
   }
 
   const object = getObjectLookedAt(scene);
@@ -209,7 +211,7 @@ export const handlePokeball = (
 export const handleBicycle = (scene: WorldScene) => {
   if (isDialogOpen()) {
     playClick(scene);
-    return triggerDialogNextStep();
+    return triggerUINextStep();
   }
 
   const userData = useUserDataStore.getState();
