@@ -16,7 +16,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   create(): void {
-    this.scene.start("World");
+    this.scene.start("Title");
 
     Object.values(Audios).forEach((audio) => {
       this.sound.add(audio);
