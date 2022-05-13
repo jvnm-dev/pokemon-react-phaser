@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { UIEvents } from "../../constants/events";
 import { useUIStore } from "../../stores/ui";
+import { useEventsListeners } from "../../utils/events";
 
 interface IDialogState {
   steps: string[];
@@ -17,7 +18,7 @@ export const Dialog = () => {
   const [state, _setState] = useState<IDialogState>(defaultState);
   const stateRef = useRef(state);
 
-  const setState = (data) => {
+  const setState = (data: IDialogState) => {
     stateRef.current = data;
     _setState(data);
   };
@@ -31,14 +32,19 @@ export const Dialog = () => {
         currentStepIndex: nextStepIndex,
       });
     } else {
-      store.toggleDialog();
+      store.closeDialog();
     }
   };
 
-  useEffect(() => {
-    window.addEventListener(UIEvents.NEXT_STEP, triggerNextStep);
-    () => window.removeEventListener(UIEvents.NEXT_STEP, triggerNextStep);
-  }, []);
+  useEventsListeners(
+    [
+      {
+        name: UIEvents.NEXT_STEP,
+        callback: triggerNextStep,
+      },
+    ],
+    []
+  );
 
   useEffect(() => {
     const { isOpen, content } = store.dialog;
@@ -50,7 +56,7 @@ export const Dialog = () => {
     if (isOpen) {
       setState({
         ...state,
-        steps: content.split(";"),
+        steps: content?.split(";") ?? [],
       });
     }
   }, [store.dialog]);

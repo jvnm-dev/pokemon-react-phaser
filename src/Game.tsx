@@ -7,6 +7,7 @@ import { GridEngine } from "grid-engine";
 import BootScene from "./scenes/BootScene";
 import TitleScene from "./scenes/TitleScene";
 import WorldScene from "./scenes/WorldScene";
+import BattleScene from "./scenes/BattleScene";
 import { GAME_HEIGHT, GAME_WIDTH } from "./constants/game";
 import { UI } from "./ui/UI";
 
@@ -19,7 +20,7 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [BootScene, TitleScene, WorldScene],
+  scene: [BootScene, TitleScene, WorldScene, BattleScene],
   physics: {
     default: "arcade",
     arcade: {
@@ -49,10 +50,12 @@ export const GameComponent = () => {
 
   return (
     <>
-      <UI />
+      <UI game={game} />
       <div id="game" />
     </>
   );
 };
 
-ReactDOM.render(<GameComponent />, document.getElementById("root"));
+const root = (ReactDOM as any).createRoot(document.getElementById("root"));
+
+root.render(<GameComponent />);

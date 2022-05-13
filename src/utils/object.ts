@@ -2,25 +2,18 @@ import type WorldScene from "../scenes/WorldScene";
 import type { WorldReceivedData } from "../scenes/WorldScene";
 import { Audios, Layers, Objects, Sprites } from "../constants/assets";
 import { TILE_SIZE } from "../constants/game";
-import { getCurrentPlayerTile } from "./map";
+import { getCurrentPlayerTile, savePlayerPosition } from "./map";
 import { getAudioConfig, playClick } from "./audio";
 import { Direction } from "grid-engine";
-import {
-  isDialogOpen,
-  isUIOpen,
-  openDialog,
-  triggerUINextStep,
-  triggerUIDown,
-  triggerUIUp,
-} from "./ui";
+import { isDialogOpen, isUIOpen, openDialog, triggerUINextStep } from "./ui";
 import { useUserDataStore } from "../stores/userData";
 
 export const convertObjectPositionToTilePosition = (
   object: Phaser.Types.Tilemaps.TiledObject
 ) => ({
   ...object,
-  x: ~~(object.x / TILE_SIZE),
-  y: ~~(object.y / TILE_SIZE),
+  x: ~~((object?.x ?? 0) / TILE_SIZE),
+  y: ~~((object?.y ?? 0) / TILE_SIZE),
 });
 
 export const findObjectByPosition = (
@@ -76,15 +69,25 @@ export const getTiledObjectProperty = (
   name: string,
   object: Phaser.Types.Tilemaps.TiledObject
 ) => {
-  return object.properties?.find((property) => property.name === name)?.value;
+  return object.properties?.find((property: any) => property.name === name)
+    ?.value;
 };
 
 export const removeObject = (
   scene: WorldScene,
   object: Phaser.Types.Tilemaps.TiledObject
 ) => {
-  const removeTile = (layer: Layers) =>
-    scene.tilemap.removeTileAt(object.x, object.y, false, false, layer);
+  const removeTile = (layer: Layers) => {
+    if (object.x && object.y) {
+      return scene.tilemap.removeTileAt(
+        object.x,
+        object.y,
+        false,
+        false,
+        layer
+      );
+    }
+  };
 
   let removedTile = removeTile(Layers.WORLD2);
 
@@ -107,17 +110,21 @@ export const getSpawn = (scene: WorldScene) => {
     (obj) => obj.name === Objects.SPAWN
   );
 
-  const facingDirection = spawnPoint.properties?.find(
-    ({ name }) => name === "spriteDirection"
-  )?.value;
+  if (spawnPoint?.x && spawnPoint?.y) {
+    const facingDirection = spawnPoint.properties?.find(
+      (property: any) => property.name === "spriteDirection"
+    )?.value;
 
-  return {
-    startPosition: {
-      x: Math.floor(spawnPoint.x / TILE_SIZE),
-      y: Math.floor(spawnPoint.y / TILE_SIZE),
-    },
-    facingDirection,
-  };
+    return {
+      startPosition: {
+        x: Math.floor(spawnPoint.x / TILE_SIZE),
+        y: Math.floor(spawnPoint.y / TILE_SIZE),
+      },
+      facingDirection,
+    };
+  } else {
+    console.error("No spawn point set or no position detected");
+  }
 };
 
 export const handleClickOnObject = (scene: WorldScene) => {
@@ -149,6 +156,11 @@ export const handleOverlappableObject = (
     case Objects.DOOR:
       handleDoor(scene, object);
       break;
+    case Objects.GRASS:
+      if (scene.gridEngine.isMoving(Sprites.PLAYER)) {
+        handleMoveOnGrass(scene, object);
+      }
+      break;
   }
 };
 
@@ -176,11 +188,46 @@ export const handleDoor = (
   scene.scene.restart({ startPosition: { x, y } });
 };
 
+export const handleMoveOnGrass = (
+  scene: WorldScene,
+  grass: Phaser.Types.Tilemaps.TiledObject
+) => {
+  const min = 0;
+  const max = 400;
+
+  const randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
+
+  if (grass.x && grass.y) {
+    const tile = scene.tilemap.getTileAtWorldXY(
+      grass.x * 48,
+      grass.y * 48,
+      false,
+      scene.cameras.main,
+      "below_player"
+    );
+
+    if (tile) {
+      tile.tint = 0xaaaaaa;
+
+      setTimeout(() => {
+        if (tile) {
+          tile.tint = 0xffffff;
+        }
+      }, 300);
+
+      if (randomNumber === max / 2) {
+        savePlayerPosition(scene);
+        scene.scene.stop("World").start("Battle");
+      }
+    }
+  }
+};
+
 export const handleDialogObject = (
   dialog: Phaser.Types.Tilemaps.TiledObject
 ) => {
   const content = dialog.properties.find(
-    ({ name }) => name === "content"
+    (property: any) => property.name === "content"
   )?.value;
 
   if (content) {
@@ -193,12 +240,13 @@ export const handlePokeball = (
   pokeball: Phaser.Types.Tilemaps.TiledObject
 ) => {
   const pokemonInside = pokeball.properties.find(
-    ({ name }) => name === "pokemon_inside"
+    (property: any) => property.name === "pokemon_inside"
   )?.value;
 
   removeObject(scene, pokeball);
 
   useUserDataStore.getState().addObjectToInventory(pokeball.id);
+  useUserDataStore.getState().addPokemon(pokemonInside);
 
   if (pokemonInside) {
     scene.sound.play(Audios.GAIN, getAudioConfig(0.1, false));
@@ -217,7 +265,8 @@ export const handleBicycle = (scene: WorldScene) => {
   const userData = useUserDataStore.getState();
   const mapProperties = scene.tilemap.properties as any;
   const isIndoor =
-    mapProperties.find && mapProperties.find(({ name }) => name === "indoor");
+    mapProperties.find &&
+    mapProperties.find((property: any) => property.name === "indoor");
 
   if (isUIOpen()) {
     return;

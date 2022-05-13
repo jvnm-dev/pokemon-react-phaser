@@ -5,8 +5,13 @@ import { useUIStore } from "../stores/ui";
 import { useWindowSize } from "./hooks/useWindowSize";
 import { Menu } from "./components/Menu";
 import { Dialog } from "./components/Dialog";
+import { Battle } from "./components/Battle";
 
-export const UI = () => {
+export type UIBase = {
+  game: Phaser.Game;
+};
+
+export const UI = ({ game }: UIBase) => {
   const [size, setSize] = useState({ width: 0, height: 0 });
   const windowSize = useWindowSize();
 
@@ -15,8 +20,8 @@ export const UI = () => {
   useEffect(() => {
     const canvas = document.getElementsByTagName("canvas")?.[0];
     setSize({
-      width: canvas.style?.width ?? canvas.width,
-      height: canvas.style?.height ?? canvas.height,
+      width: Number(canvas.style?.width.replace("px", "")) ?? canvas.width,
+      height: Number(canvas.style?.height.replace("px", "")) ?? canvas.height,
     });
   }, [windowSize]);
 
@@ -31,6 +36,7 @@ export const UI = () => {
     >
       <Menu />
       <Dialog />
+      <Battle game={game} />
     </div>
   );
 };

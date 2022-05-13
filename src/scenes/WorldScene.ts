@@ -11,8 +11,22 @@ import {
   removeObject,
 } from "../utils/object";
 import { playClick } from "../utils/audio";
-import { getCurrentPlayerTile, getStartPosition } from "../utils/map";
-import { isUIOpen, openMenu, triggerUIDown, triggerUIUp } from "../utils/ui";
+import {
+  getCurrentPlayerTile,
+  getStartPosition,
+  savePlayerPosition,
+} from "../utils/map";
+import {
+  isMenuOpen,
+  isUIOpen,
+  toggleMenu,
+  triggerUIDown,
+  triggerUIExit,
+  triggerUILeft,
+  triggerUINextStep,
+  triggerUIRight,
+  triggerUIUp,
+} from "../utils/ui";
 import { useUserDataStore } from "../stores/userData";
 import { useUIStore } from "../stores/ui";
 
@@ -42,7 +56,7 @@ export default class WorldScene extends Phaser.Scene {
     super("World");
   }
 
-  init(data) {
+  init(data: Partial<WorldReceivedData>) {
     this.receivedData = data;
   }
 
@@ -68,13 +82,16 @@ export default class WorldScene extends Phaser.Scene {
   initializeTilemap(): void {
     this.tilemap = this.make.tilemap({ key: this.map });
 
-    const all_tilesets = Object.values(Tilesets)
-      .map((tileset) => {
-        if (this.tilemap.tilesets.find(({ name }) => name === tileset)) {
-          return this.tilemap.addTilesetImage(tileset);
+    const all_tilesets = Object.values(Tilesets).reduce(
+      (acc: Phaser.Tilemaps.Tileset[], value: Tilesets) => {
+        if (this.tilemap.tilesets.find(({ name }) => name === value)) {
+          acc = [...acc, this.tilemap.addTilesetImage(value)];
         }
-      })
-      .filter(Boolean);
+
+        return acc;
+      },
+      []
+    );
 
     Object.values(Layers)
       .filter((layer) => layer !== Layers.OBJECTS)
@@ -112,7 +129,7 @@ export default class WorldScene extends Phaser.Scene {
   }
 
   initializeGrid(): void {
-    const { startPosition, facingDirection } = getStartPosition(this);
+    const { startPosition, facingDirection } = getStartPosition(this) ?? {};
 
     const gridEngineConfig = {
       collisionTilePropertyName: "collides",
@@ -144,7 +161,7 @@ export default class WorldScene extends Phaser.Scene {
   }
 
   listenKeyboardControl(): void {
-    this.input.keyboard.on("keyup", (event) => {
+    this.input.keyboard.on("keyup", (event: KeyboardEvent) => {
       const uiStore = useUIStore.getState();
       const isOpen = uiStore.menu.isOpen || uiStore.dialog.isOpen;
 
@@ -155,9 +172,17 @@ export default class WorldScene extends Phaser.Scene {
         case "E":
           handleClickOnObject(this);
           break;
+        case "ENTER":
+          playClick(this);
+          triggerUINextStep();
+          break;
         case "ESCAPE":
           playClick(this);
-          openMenu();
+          if (!isMenuOpen()) {
+            toggleMenu();
+          } else {
+            triggerUIExit();
+          }
           break;
         case " ":
           handleBicycle(this);
@@ -174,6 +199,18 @@ export default class WorldScene extends Phaser.Scene {
             triggerUIUp();
           }
           break;
+        case "ARROWLEFT":
+          if (isOpen) {
+            playClick(this);
+            triggerUILeft();
+          }
+          break;
+        case "ARROWRIGHT":
+          if (isOpen) {
+            playClick(this);
+            triggerUIRight();
+          }
+          break;
       }
     });
   }
@@ -183,26 +220,7 @@ export default class WorldScene extends Phaser.Scene {
     const keys: any = this.input.keyboard.addKeys("W,S,A,D");
     const userData = useUserDataStore.getState();
 
-    // If move finished & position different, save it
-    if (!this.gridEngine.isMoving(Sprites.PLAYER)) {
-      const currentTile = getCurrentPlayerTile(this);
-
-      if (
-        currentTile &&
-        (userData.position?.x !== currentTile.x ||
-          userData.position?.y !== currentTile.y ||
-          userData.position?.map !== this.map)
-      ) {
-        userData.update({
-          position: {
-            x: currentTile.x,
-            y: currentTile.y,
-            map: this.map,
-            facingDirection: this.gridEngine.getFacingDirection(Sprites.PLAYER),
-          },
-        });
-      }
-    }
+    savePlayerPosition(this);
 
     if (cursors.left.isDown || keys.A.isDown) {
       this.gridEngine.move(Sprites.PLAYER, Direction.LEFT);

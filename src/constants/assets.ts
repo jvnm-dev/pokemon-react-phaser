@@ -32,6 +32,7 @@ export enum Objects {
   DIALOG = "dialog",
   POKEBALL = "pokeball",
   POKEDEX = "pokedex",
+  GRASS = "grass",
 }
 
 export enum AssetExtension {

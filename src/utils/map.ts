@@ -18,8 +18,9 @@ export const getCurrentPlayerTile = (scene: WorldScene) => {
 
 export const getStartPosition = (scene: WorldScene) => {
   const receivedData = scene.receivedData;
+
   const { startPosition: spawnPosition, facingDirection: spawnDirection } =
-    getSpawn(scene);
+    getSpawn(scene) ?? {};
 
   const position = useUserDataStore.getState().position;
   const facingDirection =
@@ -50,11 +51,40 @@ export const getStartPosition = (scene: WorldScene) => {
   }
 
   // If no saved position, use spawn position
-  return {
-    startPosition: {
-      x: spawnPosition.x,
-      y: spawnPosition.y,
-    },
-    facingDirection,
-  };
+  if (spawnPosition) {
+    return {
+      startPosition: {
+        x: spawnPosition.x,
+        y: spawnPosition.y,
+      },
+      facingDirection,
+    };
+  } else {
+    console.error("No spawn position found");
+  }
+};
+
+export const savePlayerPosition = (scene: WorldScene) => {
+  const userData = useUserDataStore.getState();
+
+  // If move finished & position different, save it
+  if (!scene.gridEngine.isMoving(Sprites.PLAYER)) {
+    const currentTile = getCurrentPlayerTile(scene);
+
+    if (
+      currentTile &&
+      (userData.position?.x !== currentTile.x ||
+        userData.position?.y !== currentTile.y ||
+        userData.position?.map !== scene.map)
+    ) {
+      userData.update({
+        position: {
+          x: currentTile.x,
+          y: currentTile.y,
+          map: scene.map,
+          facingDirection: scene.gridEngine.getFacingDirection(Sprites.PLAYER),
+        },
+      });
+    }
+  }
 };

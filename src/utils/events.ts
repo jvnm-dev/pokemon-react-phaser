@@ -5,7 +5,7 @@ export type EventListener = {
   callback: EventListenerOrEventListenerObject;
 };
 
-export const useEventsListeners = (listeners: EventListener[]) => {
+export const useEventsListeners = (listeners: EventListener[], deps: any[]) => {
   useEffect(() => {
     listeners.forEach(({ name, callback }) =>
       window.addEventListener(name, callback)
@@ -16,5 +16,5 @@ export const useEventsListeners = (listeners: EventListener[]) => {
         window.removeEventListener(name, callback)
       );
     };
-  }, []);
+  }, deps);
 };

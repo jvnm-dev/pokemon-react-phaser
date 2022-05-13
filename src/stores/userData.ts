@@ -16,16 +16,31 @@ interface IInventoryObject {
   objectId: number;
 }
 
+interface IPokemon {
+  id: number;
+  name: string;
+}
+
+interface ISettings {
+  general: {
+    enableSound: boolean;
+    skipIntroScreen: boolean;
+  };
+}
+
 interface IUserDataStore {
   onBicycle: boolean;
   position?: IPosition;
   inventory: IInventoryObject[];
+  pokemons: IPokemon[];
+  settings: ISettings;
 
   update: (state: Partial<IUserDataStore>) => void;
   addObjectToInventory: (objectId: number) => void;
+  addPokemon: (name: string) => void;
 }
 
-export const useUserDataStore = create<IUserDataStore>(
+export const useUserDataStore = create<IUserDataStore>()(
   devtools(
     persist(
       (set) => ({
@@ -38,6 +53,29 @@ export const useUserDataStore = create<IUserDataStore>(
 
         onBicycle: Boolean(false),
         inventory: [],
+        pokemons: [],
+        settings: {
+          general: {
+            enableSound: Boolean(true),
+            skipIntroScreen: Boolean(false),
+          },
+        },
+
+        addPokemon: (name: string) => {
+          const id = Date.now();
+
+          set((state) => ({
+            ...state,
+            pokemons: [
+              ...state.pokemons,
+              {
+                id,
+                name,
+              },
+            ],
+          }));
+        },
+
         addObjectToInventory: (objectId: number) => {
           set((state) => ({
             ...state,
@@ -51,7 +89,7 @@ export const useUserDataStore = create<IUserDataStore>(
         },
       }),
       {
-        name: "inventory",
+        name: "userData",
       }
     )
   )

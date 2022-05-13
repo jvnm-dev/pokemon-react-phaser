@@ -4,7 +4,7 @@ import UIButton from "../prefabs/UIButton";
 
 export default class TitleScene extends Phaser.Scene {
   titleText: Phaser.GameObjects.Text;
-  startGameButton;
+  startGameButton: UIButton;
 
   constructor() {
     super("Title");

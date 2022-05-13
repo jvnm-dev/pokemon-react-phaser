@@ -25,12 +25,15 @@ body {
   z-index: 99999;
   background: #ffffff;
   border: 2px solid #98c8f8;
+  box-shadow: 0 2px 0 2px #698096,
+              inset 0 2px 0 2px #698096,
+              0 0 0 2px #698096,
+              inset 0 0 0 2px #698096;
   border-radius: 16px;
 }
 
 #ui .dialog .inner {
   color: #000;
-  border: 2px inset #98c8f8;
   font-size: 5vh;
   border-radius: 14px;
   padding: 12px;
@@ -45,25 +48,103 @@ body {
   color: green;
 }
 
-#ui #menu {
+#ui .menu {
+  box-shadow: 0 2px 0 2px #698096,
+              inset 0 2px 0 2px #698096,
+              0 0 0 2px #698096,
+              inset 0 0 0 2px #698096;
   background: #fff;
   border: 2px solid #98c8f8;
   position: absolute;
   right: 28px;
   top: 28px;
   padding: 16px;
+  font-size: 32px;
 }
 
-#ui #menu ul {
+#ui .menu ul {
   list-style-type: none;
   margin: 0;
   padding: 0 16px;
-  font-size: 32px;
   line-height: 48px;
 }
 
-#ui #menu ul li.selected {
+#ui .menu ul li.hovered, #ui .menu .submenu ul li.hovered, div.hovered label {
   color: red;
+}
+
+#ui .menu.full {
+  left: 28px;
+  top: 28px;
+  display: flex;;
+}
+
+#ui .menu .submenu {
+  width: fit-content;
+  position: relative;
+}
+
+#ui .menu .submenu::after {
+  content: " ";
+  position: absolute;
+  top: -12px;
+  right: 0;
+  height: calc(100% + 26px);
+  width: 4px;
+  background-color: #98c8f8;
+  box-shadow: 0 0.2px 0 0.2px #698096,
+              inset 0 0.2px 0 0.2px #698096,
+              0 0 0 0.2px #698096,
+              inset 0 0 0 0.2px #698096;
+}
+
+#ui .menu .content {
+  padding: 0 16px;
+  width: 100%;
+}
+
+#ui .menu .content > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#ui .menu .content > div > input[type="checkbox"] {
+  appearance: none;
+  display: grid;
+  place-content: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000;
+}
+
+#ui .menu .content > div > input[type="checkbox"]::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  transform: scale(0);
+  box-shadow: inset 14px 14px rgb(72, 184, 72);
+}
+
+#ui .menu .content > div > input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+#ui .battle_menu {
+  width: calc(100% - 32px);
+  height: 35.5%;
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translate(-50%, 16px);
+  z-index: 99999;
+  background: #ffffff;
+  border: 2px solid #98c8f8;
+  box-shadow: 0 2px 0 2px #698096,
+              inset 0 2px 0 2px #698096,
+              0 0 0 2px #698096,
+              inset 0 0 0 2px #698096;
+  border-radius: 16px;
 }
 
 @keyframes blinker {
