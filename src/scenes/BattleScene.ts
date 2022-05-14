@@ -8,13 +8,28 @@ import {
   triggerUILeft,
   triggerUIRight,
 } from "../utils/ui";
+import { useUserDataStore } from "../stores/userData";
+
+export type EnnemyPokemon = {
+  image?: Phaser.GameObjects.Image;
+  data?: any;
+};
 
 export default class BattleScene extends Phaser.Scene {
+  trainerBack: Phaser.GameObjects.Image;
+  pokemonFromTeam: Phaser.GameObjects.Image;
+  ennemyPokemon: EnnemyPokemon = {};
+
   constructor() {
     super("Battle");
   }
 
+  init(data: { pokemon: any }) {
+    this.ennemyPokemon.data = data.pokemon;
+  }
+
   create(): void {
+    // Add base images
     const background = this.add.image(
       this.scale.width / 2,
       this.scale.height / 2,
@@ -37,11 +52,129 @@ export default class BattleScene extends Phaser.Scene {
     grass.y = Number(this.game.config.height) / 2;
     grass.x = Number(this.game.config.width) / 2;
 
+    this.trainerBack = this.add.image(
+      this.scale.width / 2,
+      this.scale.height / 2,
+      "trainer_back"
+    );
+
+    this.trainerBack.displayHeight = Number(this.game.config.height) / 4;
+    this.trainerBack.scaleX = this.trainerBack.scaleY;
+    this.trainerBack.y = Number(this.game.config.height) / 1.9;
+    this.trainerBack.x = 0;
+
+    this.ennemyPokemon.image = this.add.image(
+      this.scale.width / 2,
+      this.scale.height / 2,
+      `pokemon_${this.ennemyPokemon.data.id}_front`
+    );
+
+    this.ennemyPokemon.image.displayHeight =
+      Number(this.game.config.height) / 4;
+    this.ennemyPokemon.image.scaleX = this.ennemyPokemon.image.scaleY;
+    this.ennemyPokemon.image.y = Number(this.game.config.height) / 3.5;
+    this.ennemyPokemon.image.x = Number(this.game.config.width);
+    this.ennemyPokemon.image.tint = 0x000000;
+
+    const positionTransitionDelay = 1000;
+
+    // Introduce ennemy and player by sliding them in the area
+    this.tweens.add({
+      targets: this.trainerBack,
+      x: Number(this.game.config.width) / 2.8,
+      duration: 1000,
+    });
+
+    this.tweens.add({
+      targets: this.ennemyPokemon.image,
+      x: Number(this.game.config.width) / 1.52,
+      duration: 1000,
+    });
+
     this.add.existing(background);
     this.add.existing(grass);
+    this.add.existing(this.trainerBack);
+    this.add.existing(this.ennemyPokemon.image);
 
+    // Display UI
     useUIStore.getState().toggleBattle();
-    this.listenKeyboardControl();
+
+    // When sliding is done, show ennemy
+    this.time.delayedCall(positionTransitionDelay, () => {
+      if (this.ennemyPokemon.image) {
+        this.ennemyPokemon.image.tint = 0xffffff;
+      }
+    });
+
+    const playerGoBackOutOfScreenDelay = positionTransitionDelay + 500;
+
+    // After 1 second, make player go back for him to be able to throw a pokeball
+    this.tweens.add({
+      targets: this.trainerBack,
+      x: -50,
+      duration: 1000,
+      delay: playerGoBackOutOfScreenDelay,
+    });
+
+    const pokeball = this.add.image(
+      -50,
+      Number(this.game.config.height) / 1.6,
+      "object_pokeball"
+    );
+
+    pokeball.setScale(2.5);
+
+    this.add.existing(pokeball);
+
+    // Pokeball is thrown
+    const pokemonGoInDelay1 = playerGoBackOutOfScreenDelay + 1000;
+
+    this.tweens.add({
+      targets: pokeball,
+      x: Number(this.game.config.width) / 3,
+      y: Number(this.game.config.height) / 1.8,
+      duration: 500,
+      delay: pokemonGoInDelay1,
+    });
+
+    // Pokeball fall on the floor
+    const pokemonGoInDelay2 = pokemonGoInDelay1 + 500;
+
+    this.tweens.add({
+      targets: pokeball,
+      x: Number(this.game.config.width) / 3,
+      y: Number(this.game.config.height) / 1.5,
+      duration: 250,
+      delay: pokemonGoInDelay2,
+    });
+
+    // Pokemon from pokeball appears
+    const userData = useUserDataStore.getState();
+    const firstPokemonInTeam = userData.pokemons?.[0]?.id;
+
+    this.pokemonFromTeam = this.add.image(
+      this.scale.width / 2,
+      this.scale.height / 2,
+      `pokemon_${firstPokemonInTeam}_back`
+    );
+
+    this.pokemonFromTeam.displayHeight = Number(this.game.config.height) / 5;
+    this.pokemonFromTeam.scaleX = this.pokemonFromTeam.scaleY;
+    this.pokemonFromTeam.y = Number(this.game.config.height);
+    this.pokemonFromTeam.x = Number(this.game.config.width) / 2.9;
+
+    const pokemonFromTeamAppearsDelay = pokemonGoInDelay2 + 250;
+
+    this.tweens.add({
+      targets: this.pokemonFromTeam,
+      y: Number(this.game.config.height) / 1.8,
+      duration: 250,
+      delay: pokemonFromTeamAppearsDelay,
+    });
+
+    this.time.delayedCall(pokemonFromTeamAppearsDelay, () => {
+      this.listenKeyboardControl();
+    });
   }
 
   listenKeyboardControl(): void {

@@ -11,6 +11,55 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
+    const progressBar = this.add.graphics({
+      x: this.scale.width / 5.5,
+      y: this.scale.height / 5.5,
+    });
+    const progressBox = this.add.graphics({
+      x: this.scale.width / 5.5,
+      y: this.scale.height / 5.5,
+    });
+    progressBox.fillStyle(0x222222, 0.8);
+    progressBox.fillRect(240, 270, 320, 50);
+
+    const width = this.cameras.main.width;
+    const height = this.cameras.main.height;
+    const loadingText = this.make.text({
+      x: width / 2,
+      y: height / 2 - 50,
+      text: "Loading...",
+      style: {
+        font: "20px monospace",
+        color: "#ffffff",
+      },
+    });
+    loadingText.setOrigin(0.5, 0.5);
+
+    const percentText = this.make.text({
+      x: width / 2,
+      y: height / 2 - 5,
+      text: "0%",
+      style: {
+        font: "18px monospace",
+        color: "#ffffff",
+      },
+    });
+    percentText.setOrigin(0.5, 0.5);
+
+    this.load.on("progress", function (value: number) {
+      percentText.setText(`${(Number(value) * 100).toFixed(0)}%`);
+      progressBar.clear();
+      progressBar.fillStyle(0xffffff, 1);
+      progressBar.fillRect(250, 280, 300 * value, 30);
+    });
+
+    this.load.on("complete", function () {
+      progressBar.destroy();
+      progressBox.destroy();
+      loadingText.destroy();
+      percentText.destroy();
+    });
+
     this.loadImages();
     this.loadSpriteSheets();
     this.loadMaps();
@@ -34,16 +83,31 @@ export default class BootScene extends Phaser.Scene {
   loadImages(): void {
     // UI
     this.load.image("logo", "assets/images/ui/logo.png");
+    this.load.image("button1", "assets/images/ui/blue_button01.png");
+    this.load.image("button2", "assets/images/ui/blue_button02.png");
     this.load.image(
       "title_background",
       "assets/images/ui/title_background.png"
     );
-    this.load.image("button1", "assets/images/ui/blue_button01.png");
-    this.load.image("button2", "assets/images/ui/blue_button02.png");
 
     // Battle
     this.load.image("battle_background", "assets/images/ui/bb_background.png");
     this.load.image("battle_grass", "assets/images/ui/bb_grass.png");
+    this.load.image("trainer_back", "assets/images/battle/trainer.png");
+
+    Array.from({ length: 151 }, (_, i) => {
+      this.load.image(
+        `pokemon_${i + 1}_front`,
+        `assets/images/pokemons/front/${i + 1}.png`
+      );
+    });
+
+    Array.from({ length: 151 }, (_, i) => {
+      this.load.image(
+        `pokemon_${i + 1}_back`,
+        `assets/images/pokemons/back/${i + 1}.png`
+      );
+    });
 
     // Tilesets
     Object.values(Tilesets).forEach((tileset) => {
@@ -54,6 +118,9 @@ export default class BootScene extends Phaser.Scene {
     Object.values(Audios).forEach((audio) => {
       this.load.audio(audio, `assets/audio/${audio}.ogg`);
     });
+
+    // Objects
+    this.load.image("object_pokeball", "assets/images/objects/pokeball.png");
   }
 
   loadMaps(): void {

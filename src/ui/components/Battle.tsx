@@ -1,9 +1,11 @@
 import React from "react";
 import { useEventsListeners } from "../../utils/events";
 
-import { useUIStore } from "../../stores/ui";
-import { UIEvents } from "../../constants/events";
 import { UIBase } from "../UI";
+import { Audios } from "../../constants/assets";
+import { UIEvents } from "../../constants/events";
+import { useUIStore } from "../../stores/ui";
+import { getAudioConfig } from "../../utils/audio";
 
 export const Battle = ({ game }: UIBase) => {
   const UIStore = useUIStore();
@@ -14,6 +16,9 @@ export const Battle = ({ game }: UIBase) => {
         name: UIEvents.EXIT,
         callback: () => {
           if (UIStore.battle.isOpen) {
+            game.sound.stopAll();
+            game.sound.play(Audios.MUSIC, getAudioConfig());
+
             game.scene.stop("Battle").start("World");
             useUIStore.getState().toggleBattle();
           }

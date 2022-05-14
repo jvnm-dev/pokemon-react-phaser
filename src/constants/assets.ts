@@ -47,4 +47,5 @@ export enum Audios {
   CLICK = "click",
   BICYCLE = "bicycle",
   GAIN = "gain",
+  BATTLE = "battle",
 }

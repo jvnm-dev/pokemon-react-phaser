@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import React from "react";
 import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import { GridEngine } from "grid-engine";
 
@@ -56,6 +57,12 @@ export const GameComponent = () => {
   );
 };
 
-const root = (ReactDOM as any).createRoot(document.getElementById("root"));
+const rootElement = document.getElementById("root");
 
-root.render(<GameComponent />);
+if (rootElement) {
+  const root = createRoot(rootElement);
+
+  root.render(<GameComponent />);
+} else {
+  throw new Error("Root element not found");
+}

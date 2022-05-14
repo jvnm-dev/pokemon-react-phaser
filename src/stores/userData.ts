@@ -18,7 +18,7 @@ interface IInventoryObject {
 
 interface IPokemon {
   id: number;
-  name: string;
+  uniqId: number;
 }
 
 interface ISettings {
@@ -37,7 +37,7 @@ interface IUserDataStore {
 
   update: (state: Partial<IUserDataStore>) => void;
   addObjectToInventory: (objectId: number) => void;
-  addPokemon: (name: string) => void;
+  addPokemon: (id: number) => void;
 }
 
 export const useUserDataStore = create<IUserDataStore>()(
@@ -61,8 +61,8 @@ export const useUserDataStore = create<IUserDataStore>()(
           },
         },
 
-        addPokemon: (name: string) => {
-          const id = Date.now();
+        addPokemon: (id: number) => {
+          const uniqId = Date.now();
 
           set((state) => ({
             ...state,
@@ -70,7 +70,7 @@ export const useUserDataStore = create<IUserDataStore>()(
               ...state.pokemons,
               {
                 id,
-                name,
+                uniqId,
               },
             ],
           }));

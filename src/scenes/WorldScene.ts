@@ -11,11 +11,7 @@ import {
   removeObject,
 } from "../utils/object";
 import { playClick } from "../utils/audio";
-import {
-  getCurrentPlayerTile,
-  getStartPosition,
-  savePlayerPosition,
-} from "../utils/map";
+import { getStartPosition, savePlayerPosition } from "../utils/map";
 import {
   isMenuOpen,
   isUIOpen,
@@ -218,9 +214,6 @@ export default class WorldScene extends Phaser.Scene {
   listenMoves(): void {
     const cursors = this.input.keyboard.createCursorKeys();
     const keys: any = this.input.keyboard.addKeys("W,S,A,D");
-    const userData = useUserDataStore.getState();
-
-    savePlayerPosition(this);
 
     if (cursors.left.isDown || keys.A.isDown) {
       this.gridEngine.move(Sprites.PLAYER, Direction.LEFT);
@@ -231,6 +224,8 @@ export default class WorldScene extends Phaser.Scene {
     } else if (cursors.down.isDown || keys.S.isDown) {
       this.gridEngine.move(Sprites.PLAYER, Direction.DOWN);
     }
+
+    savePlayerPosition(this);
   }
 
   applyUserDataBeforeRender(): void {

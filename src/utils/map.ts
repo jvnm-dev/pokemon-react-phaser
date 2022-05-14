@@ -9,6 +9,10 @@ export const getCurrentPlayerTile = (scene: WorldScene) => {
   const { x, y } = scene.gridEngine.getSprite(Sprites.PLAYER);
   const tile = tilemap.getTileAtWorldXY(x, y, true, cameras.main, Layers.WORLD);
 
+  if (!tile) {
+    return;
+  }
+
   return {
     ...tile,
     x: tile.x + 1,
@@ -67,10 +71,13 @@ export const getStartPosition = (scene: WorldScene) => {
 export const savePlayerPosition = (scene: WorldScene) => {
   const userData = useUserDataStore.getState();
 
-  // If move finished & position different, save it
-  if (!scene.gridEngine.isMoving(Sprites.PLAYER)) {
-    const currentTile = getCurrentPlayerTile(scene);
+  const currentTile = getCurrentPlayerTile(scene);
+  const lastTilePosition = userData.position;
 
+  if (
+    lastTilePosition?.x !== currentTile?.x ||
+    lastTilePosition?.y !== currentTile?.y
+  ) {
     if (
       currentTile &&
       (userData.position?.x !== currentTile.x ||

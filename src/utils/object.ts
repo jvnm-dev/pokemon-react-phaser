@@ -8,6 +8,9 @@ import { Direction } from "grid-engine";
 import { isDialogOpen, isUIOpen, openDialog, triggerUINextStep } from "./ui";
 import { useUserDataStore } from "../stores/userData";
 
+import pokemons from "../constants/pokemons.json";
+import { getRandomPokemonFromZone } from "./pokemon";
+
 export const convertObjectPositionToTilePosition = (
   object: Phaser.Types.Tilemaps.TiledObject
 ) => ({
@@ -33,6 +36,10 @@ export const findObjectByPosition = (
 
 export const getObjectUnderPlayer = (scene: WorldScene) => {
   const currentTile = getCurrentPlayerTile(scene);
+
+  if (!currentTile) {
+    return;
+  }
 
   const playerPosition = {
     x: currentTile?.x,
@@ -193,7 +200,8 @@ export const handleMoveOnGrass = (
   grass: Phaser.Types.Tilemaps.TiledObject
 ) => {
   const min = 0;
-  const max = 400;
+  const max = 300;
+  const userData = useUserDataStore.getState();
 
   const randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
 
@@ -215,9 +223,48 @@ export const handleMoveOnGrass = (
         }
       }, 300);
 
-      if (randomNumber === max / 2) {
-        savePlayerPosition(scene);
-        scene.scene.stop("World").start("Battle");
+      if (!userData.pokemons?.length) {
+        openDialog(
+          "You don't have any pokemon. It's not safe to walk on grass."
+        );
+        return;
+      }
+
+      if (
+        randomNumber === max / 2 &&
+        scene.gridEngine.isMoving(Sprites.PLAYER)
+      ) {
+        scene.gridEngine.stopMovement(Sprites.PLAYER);
+        scene.gridEngine.setSpeed(Sprites.PLAYER, 0);
+        const battleStarted = scene.data.get("battleStarted");
+
+        if (!battleStarted) {
+          const pokemon = getRandomPokemonFromZone(
+            Number(
+              grass.properties.find((property: any) => property.name === "id")
+                ?.value
+            )
+          );
+
+          scene.sound.stopAll();
+          scene.sound.play(Audios.BATTLE, getAudioConfig());
+
+          scene.data.set("battleStarted", true);
+
+          scene.cameras.main.shake(1500, 0.01);
+
+          scene.time.delayedCall(1500, () => {
+            scene.cameras.main.fadeOut(200);
+          });
+
+          scene.time.delayedCall(2000, () => {
+            savePlayerPosition(scene);
+            scene.data.remove("battleStarted");
+            scene.scene.stop("World").start("Battle", {
+              pokemon,
+            });
+          });
+        }
       }
     }
   }
@@ -246,12 +293,14 @@ export const handlePokeball = (
   removeObject(scene, pokeball);
 
   useUserDataStore.getState().addObjectToInventory(pokeball.id);
-  useUserDataStore.getState().addPokemon(pokemonInside);
 
   if (pokemonInside) {
+    const pokemon = pokemons[pokemonInside - 1];
+    useUserDataStore.getState().addPokemon(pokemon.id);
+
     scene.sound.play(Audios.GAIN, getAudioConfig(0.1, false));
     openDialog(
-      `You found a <span class="gain">${pokemonInside}</span> inside this pokeball!`
+      `You found a <span class="gain">${pokemon.name}</span> inside this pokeball!`
     );
   }
 };
@@ -285,6 +334,10 @@ export const handleBicycle = (scene: WorldScene) => {
   }
 
   const tile = getCurrentPlayerTile(scene);
+
+  if (!tile) {
+    return;
+  }
 
   userData.update({
     onBicycle: !onBicycle,

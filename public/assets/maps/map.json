@@ -154,7 +154,7 @@
                         {
                          "name":"pokemon_inside",
                          "type":"string",
-                         "value":"Pikachu"
+                         "value":"25"
                         }],
                  "rotation":0,
                  "type":"",
@@ -183,66 +183,12 @@
                 }, 
                 {
                  "height":0,
-                 "id":31,
-                 "name":"grass",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"level",
-                         "type":"string",
-                         "value":"1"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":169.75,
-                 "y":500
-                }, 
-                {
-                 "height":0,
-                 "id":32,
-                 "name":"grass",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"level",
-                         "type":"string",
-                         "value":"1"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":121,
-                 "y":501
-                }, 
-                {
-                 "height":0,
-                 "id":33,
-                 "name":"grass",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"level",
-                         "type":"string",
-                         "value":"1"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":217.75,
-                 "y":500
-                }, 
-                {
-                 "height":0,
                  "id":34,
                  "name":"grass",
                  "point":true,
                  "properties":[
                         {
-                         "name":"level",
+                         "name":"id",
                          "type":"string",
                          "value":"1"
                         }],
@@ -255,12 +201,12 @@
                 }, 
                 {
                  "height":0,
-                 "id":35,
+                 "id":47,
                  "name":"grass",
                  "point":true,
                  "properties":[
                         {
-                         "name":"level",
+                         "name":"id",
                          "type":"string",
                          "value":"1"
                         }],
@@ -268,17 +214,71 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":169.25,
-                 "y":549.25
+                 "x":121.25,
+                 "y":500.75
                 }, 
                 {
                  "height":0,
-                 "id":36,
+                 "id":48,
                  "name":"grass",
                  "point":true,
                  "properties":[
                         {
-                         "name":"level",
+                         "name":"id",
+                         "type":"string",
+                         "value":"1"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":215.75,
+                 "y":501
+                }, 
+                {
+                 "height":0,
+                 "id":49,
+                 "name":"grass",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"id",
+                         "type":"string",
+                         "value":"1"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":168.5,
+                 "y":500.5
+                }, 
+                {
+                 "height":0,
+                 "id":54,
+                 "name":"grass",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"id",
+                         "type":"string",
+                         "value":"1"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":72.5,
+                 "y":548.25
+                }, 
+                {
+                 "height":0,
+                 "id":55,
+                 "name":"grass",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"id",
                          "type":"string",
                          "value":"1"
                         }],
@@ -287,16 +287,16 @@
                  "visible":true,
                  "width":0,
                  "x":120.5,
-                 "y":550.25
+                 "y":548.25
                 }, 
                 {
                  "height":0,
-                 "id":37,
+                 "id":56,
                  "name":"grass",
                  "point":true,
                  "properties":[
                         {
-                         "name":"level",
+                         "name":"id",
                          "type":"string",
                          "value":"1"
                         }],
@@ -304,17 +304,17 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":217.25,
-                 "y":549.25
+                 "x":215,
+                 "y":548.5
                 }, 
                 {
                  "height":0,
-                 "id":38,
+                 "id":57,
                  "name":"grass",
                  "point":true,
                  "properties":[
                         {
-                         "name":"level",
+                         "name":"id",
                          "type":"string",
                          "value":"1"
                         }],
@@ -322,17 +322,17 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":72.75,
-                 "y":550
+                 "x":167.75,
+                 "y":548
                 }, 
                 {
                  "height":0,
-                 "id":39,
+                 "id":58,
                  "name":"grass",
                  "point":true,
                  "properties":[
                         {
-                         "name":"level",
+                         "name":"id",
                          "type":"string",
                          "value":"1"
                         }],
@@ -340,17 +340,17 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":168,
-                 "y":596.5
+                 "x":73.75,
+                 "y":596
                 }, 
                 {
                  "height":0,
-                 "id":40,
+                 "id":59,
                  "name":"grass",
                  "point":true,
                  "properties":[
                         {
-                         "name":"level",
+                         "name":"id",
                          "type":"string",
                          "value":"1"
                         }],
@@ -358,17 +358,17 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":119.25,
-                 "y":597.5
+                 "x":121.75,
+                 "y":596
                 }, 
                 {
                  "height":0,
-                 "id":41,
+                 "id":60,
                  "name":"grass",
                  "point":true,
                  "properties":[
                         {
-                         "name":"level",
+                         "name":"id",
                          "type":"string",
                          "value":"1"
                         }],
@@ -376,17 +376,17 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":216,
-                 "y":596.5
+                 "x":216.25,
+                 "y":596.25
                 }, 
                 {
                  "height":0,
-                 "id":42,
+                 "id":61,
                  "name":"grass",
                  "point":true,
                  "properties":[
                         {
-                         "name":"level",
+                         "name":"id",
                          "type":"string",
                          "value":"1"
                         }],
@@ -394,17 +394,17 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":71.5,
-                 "y":597.25
+                 "x":169,
+                 "y":595.75
                 }, 
                 {
                  "height":0,
-                 "id":43,
+                 "id":66,
                  "name":"grass",
                  "point":true,
                  "properties":[
                         {
-                         "name":"level",
+                         "name":"id",
                          "type":"string",
                          "value":"1"
                         }],
@@ -412,17 +412,17 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":169.5,
-                 "y":644.75
+                 "x":74,
+                 "y":644.25
                 }, 
                 {
                  "height":0,
-                 "id":44,
+                 "id":67,
                  "name":"grass",
                  "point":true,
                  "properties":[
                         {
-                         "name":"level",
+                         "name":"id",
                          "type":"string",
                          "value":"1"
                         }],
@@ -430,17 +430,17 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":120.75,
-                 "y":645.75
+                 "x":122,
+                 "y":644.25
                 }, 
                 {
                  "height":0,
-                 "id":45,
+                 "id":68,
                  "name":"grass",
                  "point":true,
                  "properties":[
                         {
-                         "name":"level",
+                         "name":"id",
                          "type":"string",
                          "value":"1"
                         }],
@@ -448,17 +448,17 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":217.5,
-                 "y":644.75
+                 "x":216.5,
+                 "y":644.5
                 }, 
                 {
                  "height":0,
-                 "id":46,
+                 "id":69,
                  "name":"grass",
                  "point":true,
                  "properties":[
                         {
-                         "name":"level",
+                         "name":"id",
                          "type":"string",
                          "value":"1"
                         }],
@@ -466,8 +466,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":73,
-                 "y":645.5
+                 "x":169.25,
+                 "y":644
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -476,7 +476,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":47,
+ "nextobjectid":70,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",
