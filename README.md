@@ -3,7 +3,7 @@
 </p>
 
 <p align='center'>
-    <img src="https://i.imgur.com/xBIXfpI.gif" alt="game">
+    <img src="https://s8.gifyu.com/images/ezgif-4-5fcc4b13a5.gif" alt="game">
 </p>
 
 <p align='center'>
