@@ -1,3 +1,4 @@
+import { Types } from "phaser";
 import type WorldScene from "../scenes/WorldScene";
 import type { WorldReceivedData } from "../scenes/WorldScene";
 import { Audios, Layers, Objects, Sprites } from "../constants/assets";
@@ -7,12 +8,13 @@ import { getAudioConfig, playClick } from "./audio";
 import { Direction } from "grid-engine";
 import { isDialogOpen, isUIOpen, openDialog, triggerUINextStep } from "./ui";
 import { useUserDataStore } from "../stores/userData";
+import { getRandomNumber } from "./number";
 
 import pokemons from "../constants/pokemons.json";
 import { getRandomPokemonFromZone } from "./pokemon";
 
 export const convertObjectPositionToTilePosition = (
-  object: Phaser.Types.Tilemaps.TiledObject
+  object: Types.Tilemaps.TiledObject
 ) => ({
   ...object,
   x: ~~((object?.x ?? 0) / TILE_SIZE),
@@ -27,9 +29,9 @@ export const findObjectByPosition = (
 
   const objects = tilemap
     .getObjectLayer(Layers.OBJECTS)
-    .objects.map((object) => convertObjectPositionToTilePosition(object));
+    ?.objects.map((object) => convertObjectPositionToTilePosition(object));
 
-  return objects.find(
+  return objects?.find(
     (object) => object.x === position.x && object.y === position.y
   );
 };
@@ -54,7 +56,7 @@ export const getObjectLookedAt = (scene: WorldScene) => {
 
   const facingDirection = scene.gridEngine.getFacingDirection(Sprites.PLAYER);
 
-  const lookingPosition = {
+  let lookingPosition = {
     x: currentTile?.x ?? 0,
     y: currentTile?.y ?? 0,
   };
@@ -74,7 +76,7 @@ export const getObjectLookedAt = (scene: WorldScene) => {
 
 export const getTiledObjectProperty = (
   name: string,
-  object: Phaser.Types.Tilemaps.TiledObject
+  object: Types.Tilemaps.TiledObject
 ) => {
   return object.properties?.find((property: any) => property.name === name)
     ?.value;
@@ -82,7 +84,7 @@ export const getTiledObjectProperty = (
 
 export const removeObject = (
   scene: WorldScene,
-  object: Phaser.Types.Tilemaps.TiledObject
+  object: Types.Tilemaps.TiledObject
 ) => {
   const removeTile = (layer: Layers) => {
     if (object.x && object.y) {
@@ -134,12 +136,7 @@ export const getSpawn = (scene: WorldScene) => {
   }
 };
 
-export const handleClickOnObject = (scene: WorldScene) => {
-  if (isDialogOpen()) {
-    playClick(scene);
-    return triggerUINextStep();
-  }
-
+export const handleClickOnObjectIfAny = (scene: WorldScene) => {
   const object = getObjectLookedAt(scene);
 
   if (object) {
@@ -151,29 +148,31 @@ export const handleClickOnObject = (scene: WorldScene) => {
         break;
       case Objects.POKEBALL:
         handlePokeball(scene, object);
+        break;
+      case Objects.NPC:
+        handleNPC(scene, object);
+        break;
     }
   }
 };
 
 export const handleOverlappableObject = (
   scene: WorldScene,
-  object: Phaser.Types.Tilemaps.TiledObject
+  object: Types.Tilemaps.TiledObject
 ) => {
   switch (object.name) {
     case Objects.DOOR:
       handleDoor(scene, object);
       break;
     case Objects.GRASS:
-      if (scene.gridEngine.isMoving(Sprites.PLAYER)) {
-        handleMoveOnGrass(scene, object);
-      }
+      handleMoveOnGrass(scene, object);
       break;
   }
 };
 
 export const handleDoor = (
   scene: WorldScene,
-  door: Phaser.Types.Tilemaps.TiledObject
+  door: Types.Tilemaps.TiledObject
 ) => {
   const userData = useUserDataStore.getState();
 
@@ -197,43 +196,71 @@ export const handleDoor = (
 
 export const handleMoveOnGrass = (
   scene: WorldScene,
-  grass: Phaser.Types.Tilemaps.TiledObject
+  grass: Types.Tilemaps.TiledObject
 ) => {
   const min = 0;
-  const max = 300;
+  const max = 10;
   const userData = useUserDataStore.getState();
 
-  const randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
+  const randomNumber = getRandomNumber(min, max);
 
   if (grass.x && grass.y) {
+    const realX = grass.x * 48;
+    const realY = grass.y * 48;
+
     const tile = scene.tilemap.getTileAtWorldXY(
-      grass.x * 48,
-      grass.y * 48,
+      realX,
+      realY,
       false,
       scene.cameras.main,
       "below_player"
     );
 
     if (tile) {
-      tile.tint = 0xaaaaaa;
-
-      setTimeout(() => {
-        if (tile) {
-          tile.tint = 0xffffff;
+      const starsEmitter = scene.add.particles(
+        realX + 24,
+        realY + 24,
+        "object_star",
+        {
+          speed: 50,
+          lifespan: 500,
+          scale: { start: 0.02, end: 0.01 },
+          emitting: false,
+          duration: 100,
+          tintFill: true,
+          tint: 0x389030,
         }
-      }, 300);
+      );
+
+      starsEmitter.setDepth(1);
+      starsEmitter.explode(10);
 
       if (!userData.pokemons?.length) {
+        scene.gridEngine.stopMovement(Sprites.PLAYER);
+        const newPosition = {
+          x: userData.position?.x ?? 0,
+          y: userData.position?.y ?? 0,
+        };
+        if (userData.position?.facingDirection === Direction.UP) {
+          newPosition.y += 1;
+        }
+        if (userData.position?.facingDirection === Direction.DOWN) {
+          newPosition.y -= 1;
+        }
+        if (userData.position?.facingDirection === Direction.LEFT) {
+          newPosition.x += 1;
+        }
+        if (userData.position?.facingDirection === Direction.RIGHT) {
+          newPosition.x -= 1;
+        }
+        scene.gridEngine.moveTo(Sprites.PLAYER, newPosition);
         openDialog(
           "You don't have any pokemon. It's not safe to walk on grass."
         );
         return;
       }
 
-      if (
-        randomNumber === max / 2 &&
-        scene.gridEngine.isMoving(Sprites.PLAYER)
-      ) {
+      if (randomNumber === max / 2) {
         scene.gridEngine.stopMovement(Sprites.PLAYER);
         scene.gridEngine.setSpeed(Sprites.PLAYER, 0);
         const battleStarted = scene.data.get("battleStarted");
@@ -258,8 +285,8 @@ export const handleMoveOnGrass = (
           });
 
           scene.time.delayedCall(2000, () => {
-            savePlayerPosition(scene);
-            scene.data.remove("battleStarted");
+            scene.data.reset();
+            scene.receivedData = {};
             scene.scene.stop("World").start("Battle", {
               pokemon,
             });
@@ -270,9 +297,7 @@ export const handleMoveOnGrass = (
   }
 };
 
-export const handleDialogObject = (
-  dialog: Phaser.Types.Tilemaps.TiledObject
-) => {
+export const handleDialogObject = (dialog: Types.Tilemaps.TiledObject) => {
   const content = dialog.properties.find(
     (property: any) => property.name === "content"
   )?.value;
@@ -284,7 +309,7 @@ export const handleDialogObject = (
 
 export const handlePokeball = (
   scene: WorldScene,
-  pokeball: Phaser.Types.Tilemaps.TiledObject
+  pokeball: Types.Tilemaps.TiledObject
 ) => {
   const pokemonInside = pokeball.properties.find(
     (property: any) => property.name === "pokemon_inside"
@@ -350,4 +375,48 @@ export const handleBicycle = (scene: WorldScene) => {
     },
     facingDirection: scene.gridEngine.getFacingDirection(Sprites.PLAYER),
   } as WorldReceivedData);
+};
+
+export const getNPCs = (scene: WorldScene) => {
+  const objects = scene.tilemap
+    .getObjectLayer(Layers.OBJECTS)
+    ?.objects.map((object) => convertObjectPositionToTilePosition(object));
+
+  return objects?.filter((object) => object.name === "npc") ?? [];
+};
+
+export const spawnNPC = (scene: WorldScene) => {
+  const NPCs = getNPCs(scene);
+
+  if (NPCs.length) {
+    NPCs.forEach((npc) => {
+      const name = getTiledObjectProperty("name", npc);
+      const x = getTiledObjectProperty("x", npc);
+      const y = getTiledObjectProperty("y", npc);
+
+      const sprite = scene.add.sprite(0, 0, name);
+      sprite.setOrigin(0.5, 0.5);
+      sprite.setDepth(1);
+      sprite.setScale(1.25);
+
+      scene.gridEngine.addCharacter({
+        id: name,
+        sprite,
+        walkingAnimationMapping: 0,
+        startPosition: { x: x, y: y },
+        speed: 5,
+      });
+    });
+  }
+};
+
+export const handleNPC = (
+  scene: WorldScene,
+  npc: Types.Tilemaps.TiledObject
+) => {
+  if (!isDialogOpen()) {
+    const name = getTiledObjectProperty("name", npc);
+
+    openDialog(`Hello, I'm ${name}!`);
+  }
 };

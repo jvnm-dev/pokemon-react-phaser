@@ -1,10 +1,11 @@
+import { Scene, GameObjects } from "phaser";
 import { PLAYER_SIZE } from "../constants/game";
 import { Audios, Maps, Sprites } from "../constants/assets";
 import { Tilesets } from "../constants/assets";
 import { useUserDataStore } from "../stores/userData";
 
-export default class BootScene extends Phaser.Scene {
-  text: Phaser.GameObjects.Text;
+export default class BootScene extends Scene {
+  text: GameObjects.Text;
 
   constructor() {
     super("Boot");
@@ -100,12 +101,22 @@ export default class BootScene extends Phaser.Scene {
         `pokemon_${i + 1}_front`,
         `assets/images/pokemons/front/${i + 1}.png`
       );
+
+      this.load.image(
+        `pokemon_${i + 1}_front_shiny`,
+        `assets/images/pokemons/front/shiny/${i + 1}.png`
+      );
     });
 
     Array.from({ length: 151 }, (_, i) => {
       this.load.image(
         `pokemon_${i + 1}_back`,
         `assets/images/pokemons/back/${i + 1}.png`
+      );
+
+      this.load.image(
+        `pokemon_${i + 1}_back_shiny`,
+        `assets/images/pokemons/back/shiny/${i + 1}.png`
       );
     });
 
@@ -121,6 +132,7 @@ export default class BootScene extends Phaser.Scene {
 
     // Objects
     this.load.image("object_pokeball", "assets/images/objects/pokeball.png");
+    this.load.image("object_star", "assets/images/objects/star.png");
   }
 
   loadMaps(): void {
@@ -149,5 +161,10 @@ export default class BootScene extends Phaser.Scene {
         frameHeight: PLAYER_SIZE,
       }
     );
+
+    this.load.spritesheet(Sprites.CHEN, "assets/images/characters/chen.png", {
+      frameWidth: PLAYER_SIZE,
+      frameHeight: PLAYER_SIZE,
+    });
   }
 }

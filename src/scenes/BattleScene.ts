@@ -1,3 +1,5 @@
+import { Scene, GameObjects } from "phaser";
+
 import { playClick } from "../utils/audio";
 import { useUIStore } from "../stores/ui";
 import {
@@ -9,23 +11,27 @@ import {
   triggerUIRight,
 } from "../utils/ui";
 import { useUserDataStore } from "../stores/userData";
+import { getRandomNumber } from "../utils/number";
 
 export type EnnemyPokemon = {
-  image?: Phaser.GameObjects.Image;
+  image?: GameObjects.Image;
   data?: any;
 };
 
-export default class BattleScene extends Phaser.Scene {
-  trainerBack: Phaser.GameObjects.Image;
-  pokemonFromTeam: Phaser.GameObjects.Image;
+export default class BattleScene extends Scene {
+  trainerBack: GameObjects.Image;
+  pokemonFromTeam: GameObjects.Image;
   ennemyPokemon: EnnemyPokemon = {};
+  isShiny: boolean;
 
   constructor() {
     super("Battle");
+    this.isShiny = false;
   }
 
   init(data: { pokemon: any }) {
     this.ennemyPokemon.data = data.pokemon;
+    this.isShiny = getRandomNumber(0, 512) === 0;
   }
 
   create(): void {
@@ -66,7 +72,9 @@ export default class BattleScene extends Phaser.Scene {
     this.ennemyPokemon.image = this.add.image(
       this.scale.width / 2,
       this.scale.height / 2,
-      `pokemon_${this.ennemyPokemon.data.id}_front`
+      `pokemon_${this.ennemyPokemon.data.id}_front${
+        this.isShiny ? "_shiny" : ""
+      }`
     );
 
     this.ennemyPokemon.image.displayHeight =
@@ -102,7 +110,32 @@ export default class BattleScene extends Phaser.Scene {
     // When sliding is done, show ennemy
     this.time.delayedCall(positionTransitionDelay, () => {
       if (this.ennemyPokemon.image) {
+        this.ennemyPokemon.image.setDepth(99);
         this.ennemyPokemon.image.tint = 0xffffff;
+
+        const circle = new Phaser.Geom.Circle(
+          this.ennemyPokemon.image.x - 15,
+          this.ennemyPokemon.image.y,
+          this.ennemyPokemon.image.displayHeight / 2
+        );
+
+        if (this.isShiny) {
+          const starsEmitter = this.add.particles(0, 0, "object_star", {
+            speed: 0.5,
+            lifespan: 1500,
+            quantity: 1,
+            scale: { start: 0.05, end: 0.03 },
+            emitting: false,
+            emitZone: {
+              type: "edge",
+              source: circle,
+              quantity: 20,
+            },
+            duration: 250,
+          });
+
+          starsEmitter.start(1);
+        }
       }
     });
 
@@ -178,7 +211,7 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   listenKeyboardControl(): void {
-    this.input.keyboard.on("keyup", (event: KeyboardEvent) => {
+    this.input.keyboard?.on("keyup", (event: KeyboardEvent) => {
       const uiStore = useUIStore.getState();
       const isOpen = uiStore.battle.isOpen;
 

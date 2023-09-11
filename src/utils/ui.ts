@@ -1,52 +1,44 @@
 import { UIEvents } from "../constants/events";
 import { useUIStore } from "../stores/ui";
 
-export const isUIOpen = (): boolean => {
+export const isUIOpen = () => {
   return isDialogOpen() || isMenuOpen() || isBattleOpen();
 };
 
-export const isDialogOpen = (): boolean => {
+export const isDialogOpen = () => {
   return useUIStore.getState().dialog.isOpen;
 };
 
-export const isMenuOpen = (): boolean => {
+export const isMenuOpen = () => {
   return useUIStore.getState().menu.isOpen;
 };
 
-export const isBattleOpen = (): boolean => {
+export const isBattleOpen = () => {
   return useUIStore.getState().battle.isOpen;
 };
 
-export const openDialog = (content: string): void => {
+export const openDialog = (content: string) => {
   return useUIStore.getState().toggleDialog(content);
 };
 
-export const toggleMenu = (): void => {
+export const toggleMenu = () => {
   if (!isDialogOpen()) {
     return useUIStore.getState().toggleMenu();
   }
 };
 
-export const triggerUIExit = (): void => {
-  window.dispatchEvent(new Event(UIEvents.EXIT));
+const dispatch = (eventType: string) => {
+  window.dispatchEvent(new Event(eventType));
 };
 
-export const triggerUINextStep = (): void => {
-  window.dispatchEvent(new Event(UIEvents.NEXT_STEP));
-};
+export const triggerUIExit = () => dispatch(UIEvents.EXIT);
 
-export const triggerUIDown = (): void => {
-  window.dispatchEvent(new Event(UIEvents.DOWN));
-};
+export const triggerUINextStep = () => dispatch(UIEvents.NEXT_STEP);
 
-export const triggerUIUp = (): void => {
-  window.dispatchEvent(new Event(UIEvents.UP));
-};
+export const triggerUIDown = () => dispatch(UIEvents.DOWN);
 
-export const triggerUILeft = (): void => {
-  window.dispatchEvent(new Event(UIEvents.LEFT));
-};
+export const triggerUIUp = () => dispatch(UIEvents.UP);
 
-export const triggerUIRight = (): void => {
-  window.dispatchEvent(new Event(UIEvents.RIGHT));
-};
+export const triggerUILeft = () => dispatch(UIEvents.LEFT);
+
+export const triggerUIRight = () => dispatch(UIEvents.RIGHT);

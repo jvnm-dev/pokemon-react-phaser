@@ -1,3 +1,4 @@
+import { Scene, GameObjects, Tilemaps } from "phaser";
 import { Direction, GridEngine, GridEngineConfig } from "grid-engine";
 
 import { GAME_HEIGHT, GAME_WIDTH } from "../constants/game";
@@ -6,9 +7,11 @@ import {
   convertObjectPositionToTilePosition,
   getObjectUnderPlayer,
   handleBicycle,
-  handleClickOnObject,
+  handleClickOnObjectIfAny,
+  handleNPCInteractionIfAny,
   handleOverlappableObject,
   removeObject,
+  spawnNPC,
 } from "../utils/object";
 import { playClick } from "../utils/audio";
 import { getStartPosition, savePlayerPosition } from "../utils/map";
@@ -34,15 +37,15 @@ export interface WorldReceivedData {
   };
 }
 
-export default class WorldScene extends Phaser.Scene {
+export default class WorldScene extends Scene {
   gridEngine: GridEngine;
 
-  currentSprite: Phaser.GameObjects.Sprite;
-  player: Phaser.GameObjects.Sprite;
-  bicycle: Phaser.GameObjects.Sprite;
+  currentSprite: GameObjects.Sprite;
+  player: GameObjects.Sprite;
+  bicycle: GameObjects.Sprite;
   speed: number;
 
-  tilemap: Phaser.Tilemaps.Tilemap;
+  tilemap: Tilemaps.Tilemap;
 
   map: Maps = Maps.MAP;
 
@@ -62,8 +65,15 @@ export default class WorldScene extends Phaser.Scene {
     this.initializePlayer();
     this.initializeCamera();
     this.initializeGrid();
+    this.initializeNPCs();
     this.listenKeyboardControl();
     this.applyUserDataAfterRender();
+    this.gridEngine.positionChangeFinished().subscribe((observer) => {
+      if (observer.charId === Sprites.PLAYER) {
+        savePlayerPosition(this);
+        this.handleObjectsOverlap();
+      }
+    });
   }
 
   update(): void {
@@ -72,16 +82,19 @@ export default class WorldScene extends Phaser.Scene {
     }
 
     this.listenMoves();
-    this.handleObjectsOverlap();
   }
 
   initializeTilemap(): void {
     this.tilemap = this.make.tilemap({ key: this.map });
 
     const all_tilesets = Object.values(Tilesets).reduce(
-      (acc: Phaser.Tilemaps.Tileset[], value: Tilesets) => {
+      (acc: Tilemaps.Tileset[], value: Tilesets) => {
         if (this.tilemap.tilesets.find(({ name }) => name === value)) {
-          acc = [...acc, this.tilemap.addTilesetImage(value)];
+          const tileset = this.tilemap.addTilesetImage(value);
+
+          if (tileset) {
+            acc = [...acc, tileset];
+          }
         }
 
         return acc;
@@ -114,7 +127,7 @@ export default class WorldScene extends Phaser.Scene {
 
     this.currentSprite.setOrigin(0.5, 0.5);
     this.currentSprite.setDepth(1);
-    this.currentSprite.setScale(1.25);
+    this.currentSprite.setScale(1.1);
 
     // Removing unused sprite from the world
     [player, bicycle].forEach((sprite) => {
@@ -122,6 +135,9 @@ export default class WorldScene extends Phaser.Scene {
         sprite.destroy();
       }
     });
+
+    this.player = player;
+    this.bicycle = bicycle;
   }
 
   initializeGrid(): void {
@@ -145,6 +161,10 @@ export default class WorldScene extends Phaser.Scene {
     this.gridEngine.create(this.tilemap, gridEngineConfig);
   }
 
+  initializeNPCs() {
+    spawnNPC(this);
+  }
+
   initializeCamera(): void {
     this.cameras.roundPixels = true;
     this.cameras.main.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
@@ -157,20 +177,25 @@ export default class WorldScene extends Phaser.Scene {
   }
 
   listenKeyboardControl(): void {
-    this.input.keyboard.on("keyup", (event: KeyboardEvent) => {
+    this.input.keyboard?.on("keyup", (event: KeyboardEvent) => {
       const uiStore = useUIStore.getState();
-      const isOpen = uiStore.menu.isOpen || uiStore.dialog.isOpen;
+      const isUIOpen = uiStore.menu.isOpen || uiStore.dialog.isOpen;
+
+      if (this.data.get("battleStarted")) {
+        return;
+      }
 
       switch (event.key.toUpperCase()) {
         case "M":
           this.sound.mute = !this.sound.mute;
           break;
         case "E":
-          handleClickOnObject(this);
-          break;
-        case "ENTER":
-          playClick(this);
-          triggerUINextStep();
+          if (isUIOpen) {
+            playClick(this);
+            triggerUINextStep();
+          } else {
+            handleClickOnObjectIfAny(this);
+          }
           break;
         case "ESCAPE":
           playClick(this);
@@ -184,25 +209,25 @@ export default class WorldScene extends Phaser.Scene {
           handleBicycle(this);
           break;
         case "ARROWDOWN":
-          if (isOpen) {
+          if (isUIOpen) {
             playClick(this);
             triggerUIDown();
           }
           break;
         case "ARROWUP":
-          if (isOpen) {
+          if (isUIOpen) {
             playClick(this);
             triggerUIUp();
           }
           break;
         case "ARROWLEFT":
-          if (isOpen) {
+          if (isUIOpen) {
             playClick(this);
             triggerUILeft();
           }
           break;
         case "ARROWRIGHT":
-          if (isOpen) {
+          if (isUIOpen) {
             playClick(this);
             triggerUIRight();
           }
@@ -212,20 +237,24 @@ export default class WorldScene extends Phaser.Scene {
   }
 
   listenMoves(): void {
-    const cursors = this.input.keyboard.createCursorKeys();
-    const keys: any = this.input.keyboard.addKeys("W,S,A,D");
+    if (
+      this.input.keyboard &&
+      !isUIOpen() &&
+      !this.gridEngine.isMoving(Sprites.PLAYER)
+    ) {
+      const cursors = this.input.keyboard.createCursorKeys();
+      const keys: any = this.input.keyboard.addKeys("W,S,A,D");
 
-    if (cursors.left.isDown || keys.A.isDown) {
-      this.gridEngine.move(Sprites.PLAYER, Direction.LEFT);
-    } else if (cursors.right.isDown || keys.D.isDown) {
-      this.gridEngine.move(Sprites.PLAYER, Direction.RIGHT);
-    } else if (cursors.up.isDown || keys.W.isDown) {
-      this.gridEngine.move(Sprites.PLAYER, Direction.UP);
-    } else if (cursors.down.isDown || keys.S.isDown) {
-      this.gridEngine.move(Sprites.PLAYER, Direction.DOWN);
+      if (cursors.left.isDown || keys.A.isDown) {
+        this.gridEngine.move(Sprites.PLAYER, Direction.LEFT);
+      } else if (cursors.right.isDown || keys.D.isDown) {
+        this.gridEngine.move(Sprites.PLAYER, Direction.RIGHT);
+      } else if (cursors.up.isDown || keys.W.isDown) {
+        this.gridEngine.move(Sprites.PLAYER, Direction.UP);
+      } else if (cursors.down.isDown || keys.S.isDown) {
+        this.gridEngine.move(Sprites.PLAYER, Direction.DOWN);
+      }
     }
-
-    savePlayerPosition(this);
   }
 
   applyUserDataBeforeRender(): void {

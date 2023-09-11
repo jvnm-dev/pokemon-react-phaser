@@ -18,8 +18,10 @@ export const Battle = ({ game }: UIBase) => {
           if (UIStore.battle.isOpen) {
             game.sound.stopAll();
             game.sound.play(Audios.MUSIC, getAudioConfig());
-
-            game.scene.stop("Battle").start("World");
+            game.scene.stop("Battle").start("World", {
+              facingDirection: void 0,
+              startPosition: void 0,
+            });
             useUIStore.getState().toggleBattle();
           }
         },

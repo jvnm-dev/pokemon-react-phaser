@@ -1,3 +1,4 @@
+import { Tilemaps } from "phaser";
 import type WorldScene from "../scenes/WorldScene";
 
 import { useUserDataStore } from "../stores/userData";
@@ -6,7 +7,7 @@ import { getSpawn } from "./object";
 
 export const getCurrentPlayerTile = (scene: WorldScene) => {
   const { cameras, tilemap } = scene;
-  const { x, y } = scene.gridEngine.getSprite(Sprites.PLAYER);
+  const { x, y } = scene.gridEngine.getSprite(Sprites.PLAYER) ?? { x: 0, y: 0 };
   const tile = tilemap.getTileAtWorldXY(x, y, true, cameras.main, Layers.WORLD);
 
   if (!tile) {
@@ -17,7 +18,7 @@ export const getCurrentPlayerTile = (scene: WorldScene) => {
     ...tile,
     x: tile.x + 1,
     y: tile.y + 1,
-  } as Phaser.Tilemaps.Tile;
+  } as Tilemaps.Tile;
 };
 
 export const getStartPosition = (scene: WorldScene) => {

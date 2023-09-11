@@ -1,6 +1,5 @@
-import Phaser from "phaser";
+import { Types, AUTO, Scale, Game as PhaserGame } from "phaser";
 import React from "react";
-import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
 
 import { GridEngine } from "grid-engine";
@@ -12,14 +11,14 @@ import BattleScene from "./scenes/BattleScene";
 import { GAME_HEIGHT, GAME_WIDTH } from "./constants/game";
 import { UI } from "./ui/UI";
 
-const gameConfig: Phaser.Types.Core.GameConfig = {
+const gameConfig: Types.Core.GameConfig = {
   parent: "game",
-  type: Phaser.AUTO,
+  type: AUTO,
   width: GAME_WIDTH,
   height: GAME_HEIGHT,
   scale: {
-    mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH,
+    mode: Scale.FIT,
+    autoCenter: Scale.CENTER_BOTH,
   },
   scene: [BootScene, TitleScene, WorldScene, BattleScene],
   physics: {
@@ -40,8 +39,8 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
   },
 };
 
-export default class Game extends Phaser.Game {
-  constructor(config: Phaser.Types.Core.GameConfig) {
+export default class Game extends PhaserGame {
+  constructor(config: Types.Core.GameConfig) {
     super(config);
   }
 }

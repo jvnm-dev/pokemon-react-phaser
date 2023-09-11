@@ -1,11 +1,11 @@
-import type Phaser from "phaser";
+import type { Types, Scene } from "phaser";
 
 import { Audios } from "../constants/assets";
 
 export const getAudioConfig = (
   volume: number = 0.1,
   loop: boolean = true
-): Phaser.Types.Sound.SoundConfig => ({
+): Types.Sound.SoundConfig => ({
   mute: false,
   volume,
   rate: 1,
@@ -13,6 +13,6 @@ export const getAudioConfig = (
   loop,
 });
 
-export const playClick = (scene: Phaser.Scene) => {
+export const playClick = (scene: Scene) => {
   scene.sound.play(Audios.CLICK, getAudioConfig(0.2, false));
 };

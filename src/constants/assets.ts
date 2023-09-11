@@ -1,6 +1,7 @@
 export enum Sprites {
   PLAYER = "player",
   BICYCLE = "bicycle",
+  CHEN = "chen",
 }
 
 export enum Tilesets {
@@ -9,6 +10,14 @@ export enum Tilesets {
   WORLD2 = "world2",
   INSIDE = "inside",
   GROUNDS_INSIDE = "grounds_inside",
+  INSIDE_ONE = "inside_one",
+  INSIDE_TWO = "inside_two",
+  INSIDE_THREE = "inside_three",
+  INSIDE_FOUR = "inside_four",
+  INSIDE_FIVE = "inside_five",
+  INSIDE_SIX = "inside_six",
+  INSIDE_SEVEN = "inside_seven",
+  INSIDE_EIGHT = "inside_eight",
 }
 
 export enum Maps {
@@ -20,6 +29,7 @@ export enum Maps {
 
 export enum Layers {
   BELOW_PLAYER = "below_player",
+  BELOW_PLAYER2 = "below_player2",
   WORLD = "world",
   WORLD2 = "world2",
   ABOVE_PLAYER = "above_player",
@@ -29,6 +39,7 @@ export enum Layers {
 export enum Objects {
   SPAWN = "spawn",
   DOOR = "door",
+  NPC = "npc",
   DIALOG = "dialog",
   POKEBALL = "pokeball",
   POKEDEX = "pokedex",

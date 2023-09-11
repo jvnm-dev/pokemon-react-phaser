@@ -1,3 +1,4 @@
+import { Types } from "phaser";
 import React, { useState, useEffect } from "react";
 import capitalize from "lodash/capitalize";
 
@@ -93,7 +94,7 @@ export const SettingsMenu = ({ setSelectedOption }: SettingsMenuProps) => {
             "You must reload the page for you changes to be taken in account!",
         },
       ],
-    } as Phaser.Types.Tilemaps.TiledObject);
+    } as Types.Tilemaps.TiledObject);
   };
 
   const processHoveredOption = () => {

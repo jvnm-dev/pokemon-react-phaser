@@ -5,22 +5,7 @@ module.exports = {
     src: { url: "/dist" },
   },
   plugins: ["@snowpack/plugin-typescript"],
-  install: [
-    /* ... */
-  ],
-  installOptions: {
+  packageOptions: {
     installTypes: true,
-  },
-  devOptions: {
-    /* ... */
-  },
-  buildOptions: {
-    /* ... */
-  },
-  proxy: {
-    /* ... */
-  },
-  alias: {
-    /* ... */
   },
 };

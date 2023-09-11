@@ -1,3 +1,4 @@
+import { Game } from "phaser";
 import React, { useEffect, useState } from "react";
 
 import { isUIOpen } from "../utils/ui";
@@ -8,13 +9,12 @@ import { Dialog } from "./components/Dialog";
 import { Battle } from "./components/Battle";
 
 export type UIBase = {
-  game: Phaser.Game;
+  game: Game;
 };
 
 export const UI = ({ game }: UIBase) => {
   const [size, setSize] = useState({ width: 0, height: 0 });
   const windowSize = useWindowSize();
-
   useUIStore();
 
   useEffect(() => {

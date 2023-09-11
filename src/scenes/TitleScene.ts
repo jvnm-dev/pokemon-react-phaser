@@ -1,9 +1,10 @@
+import { Scene, GameObjects } from "phaser";
 import { Audios } from "../constants/assets";
 import { getAudioConfig, playClick } from "../utils/audio";
 import UIButton from "../prefabs/UIButton";
 
-export default class TitleScene extends Phaser.Scene {
-  titleText: Phaser.GameObjects.Text;
+export default class TitleScene extends Scene {
+  titleText: GameObjects.Text;
   startGameButton: UIButton;
 
   constructor() {
