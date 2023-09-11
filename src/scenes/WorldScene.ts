@@ -8,7 +8,6 @@ import {
   getObjectUnderPlayer,
   handleBicycle,
   handleClickOnObjectIfAny,
-  handleNPCInteractionIfAny,
   handleOverlappableObject,
   removeObject,
   spawnNPC,
