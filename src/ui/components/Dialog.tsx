@@ -16,7 +16,7 @@ export const Dialog = () => {
   const [selectedChoice, setSelectedChoice] = useState<string>();
 
   const isLastStep = dialog.currentStepIndex === dialog.steps.length - 1;
-  const shouldShowChoices = isLastStep && !!dialog.choices.length;
+  const shouldShowChoices = isLastStep && !!dialog.choices?.length;
 
   const triggerNextStep = () => {
     const nextStepIndex = dialog.currentStepIndex + 1;
@@ -44,27 +44,35 @@ export const Dialog = () => {
       {
         name: UIEvents.UP,
         callback: () => {
-          setSelectedChoice((current) => 
-            dialog.choices[dialog.choices.indexOf(current) - 1] ||
-            dialog.choices[dialog.choices.length - 1]
-          )
+          if (shouldShowChoices) {
+            setSelectedChoice(
+              (current) =>
+                dialog.choices[dialog.choices.indexOf(current) - 1] ||
+                dialog.choices[dialog.choices.length - 1],
+            );
+          }
         },
       },
       {
         name: UIEvents.DOWN,
         callback: () => {
-          setSelectedChoice((current) => 
-            dialog.choices[dialog.choices.indexOf(current) + 1] ||
-            dialog.choices[0]
-          )
-        }
+          if (shouldShowChoices) {
+            setSelectedChoice(
+              (current) =>
+                dialog.choices[dialog.choices.indexOf(current) + 1] ||
+                dialog.choices[0],
+            );
+          }
+        },
       },
     ],
     [dialog, selectedChoice],
   );
 
   useEffect(() => {
-    setSelectedChoice(dialog.choices[0]);
+    if (dialog.choices?.length) {
+      setSelectedChoice(dialog.choices[0]);
+    }
   }, [dialog.choices]);
 
   return (

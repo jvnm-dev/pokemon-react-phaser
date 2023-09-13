@@ -313,7 +313,7 @@ export const handleDialogObject = (dialog: Types.Tilemaps.TiledObject) => {
   )?.value;
 
   if (content) {
-    openDialog(content);
+    openDialog({ content });
   }
 };
 

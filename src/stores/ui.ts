@@ -8,7 +8,7 @@ interface UIStore {
     callback?: (selectedChoice?: string) => void;
     steps: string[];
     currentStepIndex: number;
-    choices: string[];
+    choices?: string[];
   };
   menu: {
     isOpen: boolean;

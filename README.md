@@ -15,6 +15,7 @@ Welcome to my homemade Pokémon game project! This game is a labor of love and i
 </p>
 
 ## Technologies Used
+
 - React
 - Vite
 - Phaser
