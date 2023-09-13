@@ -1,5 +1,5 @@
 import { Game } from "phaser";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { isUIOpen } from "../utils/ui";
 import { useUIStore } from "../stores/ui";

@@ -98,7 +98,7 @@ export default class WorldScene extends Scene {
 
         return acc;
       },
-      []
+      [],
     );
 
     Object.values(Layers)
@@ -171,7 +171,7 @@ export default class WorldScene extends Scene {
     this.cameras.main.startFollow(this.currentSprite, true);
     this.cameras.main.setFollowOffset(
       -this.currentSprite.width,
-      -this.currentSprite.height
+      -this.currentSprite.height,
     );
   }
 
@@ -189,6 +189,7 @@ export default class WorldScene extends Scene {
           this.sound.mute = !this.sound.mute;
           break;
         case "E":
+        case "ENTER":
           if (isUIOpen) {
             playClick(this);
             triggerUINextStep();
@@ -242,7 +243,10 @@ export default class WorldScene extends Scene {
       !this.gridEngine.isMoving(Sprites.PLAYER)
     ) {
       const cursors = this.input.keyboard.createCursorKeys();
-      const keys: any = this.input.keyboard.addKeys("W,S,A,D");
+      const keys = this.input.keyboard.addKeys("W,S,A,D") as Record<
+        string,
+        { isDown: boolean }
+      >;
 
       if (cursors.left.isDown || keys.A.isDown) {
         this.gridEngine.move(Sprites.PLAYER, Direction.LEFT);

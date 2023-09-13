@@ -3,7 +3,7 @@ import type WorldScene from "../scenes/WorldScene";
 import type { WorldReceivedData } from "../scenes/WorldScene";
 import { Audios, Layers, Objects, Sprites } from "../constants/assets";
 import { TILE_SIZE } from "../constants/game";
-import { getCurrentPlayerTile, savePlayerPosition } from "./map";
+import { getCurrentPlayerTile } from "./map";
 import { getAudioConfig, playClick } from "./audio";
 import { Direction } from "grid-engine";
 import { isDialogOpen, isUIOpen, openDialog, triggerUINextStep } from "./ui";
@@ -12,9 +12,11 @@ import { getRandomNumber } from "./number";
 
 import pokemons from "../constants/pokemons.json";
 import { getRandomPokemonFromZone } from "./pokemon";
+import { scenarios } from "../scenarios";
+import { ObjectProperties } from "../constants/types";
 
 export const convertObjectPositionToTilePosition = (
-  object: Types.Tilemaps.TiledObject
+  object: Types.Tilemaps.TiledObject,
 ) => ({
   ...object,
   x: ~~((object?.x ?? 0) / TILE_SIZE),
@@ -23,7 +25,7 @@ export const convertObjectPositionToTilePosition = (
 
 export const findObjectByPosition = (
   scene: WorldScene,
-  position: { x: number; y: number }
+  position: { x: number; y: number },
 ) => {
   const { tilemap } = scene;
 
@@ -32,7 +34,7 @@ export const findObjectByPosition = (
     ?.objects.map((object) => convertObjectPositionToTilePosition(object));
 
   return objects?.find(
-    (object) => object.x === position.x && object.y === position.y
+    (object) => object.x === position.x && object.y === position.y,
   );
 };
 
@@ -56,7 +58,7 @@ export const getObjectLookedAt = (scene: WorldScene) => {
 
   const facingDirection = scene.gridEngine.getFacingDirection(Sprites.PLAYER);
 
-  let lookingPosition = {
+  const lookingPosition = {
     x: currentTile?.x ?? 0,
     y: currentTile?.y ?? 0,
   };
@@ -76,15 +78,16 @@ export const getObjectLookedAt = (scene: WorldScene) => {
 
 export const getTiledObjectProperty = (
   name: string,
-  object: Types.Tilemaps.TiledObject
+  object: Types.Tilemaps.TiledObject,
 ) => {
-  return object.properties?.find((property: any) => property.name === name)
-    ?.value;
+  return object.properties?.find(
+    (property: ObjectProperties) => property.name === name,
+  )?.value;
 };
 
 export const removeObject = (
   scene: WorldScene,
-  object: Types.Tilemaps.TiledObject
+  object: Types.Tilemaps.TiledObject,
 ) => {
   const removeTile = (layer: Layers) => {
     if (object.x && object.y) {
@@ -93,7 +96,7 @@ export const removeObject = (
         object.y,
         false,
         false,
-        layer
+        layer,
       );
     }
   };
@@ -116,12 +119,12 @@ export const removeObject = (
 export const getSpawn = (scene: WorldScene) => {
   const spawnPoint = scene.tilemap.findObject(
     Layers.OBJECTS,
-    (obj) => obj.name === Objects.SPAWN
+    (obj) => obj.name === Objects.SPAWN,
   );
 
   if (spawnPoint?.x && spawnPoint?.y) {
     const facingDirection = spawnPoint.properties?.find(
-      (property: any) => property.name === "spriteDirection"
+      (property: ObjectProperties) => property.name === "spriteDirection",
     )?.value;
 
     return {
@@ -158,7 +161,7 @@ export const handleClickOnObjectIfAny = (scene: WorldScene) => {
 
 export const handleOverlappableObject = (
   scene: WorldScene,
-  object: Types.Tilemaps.TiledObject
+  object: Types.Tilemaps.TiledObject,
 ) => {
   switch (object.name) {
     case Objects.DOOR:
@@ -172,7 +175,7 @@ export const handleOverlappableObject = (
 
 export const handleDoor = (
   scene: WorldScene,
-  door: Types.Tilemaps.TiledObject
+  door: Types.Tilemaps.TiledObject,
 ) => {
   const userData = useUserDataStore.getState();
 
@@ -196,7 +199,7 @@ export const handleDoor = (
 
 export const handleMoveOnGrass = (
   scene: WorldScene,
-  grass: Types.Tilemaps.TiledObject
+  grass: Types.Tilemaps.TiledObject,
 ) => {
   const min = 0;
   const max = 10;
@@ -213,7 +216,7 @@ export const handleMoveOnGrass = (
       realY,
       false,
       scene.cameras.main,
-      "below_player"
+      "below_player",
     );
 
     if (tile) {
@@ -229,7 +232,7 @@ export const handleMoveOnGrass = (
           duration: 100,
           tintFill: true,
           tint: 0x389030,
-        }
+        },
       );
 
       starsEmitter.setDepth(1);
@@ -255,7 +258,7 @@ export const handleMoveOnGrass = (
         }
         scene.gridEngine.moveTo(Sprites.PLAYER, newPosition);
         openDialog(
-          "You don't have any pokemon. It's not safe to walk on grass."
+          "You don't have any pokemon. It's not safe to walk on grass.",
         );
         return;
       }
@@ -268,9 +271,10 @@ export const handleMoveOnGrass = (
         if (!battleStarted) {
           const pokemon = getRandomPokemonFromZone(
             Number(
-              grass.properties.find((property: any) => property.name === "id")
-                ?.value
-            )
+              grass.properties.find(
+                (property: ObjectProperties) => property.name === "id",
+              )?.value,
+            ),
           );
 
           scene.sound.stopAll();
@@ -299,7 +303,7 @@ export const handleMoveOnGrass = (
 
 export const handleDialogObject = (dialog: Types.Tilemaps.TiledObject) => {
   const content = dialog.properties.find(
-    (property: any) => property.name === "content"
+    (property: ObjectProperties) => property.name === "content",
   )?.value;
 
   if (content) {
@@ -309,10 +313,10 @@ export const handleDialogObject = (dialog: Types.Tilemaps.TiledObject) => {
 
 export const handlePokeball = (
   scene: WorldScene,
-  pokeball: Types.Tilemaps.TiledObject
+  pokeball: Types.Tilemaps.TiledObject,
 ) => {
   const pokemonInside = pokeball.properties.find(
-    (property: any) => property.name === "pokemon_inside"
+    (property: ObjectProperties) => property.name === "pokemon_inside",
   )?.value;
 
   removeObject(scene, pokeball);
@@ -325,7 +329,7 @@ export const handlePokeball = (
 
     scene.sound.play(Audios.GAIN, getAudioConfig(0.1, false));
     openDialog(
-      `You found a <span class="gain">${pokemon.name}</span> inside this pokeball!`
+      `You found a <span class="gain">${pokemon.name}</span> inside this pokeball!`,
     );
   }
 };
@@ -337,10 +341,12 @@ export const handleBicycle = (scene: WorldScene) => {
   }
 
   const userData = useUserDataStore.getState();
-  const mapProperties = scene.tilemap.properties as any;
+  const mapProperties = scene.tilemap.properties as ObjectProperties[];
   const isIndoor =
     mapProperties.find &&
-    mapProperties.find((property: any) => property.name === "indoor");
+    mapProperties.find(
+      (property: ObjectProperties) => property.name === "indoor",
+    );
 
   if (isUIOpen()) {
     return;
@@ -397,7 +403,7 @@ export const spawnNPC = (scene: WorldScene) => {
       const sprite = scene.add.sprite(0, 0, name);
       sprite.setOrigin(0.5, 0.5);
       sprite.setDepth(1);
-      sprite.setScale(1.25);
+      sprite.setScale(1);
 
       scene.gridEngine.addCharacter({
         id: name,
@@ -412,11 +418,12 @@ export const spawnNPC = (scene: WorldScene) => {
 
 export const handleNPC = (
   scene: WorldScene,
-  npc: Types.Tilemaps.TiledObject
+  npc: Types.Tilemaps.TiledObject,
 ) => {
-  if (!isDialogOpen()) {
-    const name = getTiledObjectProperty("name", npc);
+  const scenarioId = getTiledObjectProperty("scenario_id", npc);
 
-    openDialog(`Hello, I'm ${name}!`);
+  if (scenarioId) {
+    const scenario = scenarios[scenarioId - 1];
+    scenario([npc], scene);
   }
 };

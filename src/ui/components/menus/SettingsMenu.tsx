@@ -40,7 +40,7 @@ export const SettingsMenu = ({ setSelectedOption }: SettingsMenuProps) => {
   const userDataStore = useUserDataStore();
 
   const [hovered, setHovered] = useState<Options | GeneralOptions>(
-    Options.GENERAL
+    Options.GENERAL,
   );
 
   const [hoveringRegion, setHoveringRegion] = useState<HoveringRegion>({
@@ -61,7 +61,7 @@ export const SettingsMenu = ({ setSelectedOption }: SettingsMenuProps) => {
     setHovered(
       (current: any) =>
         options[options.indexOf(current as never) - 1] ||
-        options[options.length - 1]
+        options[options.length - 1],
     );
   };
 
@@ -80,7 +80,7 @@ export const SettingsMenu = ({ setSelectedOption }: SettingsMenuProps) => {
 
     setHovered(
       (current: any) =>
-        options[options.indexOf(current as never) + 1] || options[0]
+        options[options.indexOf(current as never) + 1] || options[0],
     );
   };
 
@@ -160,7 +160,7 @@ export const SettingsMenu = ({ setSelectedOption }: SettingsMenuProps) => {
         callback: exit,
       },
     ],
-    [UIStore.menu.isOpen, hovered, hoveringRegion, userDataStore.settings]
+    [UIStore.menu.isOpen, hovered, hoveringRegion, userDataStore.settings],
   );
 
   useEffect(() => {

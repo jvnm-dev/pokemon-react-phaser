@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { UIEvents } from "../../constants/events";
 import { openDialog } from "../../utils/ui";
@@ -29,7 +29,7 @@ export const Menu = () => {
     if (!selected) {
       setHovered(
         (current) =>
-          options[options.indexOf(current) - 1] || options[options.length - 1]
+          options[options.indexOf(current) - 1] || options[options.length - 1],
       );
     }
   };
@@ -37,7 +37,7 @@ export const Menu = () => {
   const hoverNextOption = () => {
     if (!selected) {
       setHovered(
-        (current) => options[options.indexOf(current) + 1] || options[0]
+        (current) => options[options.indexOf(current) + 1] || options[0],
       );
     }
   };
@@ -46,7 +46,7 @@ export const Menu = () => {
     if (store.menu.isOpen && !selected && !store.dialog.isOpen) {
       if (
         [Options.POKEDEX, Options.BAG, Options.TEAM, Options.YOU].includes(
-          hovered
+          hovered,
         )
       ) {
         // todo: implement them
@@ -91,7 +91,7 @@ export const Menu = () => {
       store.menu.isOpen,
       hovered,
       selected,
-    ]
+    ],
   );
 
   useEffect(() => {

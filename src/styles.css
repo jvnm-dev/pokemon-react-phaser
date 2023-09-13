@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css?family=VT323");
+
 html,
 body {
   overflow: hidden;
   background: #000;
+  margin: 0;
 }
 
 #ui {
@@ -25,10 +28,11 @@ body {
   z-index: 99999;
   background: #ffffff;
   border: 2px solid #98c8f8;
-  box-shadow: 0 2px 0 2px #698096,
-              inset 0 2px 0 2px #698096,
-              0 0 0 2px #698096,
-              inset 0 0 0 2px #698096;
+  box-shadow:
+    0 2px 0 2px #698096,
+    inset 0 2px 0 2px #698096,
+    0 0 0 2px #698096,
+    inset 0 0 0 2px #698096;
   border-radius: 16px;
 }
 
@@ -49,10 +53,11 @@ body {
 }
 
 #ui .menu {
-  box-shadow: 0 2px 0 2px #698096,
-              inset 0 2px 0 2px #698096,
-              0 0 0 2px #698096,
-              inset 0 0 0 2px #698096;
+  box-shadow:
+    0 2px 0 2px #698096,
+    inset 0 2px 0 2px #698096,
+    0 0 0 2px #698096,
+    inset 0 0 0 2px #698096;
   background: #fff;
   border: 2px solid #98c8f8;
   position: absolute;
@@ -69,14 +74,16 @@ body {
   line-height: 48px;
 }
 
-#ui .menu ul li.hovered, #ui .menu .submenu ul li.hovered, div.hovered label {
+#ui .menu ul li.hovered,
+#ui .menu .submenu ul li.hovered,
+div.hovered label {
   color: red;
 }
 
 #ui .menu.full {
   left: 28px;
   top: 28px;
-  display: flex;;
+  display: flex;
 }
 
 #ui .menu .submenu {
@@ -92,10 +99,11 @@ body {
   height: calc(100% + 26px);
   width: 4px;
   background-color: #98c8f8;
-  box-shadow: 0 0.2px 0 0.2px #698096,
-              inset 0 0.2px 0 0.2px #698096,
-              0 0 0 0.2px #698096,
-              inset 0 0 0 0.2px #698096;
+  box-shadow:
+    0 0.2px 0 0.2px #698096,
+    inset 0 0.2px 0 0.2px #698096,
+    0 0 0 0.2px #698096,
+    inset 0 0 0 0.2px #698096;
 }
 
 #ui .menu .content {
@@ -140,10 +148,11 @@ body {
   z-index: 99999;
   background: #ffffff;
   border: 2px solid #98c8f8;
-  box-shadow: 0 2px 0 2px #698096,
-              inset 0 2px 0 2px #698096,
-              0 0 0 2px #698096,
-              inset 0 0 0 2px #698096;
+  box-shadow:
+    0 2px 0 2px #698096,
+    inset 0 2px 0 2px #698096,
+    0 0 0 2px #698096,
+    inset 0 0 0 2px #698096;
   border-radius: 16px;
 }
 
@@ -151,4 +160,44 @@ body {
   50% {
     opacity: 0;
   }
+}
+
+.loading {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.loading img {
+  margin-bottom: 128px;
+}
+
+.meter {
+  box-sizing: content-box;
+  height: 20px; /* Can be anything */
+  position: relative;
+  background: #555;
+  border-radius: 25px;
+  padding: 10px;
+  width: 50%;
+  box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.meter > span {
+  display: block;
+  height: 100%;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: rgb(43, 194, 83);
+  box-shadow:
+    inset 0 2px 9px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
 }

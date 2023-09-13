@@ -1,4 +1,3 @@
-import React from "react";
 import { useEventsListeners } from "../../utils/events";
 
 import { UIBase } from "../UI";
@@ -27,7 +26,7 @@ export const Battle = ({ game }: UIBase) => {
         },
       },
     ],
-    [UIStore.battle.isOpen]
+    [UIStore.battle.isOpen],
   );
 
   return (

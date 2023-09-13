@@ -1,38 +1,30 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
 import { UIEvents } from "../../constants/events";
 import { useUIStore } from "../../stores/ui";
 import { useEventsListeners } from "../../utils/events";
 
-interface IDialogState {
-  steps: string[];
-  currentStepIndex: number;
-}
-
-const defaultState: IDialogState = {
-  steps: [],
-  currentStepIndex: 0,
-};
-
 export const Dialog = () => {
-  const store = useUIStore();
-  const [state, _setState] = useState<IDialogState>(defaultState);
-  const stateRef = useRef(state);
-
-  const setState = (data: IDialogState) => {
-    stateRef.current = data;
-    _setState(data);
-  };
+  const { dialog, closeDialog, set } = useUIStore(
+    ({ dialog, closeDialog, set }) => ({
+      dialog,
+      closeDialog,
+      set,
+    }),
+  );
 
   const triggerNextStep = () => {
-    const nextStepIndex = stateRef.current.currentStepIndex + 1;
+    const nextStepIndex = dialog.currentStepIndex + 1;
 
-    if (nextStepIndex <= stateRef.current.steps.length - 1) {
-      setState({
-        ...stateRef.current,
-        currentStepIndex: nextStepIndex,
-      });
+    if (dialog.steps[nextStepIndex]) {
+      set((current) => ({
+        ...current,
+        dialog: {
+          ...current.dialog,
+          currentStepIndex: nextStepIndex,
+        },
+      }));
     } else {
-      store.closeDialog();
+      dialog.callback?.();
+      closeDialog();
     }
   };
 
@@ -43,35 +35,20 @@ export const Dialog = () => {
         callback: triggerNextStep,
       },
     ],
-    []
+    [dialog],
   );
-
-  useEffect(() => {
-    const { isOpen, content } = store.dialog;
-
-    if (!isOpen) {
-      setState(defaultState);
-    }
-
-    if (isOpen) {
-      setState({
-        ...state,
-        steps: content?.split(";") ?? [],
-      });
-    }
-  }, [store.dialog]);
 
   return (
     <div
       className="dialog"
       style={{
-        display: store.dialog.isOpen ? "block" : "none",
+        display: dialog.isOpen ? "block" : "none",
       }}
     >
       <div className="inner">
         <span
           dangerouslySetInnerHTML={{
-            __html: stateRef.current.steps[state.currentStepIndex],
+            __html: dialog.steps[dialog.currentStepIndex],
           }}
         ></span>
         <span className="blink">▼</span>

@@ -1,10 +1,13 @@
-import create from "zustand";
+import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 interface UIStore {
+  loading: boolean;
   dialog: {
     isOpen: boolean;
-    content?: string;
+    callback?: () => void;
+    steps: string[];
+    currentStepIndex: number;
   };
   menu: {
     isOpen: boolean;
@@ -12,17 +15,22 @@ interface UIStore {
   battle: {
     isOpen: boolean;
   };
-  toggleDialog: (content?: string) => void;
+  setLoading: (loading: boolean) => void;
+  toggleDialog: (content?: string, callback?: () => void) => void;
   closeDialog: () => void;
   toggleMenu: () => void;
   toggleBattle: () => void;
+  set: (fn: (state: UIStore) => UIStore) => void;
 }
 
 export const useUIStore = create<UIStore>()(
   devtools((set) => ({
+    loading: true,
     dialog: {
       isOpen: false,
-      content: "",
+      callback: undefined,
+      steps: [],
+      currentStepIndex: 0,
     },
     menu: {
       isOpen: false,
@@ -30,15 +38,25 @@ export const useUIStore = create<UIStore>()(
     battle: {
       isOpen: false,
     },
-    toggleDialog: (content) =>
+    setLoading: (loading) => set(() => ({ loading })),
+    toggleDialog: (content, callback) =>
       set((state) => ({
         dialog: {
           isOpen: !state.dialog.isOpen,
-          content,
+          callback,
+          steps: content?.split(";") ?? [],
+          currentStepIndex: 0,
         },
       })),
     closeDialog: () =>
-      set(() => ({ dialog: { isOpen: false, content: undefined } })),
+      set(() => ({
+        dialog: {
+          isOpen: false,
+          callback: undefined,
+          steps: [],
+          currentStepIndex: 0,
+        },
+      })),
     toggleMenu: () =>
       set((state) => ({
         menu: {
@@ -51,5 +69,6 @@ export const useUIStore = create<UIStore>()(
           isOpen: !state.battle.isOpen,
         },
       })),
-  }))
+    set,
+  })),
 );

@@ -5,4 +5,5 @@ export enum UIEvents {
   LEFT = "ui-left",
   RIGHT = "ui-right",
   EXIT = "ui-exit",
+  LOADING_PROGRESS = "ui-loading-progress",
 }

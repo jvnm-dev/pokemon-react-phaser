@@ -4,7 +4,7 @@ import { Audios } from "../constants/assets";
 
 export const getAudioConfig = (
   volume: number = 0.1,
-  loop: boolean = true
+  loop: boolean = true,
 ): Types.Sound.SoundConfig => ({
   mute: false,
   volume,

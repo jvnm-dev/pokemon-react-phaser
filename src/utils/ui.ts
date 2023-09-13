@@ -17,8 +17,8 @@ export const isBattleOpen = () => {
   return useUIStore.getState().battle.isOpen;
 };
 
-export const openDialog = (content: string) => {
-  return useUIStore.getState().toggleDialog(content);
+export const openDialog = (content: string, callback?: () => void) => {
+  return useUIStore.getState().toggleDialog(content, callback);
 };
 
 export const toggleMenu = () => {
@@ -27,8 +27,8 @@ export const toggleMenu = () => {
   }
 };
 
-const dispatch = (eventType: string) => {
-  window.dispatchEvent(new Event(eventType));
+export const dispatch = <T>(eventType: string, detail?: T) => {
+  window.dispatchEvent(new CustomEvent(eventType, { detail }));
 };
 
 export const triggerUIExit = () => dispatch(UIEvents.EXIT);

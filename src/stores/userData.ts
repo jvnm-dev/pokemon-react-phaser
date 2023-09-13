@@ -90,7 +90,7 @@ export const useUserDataStore = create<IUserDataStore>()(
       }),
       {
         name: "userData",
-      }
-    )
-  )
+      },
+    ),
+  ),
 );

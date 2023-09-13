@@ -39,7 +39,7 @@ export default class BattleScene extends Scene {
     const background = this.add.image(
       this.scale.width / 2,
       this.scale.height / 2,
-      "battle_background"
+      "battle_background",
     );
 
     background.displayHeight = Number(this.game.config.height);
@@ -50,7 +50,7 @@ export default class BattleScene extends Scene {
     const grass = this.add.image(
       this.scale.width / 2,
       this.scale.height / 2,
-      "battle_grass"
+      "battle_grass",
     );
 
     grass.displayHeight = Number(this.game.config.height);
@@ -61,7 +61,7 @@ export default class BattleScene extends Scene {
     this.trainerBack = this.add.image(
       this.scale.width / 2,
       this.scale.height / 2,
-      "trainer_back"
+      "trainer_back",
     );
 
     this.trainerBack.displayHeight = Number(this.game.config.height) / 4;
@@ -74,7 +74,7 @@ export default class BattleScene extends Scene {
       this.scale.height / 2,
       `pokemon_${this.ennemyPokemon.data.id}_front${
         this.isShiny ? "_shiny" : ""
-      }`
+      }`,
     );
 
     this.ennemyPokemon.image.displayHeight =
@@ -116,7 +116,7 @@ export default class BattleScene extends Scene {
         const circle = new Phaser.Geom.Circle(
           this.ennemyPokemon.image.x - 15,
           this.ennemyPokemon.image.y,
-          this.ennemyPokemon.image.displayHeight / 2
+          this.ennemyPokemon.image.displayHeight / 2,
         );
 
         if (this.isShiny) {
@@ -152,7 +152,7 @@ export default class BattleScene extends Scene {
     const pokeball = this.add.image(
       -50,
       Number(this.game.config.height) / 1.6,
-      "object_pokeball"
+      "object_pokeball",
     );
 
     pokeball.setScale(2.5);
@@ -168,6 +168,7 @@ export default class BattleScene extends Scene {
       y: Number(this.game.config.height) / 1.8,
       duration: 500,
       delay: pokemonGoInDelay1,
+      angle: 180,
     });
 
     // Pokeball fall on the floor
@@ -177,7 +178,7 @@ export default class BattleScene extends Scene {
       targets: pokeball,
       x: Number(this.game.config.width) / 3,
       y: Number(this.game.config.height) / 1.5,
-      duration: 250,
+      duration: 125,
       delay: pokemonGoInDelay2,
     });
 
@@ -188,7 +189,7 @@ export default class BattleScene extends Scene {
     this.pokemonFromTeam = this.add.image(
       this.scale.width / 2,
       this.scale.height / 2,
-      `pokemon_${firstPokemonInTeam}_back`
+      `pokemon_${firstPokemonInTeam}_back`,
     );
 
     this.pokemonFromTeam.displayHeight = Number(this.game.config.height) / 5;
@@ -216,6 +217,7 @@ export default class BattleScene extends Scene {
       const isOpen = uiStore.battle.isOpen;
 
       switch (event.key.toUpperCase()) {
+        case "E":
         case "ENTER":
           if (isOpen) {
             playClick(this);

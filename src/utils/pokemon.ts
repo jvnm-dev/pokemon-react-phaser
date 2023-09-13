@@ -14,12 +14,12 @@ export const getRandomPokemonFromZone = (zoneId: number) => {
 
   const probability = zonePokemons
     .map(({ chance }, pokemonIndex) =>
-      Array(chance === 0 ? highestProbability : chance).fill(pokemonIndex)
+      Array(chance === 0 ? highestProbability : chance).fill(pokemonIndex),
     )
     .reduce((c, v) => c.concat(v), []);
 
   const pokemonIndex = Math.floor(
-    Math.random() * (probability?.length - 1 - 0 + 1) + 0
+    Math.random() * (probability?.length - 1 - 0 + 1) + 0,
   );
   const pokemonId = zonePokemons[probability[pokemonIndex]]?.id;
 

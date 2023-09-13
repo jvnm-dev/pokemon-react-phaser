@@ -3,6 +3,10 @@ import { PLAYER_SIZE } from "../constants/game";
 import { Audios, Maps, Sprites } from "../constants/assets";
 import { Tilesets } from "../constants/assets";
 import { useUserDataStore } from "../stores/userData";
+import { UIEvents } from "../constants/events";
+import { dispatch } from "../utils/ui";
+import { useUIStore } from "../stores/ui";
+import { getAudioConfig } from "../utils/audio";
 
 export default class BootScene extends Scene {
   text: GameObjects.Text;
@@ -11,65 +15,8 @@ export default class BootScene extends Scene {
     super("Boot");
   }
 
-  preload(): void {
-    const progressBar = this.add.graphics({
-      x: this.scale.width / 5.5,
-      y: this.scale.height / 5.5,
-    });
-    const progressBox = this.add.graphics({
-      x: this.scale.width / 5.5,
-      y: this.scale.height / 5.5,
-    });
-    progressBox.fillStyle(0x222222, 0.8);
-    progressBox.fillRect(240, 270, 320, 50);
-
-    const width = this.cameras.main.width;
-    const height = this.cameras.main.height;
-    const loadingText = this.make.text({
-      x: width / 2,
-      y: height / 2 - 50,
-      text: "Loading...",
-      style: {
-        font: "20px monospace",
-        color: "#ffffff",
-      },
-    });
-    loadingText.setOrigin(0.5, 0.5);
-
-    const percentText = this.make.text({
-      x: width / 2,
-      y: height / 2 - 5,
-      text: "0%",
-      style: {
-        font: "18px monospace",
-        color: "#ffffff",
-      },
-    });
-    percentText.setOrigin(0.5, 0.5);
-
-    this.load.on("progress", function (value: number) {
-      percentText.setText(`${(Number(value) * 100).toFixed(0)}%`);
-      progressBar.clear();
-      progressBar.fillStyle(0xffffff, 1);
-      progressBar.fillRect(250, 280, 300 * value, 30);
-    });
-
-    this.load.on("complete", function () {
-      progressBar.destroy();
-      progressBox.destroy();
-      loadingText.destroy();
-      percentText.destroy();
-    });
-
-    this.loadImages();
-    this.loadSpriteSheets();
-    this.loadMaps();
-  }
-
-  create(): void {
+  launchGame(): void {
     const userSettings = useUserDataStore.getState().settings;
-    const startScene = userSettings.general.skipIntroScreen ? "World" : "Title";
-    this.scene.start(startScene);
 
     Object.values(Audios).forEach((audio) => {
       this.sound.add(audio);
@@ -79,16 +26,32 @@ export default class BootScene extends Scene {
 
     // Mute sound by default:
     this.sound.mute = !userSettings.general.enableSound;
+
+    this.sound.play(Audios.MUSIC, getAudioConfig());
+    this.scene.switch("World");
+  }
+
+  preload(): void {
+    this.load.on("progress", (value: number) => {
+      dispatch<number>(UIEvents.LOADING_PROGRESS, value);
+    });
+
+    this.load.on("complete", () => {
+      useUIStore.getState().setLoading(false);
+      this.launchGame();
+    });
+
+    this.loadImages();
+    this.loadSpriteSheets();
+    this.loadMaps();
   }
 
   loadImages(): void {
     // UI
     this.load.image("logo", "assets/images/ui/logo.png");
-    this.load.image("button1", "assets/images/ui/blue_button01.png");
-    this.load.image("button2", "assets/images/ui/blue_button02.png");
     this.load.image(
       "title_background",
-      "assets/images/ui/title_background.png"
+      "assets/images/ui/title_background.png",
     );
 
     // Battle
@@ -99,24 +62,24 @@ export default class BootScene extends Scene {
     Array.from({ length: 151 }, (_, i) => {
       this.load.image(
         `pokemon_${i + 1}_front`,
-        `assets/images/pokemons/front/${i + 1}.png`
+        `assets/images/pokemons/front/${i + 1}.png`,
       );
 
       this.load.image(
         `pokemon_${i + 1}_front_shiny`,
-        `assets/images/pokemons/front/shiny/${i + 1}.png`
+        `assets/images/pokemons/front/shiny/${i + 1}.png`,
       );
     });
 
     Array.from({ length: 151 }, (_, i) => {
       this.load.image(
         `pokemon_${i + 1}_back`,
-        `assets/images/pokemons/back/${i + 1}.png`
+        `assets/images/pokemons/back/${i + 1}.png`,
       );
 
       this.load.image(
         `pokemon_${i + 1}_back_shiny`,
-        `assets/images/pokemons/back/shiny/${i + 1}.png`
+        `assets/images/pokemons/back/shiny/${i + 1}.png`,
       );
     });
 
@@ -150,7 +113,7 @@ export default class BootScene extends Scene {
       {
         frameWidth: PLAYER_SIZE,
         frameHeight: PLAYER_SIZE,
-      }
+      },
     );
 
     this.load.spritesheet(
@@ -159,7 +122,7 @@ export default class BootScene extends Scene {
       {
         frameWidth: PLAYER_SIZE,
         frameHeight: PLAYER_SIZE,
-      }
+      },
     );
 
     this.load.spritesheet(Sprites.CHEN, "assets/images/characters/chen.png", {
