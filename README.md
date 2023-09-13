@@ -18,8 +18,8 @@ To launch the game:
 ```bash
 git clone
 cd pokemon
-yarn
-yarn start
+bun install
+bun dev
 ```
 
 ## Credits
