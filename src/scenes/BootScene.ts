@@ -96,6 +96,7 @@ export default class BootScene extends Scene {
     // Objects
     this.load.image("object_pokeball", "assets/images/objects/pokeball.png");
     this.load.image("object_star", "assets/images/objects/star.png");
+    this.load.image("object_leaf", "assets/images/objects/leaf.png");
   }
 
   loadMaps(): void {
@@ -125,7 +126,7 @@ export default class BootScene extends Scene {
       },
     );
 
-    this.load.spritesheet(Sprites.CHEN, "assets/images/characters/chen.png", {
+    this.load.spritesheet(Sprites.OAK, "assets/images/characters/oak.png", {
       frameWidth: PLAYER_SIZE,
       frameHeight: PLAYER_SIZE,
     });

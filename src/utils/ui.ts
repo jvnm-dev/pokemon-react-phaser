@@ -1,6 +1,12 @@
 import { UIEvents } from "../constants/events";
 import { useUIStore } from "../stores/ui";
 
+export type OpenDialogParams = {
+  content: string;
+  choices?: string[];
+  callback?: (selectedChoice?: string) => void;
+};
+
 export const isUIOpen = () => {
   return isDialogOpen() || isMenuOpen() || isBattleOpen();
 };
@@ -17,8 +23,12 @@ export const isBattleOpen = () => {
   return useUIStore.getState().battle.isOpen;
 };
 
-export const openDialog = (content: string, callback?: () => void) => {
-  return useUIStore.getState().toggleDialog(content, callback);
+export const openDialog = ({
+  content,
+  choices,
+  callback,
+}: OpenDialogParams) => {
+  return useUIStore.getState().toggleDialog(content, choices, callback);
 };
 
 export const toggleMenu = () => {

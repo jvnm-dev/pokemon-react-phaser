@@ -19,11 +19,17 @@ export default (objects: Types.Tilemaps.TiledObject[], scene: WorldScene) => {
     basePosition.x === currentPosition.x &&
     basePosition.y === currentPosition.y
   ) {
-    openDialog(`Hello, I'm ${name}!;What do you want?`, () => {
-      scene.gridEngine.moveTo(name, {
-        x: 10,
-        y: 6,
-      });
+    openDialog({
+      content: `Hello, I'm ${name}!;What do you want?`,
+      choices: ["Nothing", "Move"],
+      callback: (choice) => {
+        if (choice === "Move") {
+          scene.gridEngine.moveTo(name, {
+            x: 10,
+            y: 6,
+          });
+        }
+      },
     });
   }
 };

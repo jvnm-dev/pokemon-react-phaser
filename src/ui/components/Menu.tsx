@@ -50,7 +50,7 @@ export const Menu = () => {
         )
       ) {
         // todo: implement them
-        openDialog("This feature is not ready yet.");
+        openDialog({ content: "This feature is not ready yet." });
         return;
       }
 

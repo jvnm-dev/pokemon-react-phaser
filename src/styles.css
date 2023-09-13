@@ -19,13 +19,19 @@ body {
   font-family: "VT323", monospace;
 }
 
-#ui .dialog {
+#ui .dialogContainer {
   width: 80%;
   position: absolute;
   bottom: 5%;
   left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 99999;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#ui .dialog {
   background: #ffffff;
   border: 2px solid #98c8f8;
   box-shadow:
@@ -33,7 +39,9 @@ body {
     inset 0 2px 0 2px #698096,
     0 0 0 2px #698096,
     inset 0 0 0 2px #698096;
-  border-radius: 16px;
+  border-radius: 48px;
+  padding: 0 16px;
+  width: 100%;
 }
 
 #ui .dialog .inner {
@@ -46,6 +54,11 @@ body {
 #ui .dialog .inner span.blink {
   color: rgb(180, 54, 54);
   animation: blinker 0.8s steps(1, end) infinite;
+}
+
+#ui .dialog.choice {
+  margin-bottom: 16px;
+  width: fit-content;
 }
 
 .gain {

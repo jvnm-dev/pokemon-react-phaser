@@ -5,9 +5,10 @@ interface UIStore {
   loading: boolean;
   dialog: {
     isOpen: boolean;
-    callback?: () => void;
+    callback?: (selectedChoice?: string) => void;
     steps: string[];
     currentStepIndex: number;
+    choices: string[];
   };
   menu: {
     isOpen: boolean;
@@ -16,7 +17,11 @@ interface UIStore {
     isOpen: boolean;
   };
   setLoading: (loading: boolean) => void;
-  toggleDialog: (content?: string, callback?: () => void) => void;
+  toggleDialog: (
+    content?: string,
+    choices?: string[],
+    callback?: (selectedChoice?: string) => void,
+  ) => void;
   closeDialog: () => void;
   toggleMenu: () => void;
   toggleBattle: () => void;
@@ -31,6 +36,7 @@ export const useUIStore = create<UIStore>()(
       callback: undefined,
       steps: [],
       currentStepIndex: 0,
+      choices: [],
     },
     menu: {
       isOpen: false,
@@ -39,13 +45,14 @@ export const useUIStore = create<UIStore>()(
       isOpen: false,
     },
     setLoading: (loading) => set(() => ({ loading })),
-    toggleDialog: (content, callback) =>
+    toggleDialog: (content, choices, callback) =>
       set((state) => ({
         dialog: {
           isOpen: !state.dialog.isOpen,
           callback,
           steps: content?.split(";") ?? [],
           currentStepIndex: 0,
+          choices,
         },
       })),
     closeDialog: () =>
@@ -55,6 +62,7 @@ export const useUIStore = create<UIStore>()(
           callback: undefined,
           steps: [],
           currentStepIndex: 0,
+          choices: [],
         },
       })),
     toggleMenu: () =>

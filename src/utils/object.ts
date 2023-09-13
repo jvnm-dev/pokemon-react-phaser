@@ -220,30 +220,32 @@ export const handleMoveOnGrass = (
     );
 
     if (tile) {
-      const starsEmitter = scene.add.particles(
+      const leafEmitter = scene.add.particles(
         realX + 24,
         realY + 24,
-        "object_star",
+        "object_leaf",
         {
-          speed: 50,
-          lifespan: 500,
-          scale: { start: 0.02, end: 0.01 },
+          speed: 100,
+          lifespan: 150,
+          scale: { start: 0.02, end: 0.02 },
           emitting: false,
           duration: 100,
           tintFill: true,
-          tint: 0x389030,
+          tint: 0xa0e0c0,
         },
       );
 
-      starsEmitter.setDepth(1);
-      starsEmitter.explode(10);
+      leafEmitter.setDepth(99);
+      leafEmitter.explode(8);
 
       if (!userData.pokemons?.length) {
         scene.gridEngine.stopMovement(Sprites.PLAYER);
+
         const newPosition = {
           x: userData.position?.x ?? 0,
           y: userData.position?.y ?? 0,
         };
+
         if (userData.position?.facingDirection === Direction.UP) {
           newPosition.y += 1;
         }
@@ -256,10 +258,14 @@ export const handleMoveOnGrass = (
         if (userData.position?.facingDirection === Direction.RIGHT) {
           newPosition.x -= 1;
         }
+
         scene.gridEngine.moveTo(Sprites.PLAYER, newPosition);
-        openDialog(
-          "You don't have any pokemon. It's not safe to walk on grass.",
-        );
+
+        openDialog({
+          content:
+            "You don't have any pokemon. It's not safe to walk on grass.",
+        });
+
         return;
       }
 
@@ -328,9 +334,9 @@ export const handlePokeball = (
     useUserDataStore.getState().addPokemon(pokemon.id);
 
     scene.sound.play(Audios.GAIN, getAudioConfig(0.1, false));
-    openDialog(
-      `You found a <span class="gain">${pokemon.name}</span> inside this pokeball!`,
-    );
+    openDialog({
+      content: `You found a <span class="gain">${pokemon.name}</span> inside this pokeball!`,
+    });
   }
 };
 
@@ -354,7 +360,7 @@ export const handleBicycle = (scene: WorldScene) => {
 
   if (isIndoor) {
     playClick(scene);
-    openDialog("No bicycle inside!");
+    openDialog({ content: "No bicycle inside!" });
     return;
   }
 
@@ -403,7 +409,7 @@ export const spawnNPC = (scene: WorldScene) => {
       const sprite = scene.add.sprite(0, 0, name);
       sprite.setOrigin(0.5, 0.5);
       sprite.setDepth(1);
-      sprite.setScale(1);
+      sprite.setScale(1.2);
 
       scene.gridEngine.addCharacter({
         id: name,

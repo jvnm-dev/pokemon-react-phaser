@@ -126,7 +126,7 @@ export default class WorldScene extends Scene {
 
     this.currentSprite.setOrigin(0.5, 0.5);
     this.currentSprite.setDepth(1);
-    this.currentSprite.setScale(1.1);
+    this.currentSprite.setScale(1.2);
 
     // Removing unused sprite from the world
     [player, bicycle].forEach((sprite) => {
