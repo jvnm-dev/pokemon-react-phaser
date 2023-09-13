@@ -3,26 +3,24 @@
 </p>
 
 <p align='center'>
-    <img src="https://s11.gifyu.com/images/S4woS.gif" alt="game">
+    <img src="https://pouch.jumpshare.com/preview/O6soRr47QYh3Fi0QijZmzij6rWokl370yo0j5WisPSNWziEVn0ce0ZJSRXoX1qHkMvCJ1E-FXXX_Ea0Wq9ze1Fp81aGwNpfVcRVhHaoteUo" alt="game">
 </p>
 
 <p align='center'>
 Welcome to my homemade Pokémon game project! This game is a labor of love and is still in active development.
 </p>
 
+<p align='center'>
+<a href="https://jvnm-dev.github.io/">Give it a try, it's free!</a>
+</p>
+
 ## Technologies Used
+- React
+- Vite
+- Phaser
+- Bun
 
-This project leverages several technologies and frameworks to bring the Pokémon world to life:
-
-- **React**
-
-- **Vite**
-
-- **Phaser**
-
-- **Bun**
-
-## Play
+## Run it locally
 
 To launch the game:
 
