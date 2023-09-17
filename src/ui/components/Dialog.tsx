@@ -30,8 +30,15 @@ export const Dialog = () => {
         },
       }));
     } else {
-      dialog.callback?.(selectedChoice);
-      closeDialog();
+      queueMicrotask(() => {
+        closeDialog();
+
+        if (selectedChoice) {
+          console.log("Choice made: ", selectedChoice);
+        }
+
+        dialog.callback?.(selectedChoice);
+      });
     }
   };
 
@@ -87,6 +94,7 @@ export const Dialog = () => {
           <div className="inner">
             {dialog.choices.map((choice) => (
               <span
+                key={choice}
                 style={{
                   display: "block",
                   color: selectedChoice === choice ? "red" : "black",

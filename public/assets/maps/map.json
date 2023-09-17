@@ -44,7 +44,7 @@
         0, 0, 0, 0, 0, 513, 514, 530, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 626, 625, 561, 610, 501, 642, 625, 0, 0, 529, 530, 514, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 626, 561, 0, 0, 513,
-        514, 530, 0, 450, 691, 0, 0, 0, 225, 226, 227, 228, 229, 230, 231, 0, 0,
+        514, 530, 0, 1, 691, 0, 0, 0, 225, 226, 227, 228, 229, 230, 231, 0, 0,
         305, 306, 307, 308, 309, 501, 642, 0, 0, 529, 530, 514, 0, 0, 0, 0, 0,
         680, 241, 242, 243, 244, 245, 246, 247, 0, 0, 321, 322, 323, 324, 325,
         610, 625, 0, 0, 513, 514, 530, 0, 0, 0, 0, 0, 696, 257, 258, 259, 260,
@@ -232,25 +232,6 @@
           "width": 0,
           "x": 169,
           "y": 260.5
-        },
-        {
-          "height": 0,
-          "id": 28,
-          "name": "pokeball",
-          "point": true,
-          "properties": [
-            {
-              "name": "pokemon_inside",
-              "type": "string",
-              "value": "25"
-            }
-          ],
-          "rotation": 0,
-          "type": "",
-          "visible": true,
-          "width": 0,
-          "x": 119.5,
-          "y": 259.5
         },
         {
           "height": 0,
@@ -574,6 +555,50 @@
           "width": 0,
           "x": 169.25,
           "y": 644
+        },
+        {
+          "height": 0,
+          "id": 70,
+          "name": "npc",
+          "point": true,
+          "properties": [
+            {
+              "name": "move",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "value": "scientist_1"
+            },
+            {
+              "name": "scenario_ids",
+              "type": "string",
+              "value": "3"
+            },
+            {
+              "name": "sprite",
+              "type": "string",
+              "value": "scientist"
+            },
+            {
+              "name": "x",
+              "type": "int",
+              "value": 7
+            },
+            {
+              "name": "y",
+              "type": "int",
+              "value": 8
+            }
+          ],
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 0,
+          "x": 357.473684210526,
+          "y": 408
         }
       ],
       "opacity": 1,
@@ -584,10 +609,10 @@
     }
   ],
   "nextlayerid": 9,
-  "nextobjectid": 70,
+  "nextobjectid": 71,
   "orientation": "orthogonal",
   "renderorder": "right-down",
-  "tiledversion": "1.7.2",
+  "tiledversion": "1.10.1",
   "tileheight": 48,
   "tilesets": [
     {
@@ -890,6 +915,7 @@
             }
           ]
         },
+
         {
           "id": 27,
           "properties": [
@@ -1160,6 +1186,7 @@
             }
           ]
         },
+
         {
           "id": 54,
           "properties": [
@@ -1430,6 +1457,7 @@
             }
           ]
         },
+
         {
           "id": 81,
           "properties": [
@@ -1700,6 +1728,7 @@
             }
           ]
         },
+
         {
           "id": 108,
           "properties": [
@@ -1970,6 +1999,7 @@
             }
           ]
         },
+
         {
           "id": 135,
           "properties": [
@@ -2240,6 +2270,7 @@
             }
           ]
         },
+
         {
           "id": 162,
           "properties": [
@@ -2510,6 +2541,7 @@
             }
           ]
         },
+
         {
           "id": 189,
           "properties": [
@@ -2780,6 +2812,7 @@
             }
           ]
         },
+
         {
           "id": 216,
           "properties": [
@@ -3050,6 +3083,7 @@
             }
           ]
         },
+
         {
           "id": 243,
           "properties": [
@@ -3465,6 +3499,7 @@
             }
           ]
         },
+
         {
           "id": 27,
           "properties": [
@@ -3735,6 +3770,7 @@
             }
           ]
         },
+
         {
           "id": 54,
           "properties": [
@@ -4005,6 +4041,7 @@
             }
           ]
         },
+
         {
           "id": 81,
           "properties": [
@@ -4275,6 +4312,7 @@
             }
           ]
         },
+
         {
           "id": 108,
           "properties": [
@@ -4545,6 +4583,7 @@
             }
           ]
         },
+
         {
           "id": 135,
           "properties": [
@@ -4815,6 +4854,7 @@
             }
           ]
         },
+
         {
           "id": 162,
           "properties": [
@@ -5085,6 +5125,7 @@
             }
           ]
         },
+
         {
           "id": 189,
           "properties": [
@@ -5355,6 +5396,7 @@
             }
           ]
         },
+
         {
           "id": 216,
           "properties": [
@@ -5625,6 +5667,7 @@
             }
           ]
         },
+
         {
           "id": 243,
           "properties": [
@@ -5774,6 +5817,6 @@
   ],
   "tilewidth": 48,
   "type": "map",
-  "version": "1.6",
+  "version": "1.10",
   "width": 27
 }

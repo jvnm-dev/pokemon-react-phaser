@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
 import type { Direction } from "grid-engine";
@@ -24,7 +24,6 @@ interface IPokemon {
 interface ISettings {
   general: {
     enableSound: boolean;
-    skipIntroScreen: boolean;
   };
 }
 
@@ -34,10 +33,13 @@ interface IUserDataStore {
   inventory: IInventoryObject[];
   pokemons: IPokemon[];
   settings: ISettings;
+  scenariosCompleted: number[];
 
   update: (state: Partial<IUserDataStore>) => void;
   addObjectToInventory: (objectId: number) => void;
   addPokemon: (id: number) => void;
+  hasCompletedScenario: (scenarioId: number) => boolean;
+  completeScenario: (scenarioId: number) => void;
 }
 
 export const useUserDataStore = create<IUserDataStore>()(
@@ -57,9 +59,9 @@ export const useUserDataStore = create<IUserDataStore>()(
         settings: {
           general: {
             enableSound: Boolean(true),
-            skipIntroScreen: Boolean(false),
           },
         },
+        scenariosCompleted: [],
 
         addPokemon: (id: number) => {
           const uniqId = Date.now();
@@ -85,6 +87,19 @@ export const useUserDataStore = create<IUserDataStore>()(
                 objectId,
               },
             ],
+          }));
+        },
+
+        hasCompletedScenario: (scenarioId: number) => {
+          return useUserDataStore
+            .getState()
+            .scenariosCompleted.includes(scenarioId);
+        },
+
+        completeScenario: (scenarioId: number) => {
+          set((state) => ({
+            ...state,
+            scenariosCompleted: [...state.scenariosCompleted, scenarioId],
           }));
         },
       }),

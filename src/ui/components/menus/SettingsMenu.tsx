@@ -26,7 +26,6 @@ export type HoveringRegion = {
 
 export enum GeneralOptions {
   ENABLE_AUDIO = "enableAudio",
-  SKIP_INTRO_SCREEN = "skipIntroScreen",
 }
 
 export type SettingsMenuProps = {
@@ -35,13 +34,13 @@ export type SettingsMenuProps = {
   >;
 };
 
+type AllOptions = Options | GeneralOptions;
+
 export const SettingsMenu = ({ setSelectedOption }: SettingsMenuProps) => {
   const UIStore = useUIStore();
   const userDataStore = useUserDataStore();
 
-  const [hovered, setHovered] = useState<Options | GeneralOptions>(
-    Options.GENERAL,
-  );
+  const [hovered, setHovered] = useState<AllOptions>(Options.GENERAL);
 
   const [hoveringRegion, setHoveringRegion] = useState<HoveringRegion>({
     direction: HoveringRegionDirection.LEFT,
@@ -59,7 +58,7 @@ export const SettingsMenu = ({ setSelectedOption }: SettingsMenuProps) => {
     }
 
     setHovered(
-      (current: any) =>
+      (current: AllOptions) =>
         options[options.indexOf(current as never) - 1] ||
         options[options.length - 1],
     );
@@ -79,7 +78,7 @@ export const SettingsMenu = ({ setSelectedOption }: SettingsMenuProps) => {
     }
 
     setHovered(
-      (current: any) =>
+      (current: string) =>
         options[options.indexOf(current as never) + 1] || options[0],
     );
   };
@@ -106,19 +105,6 @@ export const SettingsMenu = ({ setSelectedOption }: SettingsMenuProps) => {
           general: {
             ...userDataStore.settings.general,
             enableSound: !userDataStore.settings.general.enableSound,
-          },
-        },
-      });
-    }
-
-    if (hovered === GeneralOptions.SKIP_INTRO_SCREEN) {
-      userDataStore.update({
-        ...userDataStore,
-        settings: {
-          ...userDataStore.settings,
-          general: {
-            ...userDataStore.settings.general,
-            skipIntroScreen: !userDataStore.settings.general.skipIntroScreen,
           },
         },
       });
@@ -203,21 +189,6 @@ export const SettingsMenu = ({ setSelectedOption }: SettingsMenuProps) => {
               <input
                 type="checkbox"
                 checked={userDataStore.settings.general.enableSound}
-                onChange={() => null}
-              />
-            </div>
-
-            <div
-              className={
-                GeneralOptions.SKIP_INTRO_SCREEN === (hovered as GeneralOptions)
-                  ? "hovered"
-                  : ""
-              }
-            >
-              <label>Skip intro screen</label>
-              <input
-                type="checkbox"
-                checked={userDataStore.settings.general.skipIntroScreen}
                 onChange={() => null}
               />
             </div>

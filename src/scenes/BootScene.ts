@@ -27,7 +27,7 @@ export default class BootScene extends Scene {
     // Mute sound by default:
     this.sound.mute = !userSettings.general.enableSound;
 
-    this.sound.play(Audios.MUSIC, getAudioConfig());
+    this.sound.play(Audios.PALLET_TOWN, getAudioConfig());
     this.scene.switch("World");
   }
 
@@ -108,27 +108,13 @@ export default class BootScene extends Scene {
   }
 
   loadSpriteSheets(): void {
-    this.load.spritesheet(
-      Sprites.PLAYER,
-      "assets/images/characters/player.png",
-      {
+    const sprites = Object.values(Sprites);
+
+    sprites.forEach((sprite) => {
+      this.load.spritesheet(sprite, `assets/images/characters/${sprite}.png`, {
         frameWidth: PLAYER_SIZE,
         frameHeight: PLAYER_SIZE,
-      },
-    );
-
-    this.load.spritesheet(
-      Sprites.BICYCLE,
-      "assets/images/characters/bicycle.png",
-      {
-        frameWidth: PLAYER_SIZE,
-        frameHeight: PLAYER_SIZE,
-      },
-    );
-
-    this.load.spritesheet(Sprites.OAK, "assets/images/characters/oak.png", {
-      frameWidth: PLAYER_SIZE,
-      frameHeight: PLAYER_SIZE,
+      });
     });
   }
 }

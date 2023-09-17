@@ -15,7 +15,7 @@ import { getRandomNumber } from "../utils/number";
 
 export type EnnemyPokemon = {
   image?: GameObjects.Image;
-  data?: any;
+  data?: Record<string, string>;
 };
 
 export default class BattleScene extends Scene {
@@ -29,12 +29,14 @@ export default class BattleScene extends Scene {
     this.isShiny = false;
   }
 
-  init(data: { pokemon: any }) {
+  init(data: { pokemon: Record<string, string> }) {
     this.ennemyPokemon.data = data.pokemon;
     this.isShiny = getRandomNumber(0, 512) === 0;
   }
 
   create(): void {
+    this.cameras.main.fadeIn(200);
+
     // Add base images
     const background = this.add.image(
       this.scale.width / 2,

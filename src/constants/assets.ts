@@ -2,6 +2,7 @@ export enum Sprites {
   PLAYER = "player",
   BICYCLE = "bicycle",
   OAK = "oak",
+  SCIENTIST = "scientist",
 }
 
 export enum Tilesets {
@@ -21,10 +22,11 @@ export enum Tilesets {
 }
 
 export enum Maps {
-  MAP = "map",
+  MAP= "map",
   BIG_HOUSE = "big_house",
   MEDIUM_HOUSE = "medium_house",
   SMALL_HOUSE = "small_house",
+  PALLET_TOWN = "pallet_town",
 }
 
 export enum Layers {
@@ -53,10 +55,10 @@ export enum AssetExtension {
 
 export enum Audios {
   OPENING = "opening",
-  MUSIC = "music",
   DOOR = "door",
   CLICK = "click",
   BICYCLE = "bicycle",
   GAIN = "gain",
   BATTLE = "battle",
+  PALLET_TOWN = "pallet-town",
 }

@@ -1,6 +1,5 @@
 import { Types } from "phaser";
 import type WorldScene from "../scenes/WorldScene";
-import type { WorldReceivedData } from "../scenes/WorldScene";
 import { Audios, Layers, Objects, Sprites } from "../constants/assets";
 import { TILE_SIZE } from "../constants/game";
 import { getCurrentPlayerTile } from "./map";
@@ -14,6 +13,9 @@ import pokemons from "../constants/pokemons.json";
 import { getRandomPokemonFromZone } from "./pokemon";
 import { scenarios } from "../scenarios";
 import { ObjectProperties } from "../constants/types";
+import { moveRandomly } from "./npc";
+import { getCharacterDirectionDependingOnAnotherCharacter } from "./direction";
+import { getLookingAtPosition } from "./position";
 
 export const convertObjectPositionToTilePosition = (
   object: Types.Tilemaps.TiledObject,
@@ -38,6 +40,18 @@ export const findObjectByPosition = (
   );
 };
 
+export const findObjectByName = (scene: WorldScene, name: string) => {
+  const { tilemap } = scene;
+
+  const objects = tilemap
+    .getObjectLayer(Layers.OBJECTS)
+    ?.objects.map((object) => convertObjectPositionToTilePosition(object));
+
+  return objects?.find(
+    (object) => getTiledObjectProperty("name", object) === name,
+  );
+};
+
 export const getObjectUnderPlayer = (scene: WorldScene) => {
   const currentTile = getCurrentPlayerTile(scene);
 
@@ -54,25 +68,7 @@ export const getObjectUnderPlayer = (scene: WorldScene) => {
 };
 
 export const getObjectLookedAt = (scene: WorldScene) => {
-  const currentTile = getCurrentPlayerTile(scene);
-
-  const facingDirection = scene.gridEngine.getFacingDirection(Sprites.PLAYER);
-
-  const lookingPosition = {
-    x: currentTile?.x ?? 0,
-    y: currentTile?.y ?? 0,
-  };
-
-  if (facingDirection === Direction.DOWN) {
-    lookingPosition.y += 1;
-  } else if (facingDirection === Direction.UP) {
-    lookingPosition.y -= 1;
-  } else if (facingDirection === Direction.LEFT) {
-    lookingPosition.x -= 1;
-  } else if (facingDirection === Direction.RIGHT) {
-    lookingPosition.x += 1;
-  }
-
+  const lookingPosition = getLookingAtPosition(scene);
   return findObjectByPosition(scene, lookingPosition);
 };
 
@@ -153,9 +149,25 @@ export const handleClickOnObjectIfAny = (scene: WorldScene) => {
         handlePokeball(scene, object);
         break;
       case Objects.NPC:
-        handleNPC(scene, object);
+        const staticNPC = !getTiledObjectProperty("move", object);
+        if (staticNPC) {
+          handleNPC(scene, object);
+        }
         break;
     }
+  }
+};
+
+export const handleClickOnNpcIfAny = (scene: WorldScene) => {
+  const lookingPosition = getLookingAtPosition(scene);
+  const character = scene.gridEngine.getCharactersAt(
+    lookingPosition,
+    Layers.WORLD2,
+  )[0];
+
+  if (character) {
+    const object = findObjectByName(scene, character);
+    handleNPC(scene, object);
   }
 };
 
@@ -225,18 +237,19 @@ export const handleMoveOnGrass = (
         realY + 24,
         "object_leaf",
         {
-          speed: 100,
           lifespan: 150,
           scale: { start: 0.02, end: 0.02 },
-          emitting: false,
           duration: 100,
           tintFill: true,
-          tint: 0xa0e0c0,
+          tint: [0xa0e0c0, 0x389030, 0x385810, 0x70c8a0],
+          maxParticles: 8,
+          gravityY: 500,
+          speed: 100,
         },
       );
 
       leafEmitter.setDepth(99);
-      leafEmitter.explode(8);
+      leafEmitter.start();
 
       if (!userData.pokemons?.length) {
         scene.gridEngine.stopMovement(Sprites.PLAYER);
@@ -263,7 +276,7 @@ export const handleMoveOnGrass = (
 
         openDialog({
           content:
-            "You don't have any pokemon. It's not safe to walk on grass.",
+            "You don't have any pokemon. It's not safe to walk in tall grass.",
         });
 
         return;
@@ -380,13 +393,18 @@ export const handleBicycle = (scene: WorldScene) => {
     onBicycle: !onBicycle,
   });
 
-  scene.scene.restart({
-    startPosition: {
-      x: tile.x,
-      y: tile.y,
-    },
-    facingDirection: scene.gridEngine.getFacingDirection(Sprites.PLAYER),
-  } as WorldReceivedData);
+  scene.player.visible = onBicycle;
+  scene.bicycle.visible = !onBicycle;
+
+  scene.gridEngine.setSprite(
+    Sprites.PLAYER,
+    onBicycle ? scene.player : scene.bicycle,
+  );
+  scene.gridEngine.setSpeed(Sprites.PLAYER, onBicycle ? 5 : 10);
+  scene.cameras.main.startFollow(
+    onBicycle ? scene.player : scene.bicycle,
+  )
+  scene.followWithCamera(onBicycle ? scene.player : scene.bicycle);
 };
 
 export const getNPCs = (scene: WorldScene) => {
@@ -403,21 +421,26 @@ export const spawnNPC = (scene: WorldScene) => {
   if (NPCs.length) {
     NPCs.forEach((npc) => {
       const name = getTiledObjectProperty("name", npc);
+      const sprite = getTiledObjectProperty("sprite", npc);
       const x = getTiledObjectProperty("x", npc);
       const y = getTiledObjectProperty("y", npc);
-
-      const sprite = scene.add.sprite(0, 0, name);
-      sprite.setOrigin(0.5, 0.5);
-      sprite.setDepth(1);
-      sprite.setScale(1.2);
+      const move = getTiledObjectProperty("move", npc);
+      const phaserSprite = scene.add.sprite(0, 0, sprite);
+      phaserSprite.setOrigin(0.5, 0.5);
+      phaserSprite.setDepth(1);
+      phaserSprite.setScale(1.2);
 
       scene.gridEngine.addCharacter({
         id: name,
-        sprite,
+        sprite: phaserSprite,
         walkingAnimationMapping: 0,
-        startPosition: { x: x, y: y },
+        startPosition: { x, y },
         speed: 5,
       });
+
+      if (!!move) {
+        moveRandomly(scene.gridEngine, name);
+      }
     });
   }
 };
@@ -426,10 +449,26 @@ export const handleNPC = (
   scene: WorldScene,
   npc: Types.Tilemaps.TiledObject,
 ) => {
-  const scenarioId = getTiledObjectProperty("scenario_id", npc);
+  const scenarioIds = getTiledObjectProperty("scenario_ids", npc).split(",");
+  const firstPossibleScenario = Number(
+    scenarioIds.find((scenarioId) => {
+      return !useUserDataStore
+        .getState()
+        .hasCompletedScenario(Number(scenarioId));
+    }),
+  );
 
-  if (scenarioId) {
-    const scenario = scenarios[scenarioId - 1];
+  if (!Number.isNaN(firstPossibleScenario)) {
+    const npcName = getTiledObjectProperty("name", npc);
+    const playerDirection = getCharacterDirectionDependingOnAnotherCharacter(
+      scene.gridEngine,
+      Sprites.PLAYER,
+      npcName,
+    );
+
+    scene.gridEngine.turnTowards(npcName, playerDirection);
+
+    const scenario = scenarios[firstPossibleScenario - 1];
     scenario([npc], scene);
   }
 };

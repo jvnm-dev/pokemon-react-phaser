@@ -1,12 +1,12 @@
 import { Scene, GameObjects, Tilemaps } from "phaser";
 import { Direction, GridEngine, GridEngineConfig } from "grid-engine";
 
-import { GAME_HEIGHT, GAME_WIDTH } from "../constants/game";
 import { Sprites, Layers, Tilesets, Maps } from "../constants/assets";
 import {
   convertObjectPositionToTilePosition,
   getObjectUnderPlayer,
   handleBicycle,
+  handleClickOnNpcIfAny,
   handleClickOnObjectIfAny,
   handleOverlappableObject,
   removeObject,
@@ -46,7 +46,7 @@ export default class WorldScene extends Scene {
 
   tilemap: Tilemaps.Tilemap;
 
-  map: Maps = Maps.MAP;
+  map: Maps = Maps.PALLET_TOWN;
 
   receivedData: Partial<WorldReceivedData>;
 
@@ -116,27 +116,20 @@ export default class WorldScene extends Scene {
     }
   }
 
-  initializePlayer(): void {
-    const player = this.add.sprite(0, 0, Sprites.PLAYER);
-    const bicycle = this.add.sprite(0, 0, Sprites.BICYCLE);
+  initializePlayer() {
     const onBicycle = useUserDataStore.getState().onBicycle;
 
-    this.currentSprite = onBicycle ? bicycle : player;
-    this.speed = onBicycle ? 10 : 5;
+    this.player = this.add.sprite(0, 0, Sprites.PLAYER);
+    this.bicycle = this.add.sprite(0, 0, Sprites.BICYCLE);
 
-    this.currentSprite.setOrigin(0.5, 0.5);
-    this.currentSprite.setDepth(1);
-    this.currentSprite.setScale(1.2);
-
-    // Removing unused sprite from the world
-    [player, bicycle].forEach((sprite) => {
-      if (sprite.texture.key !== this.currentSprite.texture.key) {
-        sprite.destroy();
-      }
+    [this.player, this.bicycle].forEach((sprite) => {
+      sprite.setOrigin(0.5, 0.5);
+      sprite.setDepth(1);
+      sprite.setScale(1.2);
     });
 
-    this.player = player;
-    this.bicycle = bicycle;
+    this.currentSprite = onBicycle ? this.bicycle : this.player;
+    this.speed = onBicycle ? 10 : 5;
   }
 
   initializeGrid(): void {
@@ -166,12 +159,17 @@ export default class WorldScene extends Scene {
 
   initializeCamera(): void {
     this.cameras.roundPixels = true;
-    this.cameras.main.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
-    this.cameras.main.setZoom(1);
-    this.cameras.main.startFollow(this.currentSprite, true);
+    this.cameras.main.setZoom(1.3);
+    const vignette = this.cameras.main.postFX.addVignette();
+    vignette.radius = 0.8;
+    this.followWithCamera(this.currentSprite);
+  }
+
+  followWithCamera(sprite: GameObjects.Sprite): void {
+    this.cameras.main.startFollow(sprite, true);
     this.cameras.main.setFollowOffset(
-      -this.currentSprite.width,
-      -this.currentSprite.height,
+      -sprite.width / 2,
+      -sprite.height / 2,
     );
   }
 
@@ -195,6 +193,7 @@ export default class WorldScene extends Scene {
             triggerUINextStep();
           } else {
             handleClickOnObjectIfAny(this);
+            handleClickOnNpcIfAny(this);
           }
           break;
         case "ESCAPE":
@@ -209,24 +208,28 @@ export default class WorldScene extends Scene {
           handleBicycle(this);
           break;
         case "ARROWDOWN":
+        case "S":
           if (isUIOpen) {
             playClick(this);
             triggerUIDown();
           }
           break;
         case "ARROWUP":
+        case "W":
           if (isUIOpen) {
             playClick(this);
             triggerUIUp();
           }
           break;
         case "ARROWLEFT":
+        case "A":
           if (isUIOpen) {
             playClick(this);
             triggerUILeft();
           }
           break;
         case "ARROWRIGHT":
+        case "D":
           if (isUIOpen) {
             playClick(this);
             triggerUIRight();
