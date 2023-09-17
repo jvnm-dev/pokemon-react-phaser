@@ -7,12 +7,23 @@
 </p>
 
 <p align='center'>
-Welcome to my homemade Pokémon game project! This game is a labor of love and is still in active development.
+    Welcome to my homemade Pokémon game project! This game is a labor of love and is still in active development.
 </p>
 
+## Play
+
 <p align='center'>
-<a href="https://jvnm-dev.github.io/">Give it a try, it's free!</a>
+    <a href="https://jvnm-dev.github.io/">Give it a try, it's free!</a>
 </p>
+
+### Controls
+- Z, Arrow Up: Move up
+- Q, Arrow Left: Move left
+- S, Arrow Down: Move down
+- D, Arrow Right: Move right
+- Space: Bicycle
+- E: Interact
+- Escape: Menu
 
 ## Technologies Used
 
