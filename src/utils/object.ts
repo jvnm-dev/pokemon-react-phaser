@@ -401,9 +401,7 @@ export const handleBicycle = (scene: WorldScene) => {
     onBicycle ? scene.player : scene.bicycle,
   );
   scene.gridEngine.setSpeed(Sprites.PLAYER, onBicycle ? 5 : 10);
-  scene.cameras.main.startFollow(
-    onBicycle ? scene.player : scene.bicycle,
-  )
+  scene.cameras.main.startFollow(onBicycle ? scene.player : scene.bicycle);
   scene.followWithCamera(onBicycle ? scene.player : scene.bicycle);
 };
 
@@ -428,7 +426,6 @@ export const spawnNPC = (scene: WorldScene) => {
       const phaserSprite = scene.add.sprite(0, 0, sprite);
       phaserSprite.setOrigin(0.5, 0.5);
       phaserSprite.setDepth(1);
-      phaserSprite.setScale(1.2);
 
       scene.gridEngine.addCharacter({
         id: name,

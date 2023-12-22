@@ -17,6 +17,7 @@
 </p>
 
 ### Controls
+
 - Z, Arrow Up: Move up
 - Q, Arrow Left: Move left
 - S, Arrow Down: Move down

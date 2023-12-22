@@ -82,6 +82,10 @@ export const Dialog = () => {
     }
   }, [dialog.choices]);
 
+  const newLineToBrWithStrip = (text: string) => {
+    return text?.trim().split("\n").join("<br />");
+  };
+
   return (
     <div className="dialogContainer">
       {shouldShowChoices && (
@@ -115,7 +119,9 @@ export const Dialog = () => {
         <div className="inner">
           <span
             dangerouslySetInnerHTML={{
-              __html: dialog.steps[dialog.currentStepIndex],
+              __html: newLineToBrWithStrip(
+                dialog.steps[dialog.currentStepIndex],
+              ),
             }}
           ></span>
           {!shouldShowChoices && <span className="blink">▼</span>}

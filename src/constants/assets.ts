@@ -7,6 +7,7 @@ export enum Sprites {
 
 export enum Tilesets {
   GROUNDS = "grounds",
+  GROUNDS2 = "grounds2",
   WORLD = "world",
   WORLD2 = "world2",
   INSIDE = "inside",
@@ -22,7 +23,7 @@ export enum Tilesets {
 }
 
 export enum Maps {
-  MAP= "map",
+  MAP = "map",
   BIG_HOUSE = "big_house",
   MEDIUM_HOUSE = "medium_house",
   SMALL_HOUSE = "small_house",

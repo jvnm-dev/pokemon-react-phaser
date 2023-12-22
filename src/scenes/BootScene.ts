@@ -112,8 +112,8 @@ export default class BootScene extends Scene {
 
     sprites.forEach((sprite) => {
       this.load.spritesheet(sprite, `assets/images/characters/${sprite}.png`, {
-        frameWidth: PLAYER_SIZE,
-        frameHeight: PLAYER_SIZE,
+        frameWidth: PLAYER_SIZE.width,
+        frameHeight: PLAYER_SIZE.height,
       });
     });
   }

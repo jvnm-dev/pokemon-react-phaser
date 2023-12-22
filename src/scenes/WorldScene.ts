@@ -125,7 +125,6 @@ export default class WorldScene extends Scene {
     [this.player, this.bicycle].forEach((sprite) => {
       sprite.setOrigin(0.5, 0.5);
       sprite.setDepth(1);
-      sprite.setScale(1.2);
     });
 
     this.currentSprite = onBicycle ? this.bicycle : this.player;
@@ -159,7 +158,14 @@ export default class WorldScene extends Scene {
 
   initializeCamera(): void {
     this.cameras.roundPixels = true;
-    this.cameras.main.setZoom(1.3);
+    this.cameras.main.setZoom(1);
+    this.cameras.main.setBounds(
+      0,
+      0,
+      this.tilemap.widthInPixels,
+      this.tilemap.heightInPixels,
+      true,
+    );
     const vignette = this.cameras.main.postFX.addVignette();
     vignette.radius = 0.8;
     this.followWithCamera(this.currentSprite);
@@ -167,10 +173,7 @@ export default class WorldScene extends Scene {
 
   followWithCamera(sprite: GameObjects.Sprite): void {
     this.cameras.main.startFollow(sprite, true);
-    this.cameras.main.setFollowOffset(
-      -sprite.width / 2,
-      -sprite.height / 2,
-    );
+    this.cameras.main.setFollowOffset(-sprite.width / 2, -sprite.height / 2);
   }
 
   listenKeyboardControl(): void {
