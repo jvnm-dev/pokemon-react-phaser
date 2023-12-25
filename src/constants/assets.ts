@@ -12,6 +12,8 @@ export enum Tilesets {
   WORLD2 = "world2",
   INSIDE = "inside",
   GROUNDS_INSIDE = "grounds_inside",
+  GROUNDS_INSIDE2 = "grounds_inside2",
+  GROUNDS_INSIDE3 = "grounds_inside3",
   INSIDE_ONE = "inside_one",
   INSIDE_TWO = "inside_two",
   INSIDE_THREE = "inside_three",
@@ -20,6 +22,7 @@ export enum Tilesets {
   INSIDE_SIX = "inside_six",
   INSIDE_SEVEN = "inside_seven",
   INSIDE_EIGHT = "inside_eight",
+  INSIDE_WALLS = "inside_walls",
 }
 
 export enum Maps {

@@ -16,6 +16,7 @@ import { ObjectProperties } from "../constants/types";
 import { moveRandomly } from "./npc";
 import { getCharacterDirectionDependingOnAnotherCharacter } from "./direction";
 import { getLookingAtPosition } from "./position";
+import oakNoPokemonScenario from "../scenarios/001_oak";
 
 export const convertObjectPositionToTilePosition = (
   object: Types.Tilemaps.TiledObject,
@@ -139,18 +140,19 @@ export const handleClickOnObjectIfAny = (scene: WorldScene) => {
   const object = getObjectLookedAt(scene);
 
   if (object) {
-    playClick(scene);
-
     switch (object.name) {
       case Objects.DIALOG:
+        playClick(scene);
         handleDialogObject(object);
         break;
       case Objects.POKEBALL:
+        playClick(scene);
         handlePokeball(scene, object);
         break;
       case Objects.NPC:
         const staticNPC = !getTiledObjectProperty("move", object);
         if (staticNPC) {
+          playClick(scene);
           handleNPC(scene, object);
         }
         break;
@@ -166,6 +168,7 @@ export const handleClickOnNpcIfAny = (scene: WorldScene) => {
   )[0];
 
   if (character) {
+    playClick(scene);
     const object = findObjectByName(scene, character);
     handleNPC(scene, object);
   }
@@ -274,10 +277,7 @@ export const handleMoveOnGrass = (
 
         scene.gridEngine.moveTo(Sprites.PLAYER, newPosition);
 
-        openDialog({
-          content:
-            "You don't have any pokemon. It's not safe to walk in tall grass.",
-        });
+        oakNoPokemonScenario(scene);
 
         return;
       }

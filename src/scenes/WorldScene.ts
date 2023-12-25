@@ -47,6 +47,7 @@ export default class WorldScene extends Scene {
   tilemap: Tilemaps.Tilemap;
 
   map: Maps = Maps.PALLET_TOWN;
+  daylightOverlay: GameObjects.Graphics;
 
   receivedData: Partial<WorldReceivedData>;
 
@@ -56,6 +57,13 @@ export default class WorldScene extends Scene {
 
   init(data: Partial<WorldReceivedData>) {
     this.receivedData = data;
+
+    const daylightOverlay = this.add.graphics();
+    daylightOverlay.setDepth(1000);
+    daylightOverlay.fillRect(0, 0, this.scale.width, this.scale.height);
+    daylightOverlay.setScrollFactor(0);
+
+    this.daylightOverlay = daylightOverlay;
   }
 
   create(): void {
@@ -75,9 +83,13 @@ export default class WorldScene extends Scene {
     });
   }
 
-  update(): void {
+  update(time): void {
     if (isUIOpen()) {
       return;
+    }
+
+    if (time % 5000 === 0) {
+      this.applyDaylight();
     }
 
     this.listenMoves();
@@ -169,6 +181,17 @@ export default class WorldScene extends Scene {
     const vignette = this.cameras.main.postFX.addVignette();
     vignette.radius = 0.8;
     this.followWithCamera(this.currentSprite);
+  }
+
+  applyDaylight(): void {
+    const date = new Date();
+    const hour = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    const time = hour + minutes / 60 + seconds / 3600;
+    
+    const alpha = Math.abs(0.5 - time / 24)
+    this.daylightOverlay.fillStyle(0x000033, alpha);
   }
 
   followWithCamera(sprite: GameObjects.Sprite): void {
