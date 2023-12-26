@@ -87,7 +87,7 @@ export const removeObject = (
   scene: WorldScene,
   object: Types.Tilemaps.TiledObject,
 ) => {
-  console.log("removeObject", object)
+  console.log("removeObject", object);
   const removeTile = (layer: Layers) => {
     if (object.x && object.y) {
       return scene.tilemap.removeTileAt(
@@ -145,7 +145,11 @@ export const handleClickOnObjectIfAny = (scene: WorldScene) => {
     // Check if object has a scenario, if yes, play it and ignore the rest
     const firstPossibleScenario = getFirstPossibleScenario(object);
 
-    if (object.name !== Objects.NPC && !Number.isNaN(firstPossibleScenario) && firstPossibleScenario !== 0) {
+    if (
+      object.name !== Objects.NPC &&
+      !Number.isNaN(firstPossibleScenario) &&
+      firstPossibleScenario !== 0
+    ) {
       playClick(scene);
       return scenarios[firstPossibleScenario - 1]([object], scene);
     }
@@ -180,7 +184,7 @@ export const handleClickOnNpcIfAny = (scene: WorldScene) => {
   if (character) {
     const object = findObjectByName(scene, character);
     const staticNPC = !getTiledObjectProperty("move", object);
-    
+
     // Do not handle a static NPC a second time (alreay handled in `handleClickOnObjectIfAny`)
     if (!staticNPC) {
       playClick(scene);
@@ -365,7 +369,7 @@ export const handlePokeball = (
     scene.sound.play(Audios.GAIN, getAudioConfig(0.1, false));
     openDialog({
       content: `You got a <span class="gain">${pokemon.name}</span>!`,
-      callback
+      callback,
     });
   }
 };
@@ -479,7 +483,7 @@ export const handleNPC = (
     );
 
     scene.gridEngine.turnTowards(npcName, playerDirection);
-    
+
     if (firstPossibleScenario !== 0) {
       return scenarios[firstPossibleScenario - 1]([npc], scene);
     }

@@ -189,8 +189,8 @@ export default class WorldScene extends Scene {
     const minutes = date.getMinutes();
     const seconds = date.getSeconds();
     const time = hour + minutes / 60 + seconds / 3600;
-    
-    const alpha = Math.abs(0.5 - time / 24)
+
+    const alpha = Math.abs(0.5 - time / 24);
     this.daylightOverlay.fillStyle(0x000033, alpha);
   }
 
@@ -206,7 +206,7 @@ export default class WorldScene extends Scene {
 
       if (this.data.get("battleStarted")) {
         return;
-      }      
+      }
 
       switch (event.key.toUpperCase()) {
         case "M":
