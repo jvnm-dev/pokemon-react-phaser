@@ -206,7 +206,7 @@ export default class WorldScene extends Scene {
 
       if (this.data.get("battleStarted")) {
         return;
-      }
+      }      
 
       switch (event.key.toUpperCase()) {
         case "M":
@@ -261,6 +261,28 @@ export default class WorldScene extends Scene {
             triggerUIRight();
           }
           break;
+      }
+    });
+
+    // On tile click, move player to that tile
+    this.input.on("pointerup", (pointer) => {
+      if (isUIOpen()) {
+        return;
+      }
+
+      const tile = this.tilemap.getTileAtWorldXY(
+        pointer.worldX,
+        pointer.worldY,
+        true,
+      );
+
+      if (tile) {
+        const tilePosition = {
+          x: tile.x,
+          y: tile.y,
+        };
+
+        this.gridEngine.setPosition(Sprites.PLAYER, tilePosition);
       }
     });
   }

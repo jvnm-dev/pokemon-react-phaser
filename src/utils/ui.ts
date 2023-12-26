@@ -3,6 +3,7 @@ import { useUIStore } from "../stores/ui";
 
 export type OpenDialogParams = {
   content: string;
+  image?: string;
   choices?: string[];
   callback?: (selectedChoice?: string) => void;
 };
@@ -25,10 +26,11 @@ export const isBattleOpen = () => {
 
 export const openDialog = ({
   content,
+  image,
   choices,
   callback,
 }: OpenDialogParams) => {
-  return useUIStore.getState().toggleDialog(content, choices, callback);
+  return useUIStore.getState().toggleDialog(content, image, choices, callback);
 };
 
 export const toggleMenu = () => {

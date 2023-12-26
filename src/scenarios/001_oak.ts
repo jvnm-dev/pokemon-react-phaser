@@ -1,48 +1,35 @@
-import { openDialog, isDialogOpen } from "../utils/ui";
-import WorldScene from "../scenes/WorldScene";
-import { getCurrentPlayerTile } from "../utils/map";
-import { Sprites } from "../constants/assets";
+import { useUserDataStore } from "../stores/userData";
+import { openDialog } from "../utils/ui";
 
-export default (scene: WorldScene) => {
-  if (
-    !isDialogOpen()
-  ) {
-    openDialog({
-      content: `OAK: Hey! Wait!\nDon't go out!`,
-      callback: () => {
-        const oakPhaserSprite = scene.add.sprite(0, 0, 'oak');
-        oakPhaserSprite.setOrigin(0.5, 0.5);
-        oakPhaserSprite.setDepth(1);
+export default () => {
+  const { completeScenario } = useUserDataStore.getState();
 
-        scene.gridEngine.addCharacter({
-          id: 'oak',
-          sprite: oakPhaserSprite,
-          walkingAnimationMapping: 0,
-          startPosition: { x: 12, y: 16 },
-          speed: 5,
-          collides: {
-            collisionGroups: ['npc_no_collision']
-          }
-        });
-
-        const playerPosition = getCurrentPlayerTile(scene);
-
-        scene.gridEngine.moveTo('oak', { x: playerPosition.x, y: playerPosition.y + 1 }).subscribe({
-          complete: () => {
-            openDialog({
-              content: `
-              It's unsafe!\nWild Pokémon live in tall grass!;
-              You need your own Pokémon for your protection.;
-              I know! Here, come with me!`,
-              callback: () => {
-                scene.gridEngine.setSpeed(Sprites.PLAYER, 5);
-                scene.gridEngine.follow(Sprites.PLAYER, 'oak', { algorithm: "BFS" });
-                scene.gridEngine.moveTo('oak', { x: 16, y: 18 });
-              }
-            });
-          }
-        });
-      }
-    });
-  }
+  openDialog({
+    content: `BLUE: Gramps! I'm fed up with waiting!`,
+    callback: () => {
+      openDialog({
+        content: `
+          OAK: BLUE? Let me think...;
+          Oh, that's right, I told you to come! Just wait!;
+          Here, red! There are 3 POKEMON here!;
+          Haha! They are inside the POKE BALLS.;
+          When I was young I was a serious POKEMON trainer!;
+          In my old age, I have only 3 left, but you can have one!;
+          Choose!`,
+        callback: () => {
+          openDialog({
+            content: `BLUE: Hey! Gramps! What about me?`,
+            callback: () => {
+              openDialog({
+                content: `OAK: Be patient! BLUE, you can have one too!`,
+                callback: () => {
+                  completeScenario(1);
+                }
+              });
+            },
+         });
+        }
+      });
+    }
+  });
 };

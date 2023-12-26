@@ -199,16 +199,26 @@
                  "point":true,
                  "properties":[
                         {
+                         "name":"loop_last_scenario",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"pokemon_inside",
                          "type":"string",
                          "value":"1"
+                        }, 
+                        {
+                         "name":"scenario_ids",
+                         "type":"string",
+                         "value":"3"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":744.032327635008,
-                 "y":224.51959781432
+                 "y":220.51959781432
                 }, 
                 {
                  "height":0,
@@ -217,16 +227,26 @@
                  "point":true,
                  "properties":[
                         {
+                         "name":"loop_last_scenario",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"pokemon_inside",
                          "type":"string",
                          "value":"4"
+                        }, 
+                        {
+                         "name":"scenario_ids",
+                         "type":"string",
+                         "value":"3"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":791.474770298617,
-                 "y":223.426473958458
+                 "y":220.426473958458
                 }, 
                 {
                  "height":0,
@@ -237,7 +257,7 @@
                         {
                          "name":"move",
                          "type":"bool",
-                         "value":true
+                         "value":false
                         }, 
                         {
                          "name":"name",
@@ -247,7 +267,7 @@
                         {
                          "name":"scenario_ids",
                          "type":"string",
-                         "value":"1,2"
+                         "value":"1"
                         }, 
                         {
                          "name":"sprite",
@@ -268,8 +288,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":560.117538603365,
-                 "y":226.407006222632
+                 "x":553.117538603365,
+                 "y":218.407006222632
                 }, 
                 {
                  "height":0,
@@ -278,16 +298,26 @@
                  "point":true,
                  "properties":[
                         {
+                         "name":"loop_last_scenario",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"pokemon_inside",
                          "type":"string",
                          "value":"7"
+                        }, 
+                        {
+                         "name":"scenario_ids",
+                         "type":"string",
+                         "value":"3"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":694.775754782208,
-                 "y":224.706153491588
+                 "x":696.775754782208,
+                 "y":221.706153491588
                 }, 
                 {
                  "height":0,
@@ -336,7 +366,7 @@
                         {
                          "name":"scenario_ids",
                          "type":"string",
-                         "value":"3"
+                         "value":"2"
                         }, 
                         {
                          "name":"sprite",
@@ -357,8 +387,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":511.638626411616,
-                 "y":470.154413459322
+                 "x":458.638626411616,
+                 "y":462.154413459322
                 }, 
                 {
                  "height":0,
@@ -379,7 +409,7 @@
                         {
                          "name":"scenario_ids",
                          "type":"string",
-                         "value":"3"
+                         "value":"2"
                         }, 
                         {
                          "name":"sprite",
@@ -400,8 +430,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":805.485134823692,
-                 "y":534.685411385112
+                 "x":790.485134823692,
+                 "y":549.685411385112
                 }, 
                 {
                  "height":0,
@@ -418,8 +448,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":598.064070062226,
-                 "y":65.6833371744642
+                 "x":599.064070062226,
+                 "y":64.6833371744642
                 }, 
                 {
                  "height":0,
@@ -437,7 +467,7 @@
                  "visible":true,
                  "width":0,
                  "x":646.462318506568,
-                 "y":62.2263194284397
+                 "y":64.2263194284397
                 }, 
                 {
                  "height":0,
@@ -456,6 +486,54 @@
                  "width":0,
                  "x":404.471076284858,
                  "y":77.2067296612123
+                }, 
+                {
+                 "height":0,
+                 "id":42,
+                 "name":"npc",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"facing_direction",
+                         "type":"string",
+                         "value":"up"
+                        }, 
+                        {
+                         "name":"move",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"blue"
+                        }, 
+                        {
+                         "name":"scenario_ids",
+                         "type":"string",
+                         "value":""
+                        }, 
+                        {
+                         "name":"sprite",
+                         "type":"string",
+                         "value":"blue"
+                        }, 
+                        {
+                         "name":"x",
+                         "type":"int",
+                         "value":10
+                        }, 
+                        {
+                         "name":"y",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":504,
+                 "y":263
                 }],
          "opacity":1,
          "properties":[
@@ -475,7 +553,7 @@
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":42,
+ "nextobjectid":43,
  "orientation":"orthogonal",
  "properties":[
         {

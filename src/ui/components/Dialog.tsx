@@ -117,6 +117,11 @@ export const Dialog = () => {
         }}
       >
         <div className="inner">
+          {!!dialog.image && (
+            <div className="image">
+              <img src={dialog.image} alt="representation of dialog" />
+            </div>
+          )}
           <span
             dangerouslySetInnerHTML={{
               __html: newLineToBrWithStrip(

@@ -16,7 +16,8 @@ import { ObjectProperties } from "../constants/types";
 import { moveRandomly } from "./npc";
 import { getCharacterDirectionDependingOnAnotherCharacter } from "./direction";
 import { getLookingAtPosition } from "./position";
-import oakNoPokemonScenario from "../scenarios/001_oak";
+import oakNoPokemonScenario from "../scenarios/codeDriven/oakGrassNoPokemon";
+import { getFirstPossibleScenario } from "./scenario";
 
 export const convertObjectPositionToTilePosition = (
   object: Types.Tilemaps.TiledObject,
@@ -86,6 +87,7 @@ export const removeObject = (
   scene: WorldScene,
   object: Types.Tilemaps.TiledObject,
 ) => {
+  console.log("removeObject", object)
   const removeTile = (layer: Layers) => {
     if (object.x && object.y) {
       return scene.tilemap.removeTileAt(
@@ -140,6 +142,14 @@ export const handleClickOnObjectIfAny = (scene: WorldScene) => {
   const object = getObjectLookedAt(scene);
 
   if (object) {
+    // Check if object has a scenario, if yes, play it and ignore the rest
+    const firstPossibleScenario = getFirstPossibleScenario(object);
+
+    if (object.name !== Objects.NPC && !Number.isNaN(firstPossibleScenario) && firstPossibleScenario !== 0) {
+      playClick(scene);
+      return scenarios[firstPossibleScenario - 1]([object], scene);
+    }
+
     switch (object.name) {
       case Objects.DIALOG:
         playClick(scene);
@@ -168,9 +178,14 @@ export const handleClickOnNpcIfAny = (scene: WorldScene) => {
   )[0];
 
   if (character) {
-    playClick(scene);
     const object = findObjectByName(scene, character);
-    handleNPC(scene, object);
+    const staticNPC = !getTiledObjectProperty("move", object);
+    
+    // Do not handle a static NPC a second time (alreay handled in `handleClickOnObjectIfAny`)
+    if (!staticNPC) {
+      playClick(scene);
+      handleNPC(scene, object);
+    }
   }
 };
 
@@ -333,6 +348,7 @@ export const handleDialogObject = (dialog: Types.Tilemaps.TiledObject) => {
 export const handlePokeball = (
   scene: WorldScene,
   pokeball: Types.Tilemaps.TiledObject,
+  callback?: () => void,
 ) => {
   const pokemonInside = pokeball.properties.find(
     (property: ObjectProperties) => property.name === "pokemon_inside",
@@ -348,7 +364,8 @@ export const handlePokeball = (
 
     scene.sound.play(Audios.GAIN, getAudioConfig(0.1, false));
     openDialog({
-      content: `You found a <span class="gain">${pokemon.name}</span> inside this pokeball!`,
+      content: `You got a <span class="gain">${pokemon.name}</span>!`,
+      callback
     });
   }
 };
@@ -423,6 +440,10 @@ export const spawnNPC = (scene: WorldScene) => {
       const x = getTiledObjectProperty("x", npc);
       const y = getTiledObjectProperty("y", npc);
       const move = getTiledObjectProperty("move", npc);
+      const facingDirection = getTiledObjectProperty(
+        "facing_direction",
+        npc,
+      ) as Direction;
       const phaserSprite = scene.add.sprite(0, 0, sprite);
       phaserSprite.setOrigin(0.5, 0.5);
       phaserSprite.setDepth(1);
@@ -433,6 +454,7 @@ export const spawnNPC = (scene: WorldScene) => {
         walkingAnimationMapping: 0,
         startPosition: { x, y },
         speed: 5,
+        facingDirection,
       });
 
       if (!!move) {
@@ -446,14 +468,7 @@ export const handleNPC = (
   scene: WorldScene,
   npc: Types.Tilemaps.TiledObject,
 ) => {
-  const scenarioIds = getTiledObjectProperty("scenario_ids", npc).split(",");
-  const firstPossibleScenario = Number(
-    scenarioIds.find((scenarioId) => {
-      return !useUserDataStore
-        .getState()
-        .hasCompletedScenario(Number(scenarioId));
-    }),
-  );
+  const firstPossibleScenario = getFirstPossibleScenario(npc);
 
   if (!Number.isNaN(firstPossibleScenario)) {
     const npcName = getTiledObjectProperty("name", npc);
@@ -464,8 +479,9 @@ export const handleNPC = (
     );
 
     scene.gridEngine.turnTowards(npcName, playerDirection);
-
-    const scenario = scenarios[firstPossibleScenario - 1];
-    scenario([npc], scene);
+    
+    if (firstPossibleScenario !== 0) {
+      return scenarios[firstPossibleScenario - 1]([npc], scene);
+    }
   }
 };

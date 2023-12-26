@@ -3,6 +3,7 @@ export enum Sprites {
   BICYCLE = "bicycle",
   OAK = "oak",
   SCIENTIST = "scientist",
+  BLUE = "blue",
 }
 
 export enum Tilesets {
