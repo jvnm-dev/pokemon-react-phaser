@@ -10,7 +10,7 @@ import {
   handleClickOnObjectIfAny,
   handleOverlappableObject,
   removeObject,
-  spawnNPC,
+  spawnNPCs,
 } from "../utils/object";
 import { playClick } from "../utils/audio";
 import { getStartPosition, savePlayerPosition } from "../utils/map";
@@ -165,7 +165,7 @@ export default class WorldScene extends Scene {
   }
 
   initializeNPCs() {
-    spawnNPC(this);
+    spawnNPCs(this);
   }
 
   initializeCamera(): void {
@@ -282,7 +282,14 @@ export default class WorldScene extends Scene {
           y: tile.y,
         };
 
-        this.gridEngine.setPosition(Sprites.PLAYER, tilePosition);
+        const collides = this.tilemap.layers.some((layer) => {
+          const tile = layer.data[tilePosition.y]?.[tilePosition.x];
+          return !!tile?.properties?.collides;
+        });
+
+        if (!collides) {
+          this.gridEngine.setPosition(Sprites.PLAYER, tilePosition, Layers.WORLD2);
+        }
       }
     });
   }

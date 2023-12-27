@@ -78,7 +78,7 @@ export const getTiledObjectProperty = (
   name: string,
   object: Types.Tilemaps.TiledObject,
 ) => {
-  return object.properties?.find(
+  return object?.properties?.find(
     (property: ObjectProperties) => property.name === name,
   )?.value;
 };
@@ -87,7 +87,6 @@ export const removeObject = (
   scene: WorldScene,
   object: Types.Tilemaps.TiledObject,
 ) => {
-  console.log("removeObject", object);
   const removeTile = (layer: Layers) => {
     if (object.x && object.y) {
       return scene.tilemap.removeTileAt(
@@ -434,11 +433,13 @@ export const getNPCs = (scene: WorldScene) => {
   return objects?.filter((object) => object.name === "npc") ?? [];
 };
 
-export const spawnNPC = (scene: WorldScene) => {
+export const spawnNPCs = (scene: WorldScene) => {
   const NPCs = getNPCs(scene);
+  const { hasCompletedScenario } = useUserDataStore.getState();
 
   if (NPCs.length) {
     NPCs.forEach((npc) => {
+      const hideAfter = getTiledObjectProperty("hide_after", npc);
       const name = getTiledObjectProperty("name", npc);
       const sprite = getTiledObjectProperty("sprite", npc);
       const x = getTiledObjectProperty("x", npc);
@@ -448,6 +449,11 @@ export const spawnNPC = (scene: WorldScene) => {
         "facing_direction",
         npc,
       ) as Direction;
+
+      if (hideAfter && hasCompletedScenario(Number(hideAfter))) {
+        return removeObject(scene, npc);
+      }
+
       const phaserSprite = scene.add.sprite(0, 0, sprite);
       phaserSprite.setOrigin(0.5, 0.5);
       phaserSprite.setDepth(1);
