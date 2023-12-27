@@ -19,6 +19,14 @@ export const Dialog = () => {
   const shouldShowChoices = isLastStep && !!dialog.choices?.length;
 
   const triggerNextStep = () => {
+    const menu = useUIStore.getState().menu;
+
+    if (menu.isOpen && !dialog.isOpen) {
+      // Do not trigger next step if the dialog is not open
+      // but the event is triggered by the menu
+      return;
+    }
+
     const nextStepIndex = dialog.currentStepIndex + 1;
 
     if (dialog.steps[nextStepIndex]) {

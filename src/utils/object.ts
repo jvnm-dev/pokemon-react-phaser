@@ -393,7 +393,7 @@ export const handleBicycle = (scene: WorldScene) => {
 
   if (isIndoor) {
     playClick(scene);
-    openDialog({ content: "No bicycle inside!" });
+    openDialog({ content: "OAK: No bicycle inside!" });
     return;
   }
 

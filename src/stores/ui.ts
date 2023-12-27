@@ -48,7 +48,7 @@ export const useUIStore = create<UIStore>()(
       isOpen: false,
     },
     setLoading: (loading) => set(() => ({ loading })),
-    toggleDialog: (content, image, choices, callback) =>
+    toggleDialog: (content, image, choices, callback) => 
       set((state) => ({
         dialog: {
           isOpen: !state.dialog.isOpen,
@@ -58,7 +58,8 @@ export const useUIStore = create<UIStore>()(
           choices,
           image,
         },
-      })),
+      }))
+    ,
     closeDialog: () =>
       set(() => ({
         dialog: {

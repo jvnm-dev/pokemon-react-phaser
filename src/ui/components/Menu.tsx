@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 
 import { UIEvents } from "../../constants/events";
-import { openDialog } from "../../utils/ui";
+import { openDialog, toggleMenu } from "../../utils/ui";
 import { useUIStore } from "../../stores/ui";
 import { SettingsMenu } from "./menus/SettingsMenu";
 import { useEventsListeners } from "../../utils/events";
+import { TeamMenu } from "./menus/TeamMenu";
 
 export enum Options {
   POKEDEX = "Pokedex",
@@ -45,13 +46,13 @@ export const Menu = () => {
   const selectOption = () => {
     if (store.menu.isOpen && !selected && !store.dialog.isOpen) {
       if (
-        [Options.POKEDEX, Options.BAG, Options.TEAM, Options.YOU].includes(
+        [Options.POKEDEX, Options.BAG, Options.YOU].includes(
           hovered,
-        )
+          )
       ) {
-        // todo: implement them
-        openDialog({ content: "This feature is not ready yet." });
-        return;
+        return openDialog({
+          content: `This feature is not ready yet.`,
+        });
       }
 
       setSelected(hovered);
@@ -103,6 +104,10 @@ export const Menu = () => {
 
   if (selected === Options.SETTINGS) {
     return <SettingsMenu setSelectedOption={setSelected} />;
+  }
+
+  if (selected === Options.TEAM) {
+    return <TeamMenu setSelectedOption={setSelected} />;
   }
 
   return (
