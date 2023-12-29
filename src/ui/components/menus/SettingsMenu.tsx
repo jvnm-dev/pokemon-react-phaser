@@ -163,7 +163,7 @@ export const SettingsMenu = ({ setSelectedOption }: SettingsMenuProps) => {
   }, [hoveringRegion]);
 
   return (
-    <div className="menu full">
+    <div className="menu settings full">
       <div className="submenu">
         <ul>
           {Object.values(Options).map((option) => (

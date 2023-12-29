@@ -1,7 +1,6 @@
 [
   {
     "id": 1,
-    "num": 1,
     "name": "Bulbasaur",
     "img_front": "pokemon_1_front.png",
     "img_back": "pokemon_1_back.png",
@@ -16,20 +15,29 @@
     "spawn_time": "20:00",
     "multipliers": [1.58],
     "weaknesses": ["Fire", "Ice", "Flying", "Psychic"],
+    "abilities": ["Overgrow", "Chlorophyll"],
+    "experience": 64,
+    "stats": {
+      "hp": 45,
+      "attack": 49,
+      "defense": 49,
+      "sp_attack": 65,
+      "sp_defense": 65,
+      "speed": 45
+    },
     "next_evolution": [
       {
-        "num": 2,
+        "id": 2,
         "name": "Ivysaur"
       },
       {
-        "num": 3,
+        "id": 3,
         "name": "Venusaur"
       }
     ]
   },
   {
     "id": 2,
-    "num": 2,
     "name": "Ivysaur",
     "img_front": "pokemon_2_front.png",
     "img_back": "pokemon_2_back.png",
@@ -44,22 +52,31 @@
     "spawn_time": "07:00",
     "multipliers": [1.2, 1.6],
     "weaknesses": ["Fire", "Ice", "Flying", "Psychic"],
+    "abilities": ["Overgrow", "Chlorophyll"],
+    "experience": 142,
+    "stats": {
+      "hp": 60,
+      "attack": 62,
+      "defense": 63,
+      "sp_attack": 80,
+      "sp_defense": 80,
+      "speed": 60
+    },
     "prev_evolution": [
       {
-        "num": 1,
+        "id": 1,
         "name": "Bulbasaur"
       }
     ],
     "next_evolution": [
       {
-        "num": 3,
+        "id": 3,
         "name": "Venusaur"
       }
     ]
   },
   {
     "id": 3,
-    "num": 3,
     "name": "Venusaur",
     "img_front": "pokemon_3_front.png",
     "img_back": "pokemon_3_back.png",
@@ -73,20 +90,29 @@
     "spawn_time": "11:30",
     "multipliers": null,
     "weaknesses": ["Fire", "Ice", "Flying", "Psychic"],
+    "abilities": ["Overgrow", "Chlorophyll"],
+    "experience": 236,
+    "stats": {
+      "hp": 80,
+      "attack": 82,
+      "defense": 83,
+      "sp_attack": 100,
+      "sp_defense": 100,
+      "speed": 80
+    },
     "prev_evolution": [
       {
-        "num": 1,
+        "id": 1,
         "name": "Bulbasaur"
       },
       {
-        "num": 2,
+        "id": 2,
         "name": "Ivysaur"
       }
     ]
   },
   {
     "id": 4,
-    "num": 4,
     "name": "Charmander",
     "img_front": "pokemon_4_front.png",
     "img_back": "pokemon_4_back.png",
@@ -101,20 +127,29 @@
     "spawn_time": "08:45",
     "multipliers": [1.65],
     "weaknesses": ["Water", "Ground", "Rock"],
+    "abilities": ["Blaze", "Solar Power"],
+    "experience": 62,
+    "stats": {
+      "hp": 39,
+      "attack": 52,
+      "defense": 43,
+      "sp_attack": 60,
+      "sp_defense": 50,
+      "speed": 65
+    },
     "next_evolution": [
       {
-        "num": 5,
+        "id": 5,
         "name": "Charmeleon"
       },
       {
-        "num": 6,
+        "id": 6,
         "name": "Charizard"
       }
     ]
   },
   {
     "id": 5,
-    "num": 5,
     "name": "Charmeleon",
     "img_front": "pokemon_5_front.png",
     "img_back": "pokemon_5_back.png",
@@ -129,22 +164,31 @@
     "spawn_time": "19:00",
     "multipliers": [1.79],
     "weaknesses": ["Water", "Ground", "Rock"],
+    "abilities": ["Blaze", "Solar Power"],
+    "experience": 142,
+    "stats": {
+      "hp": 58,
+      "attack": 64,
+      "defense": 58,
+      "sp_attack": 80,
+      "sp_defense": 65,
+      "speed": 80
+    },
     "prev_evolution": [
       {
-        "num": 4,
+        "id": 4,
         "name": "Charmander"
       }
     ],
     "next_evolution": [
       {
-        "num": 6,
+        "id": 6,
         "name": "Charizard"
       }
     ]
   },
   {
     "id": 6,
-    "num": 6,
     "name": "Charizard",
     "img_front": "pokemon_6_front.png",
     "img_back": "pokemon_6_back.png",
@@ -158,20 +202,29 @@
     "spawn_time": "13:34",
     "multipliers": null,
     "weaknesses": ["Water", "Electric", "Rock"],
+    "abilities": ["Blaze", "Solar Power"],
+    "experience": 240,
+    "stats": {
+      "hp": 78,
+      "attack": 84,
+      "defense": 78,
+      "sp_attack": 109,
+      "sp_defense": 85,
+      "speed": 100
+    },
     "prev_evolution": [
       {
-        "num": 4,
+        "id": 4,
         "name": "Charmander"
       },
       {
-        "num": 5,
+        "id": 5,
         "name": "Charmeleon"
       }
     ]
   },
   {
     "id": 7,
-    "num": 7,
     "name": "Squirtle",
     "img_front": "pokemon_7_front.png",
     "img_back": "pokemon_7_back.png",
@@ -186,20 +239,29 @@
     "spawn_time": "04:25",
     "multipliers": [2.1],
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Torrent", "Rain Dish"],
+    "experience": 63,
+    "stats": {
+      "hp": 44,
+      "attack": 48,
+      "defense": 65,
+      "sp_attack": 50,
+      "sp_defense": 64,
+      "speed": 43
+    },
     "next_evolution": [
       {
-        "num": 8,
+        "id": 8,
         "name": "Wartortle"
       },
       {
-        "num": 9,
+        "id": 9,
         "name": "Blastoise"
       }
     ]
   },
   {
     "id": 8,
-    "num": 8,
     "name": "Wartortle",
     "img_front": "pokemon_8_front.png",
     "img_back": "pokemon_8_back.png",
@@ -214,22 +276,31 @@
     "spawn_time": "07:02",
     "multipliers": [1.4],
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Torrent", "Rain Dish"],
+    "experience": 142,
+    "stats": {
+      "hp": 59,
+      "attack": 63,
+      "defense": 80,
+      "sp_attack": 65,
+      "sp_defense": 80,
+      "speed": 58
+    },
     "prev_evolution": [
       {
-        "num": 7,
+        "id": 7,
         "name": "Squirtle"
       }
     ],
     "next_evolution": [
       {
-        "num": 9,
+        "id": 9,
         "name": "Blastoise"
       }
     ]
   },
   {
     "id": 9,
-    "num": 9,
     "name": "Blastoise",
     "img_front": "pokemon_9_front.png",
     "img_back": "pokemon_9_back.png",
@@ -243,20 +314,29 @@
     "spawn_time": "00:06",
     "multipliers": null,
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Torrent", "Rain Dish"],
+    "experience": 239,
+    "stats": {
+      "hp": 79,
+      "attack": 83,
+      "defense": 100,
+      "sp_attack": 85,
+      "sp_defense": 105,
+      "speed": 78
+    },
     "prev_evolution": [
       {
-        "num": 7,
+        "id": 7,
         "name": "Squirtle"
       },
       {
-        "num": 8,
+        "id": 8,
         "name": "Wartortle"
       }
     ]
   },
   {
     "id": 10,
-    "num": 10,
     "name": "Caterpie",
     "img_front": "pokemon_10_front.png",
     "img_back": "pokemon_10_back.png",
@@ -271,20 +351,29 @@
     "spawn_time": "16:35",
     "multipliers": [1.05],
     "weaknesses": ["Fire", "Flying", "Rock"],
+    "abilities": ["Shield Dust", "Run Away"],
+    "experience": 39,
+    "stats": {
+      "hp": 45,
+      "attack": 30,
+      "defense": 35,
+      "sp_attack": 20,
+      "sp_defense": 20,
+      "speed": 45
+    },
     "next_evolution": [
       {
-        "num": 11,
+        "id": 11,
         "name": "Metapod"
       },
       {
-        "num": 12,
+        "id": 12,
         "name": "Butterfree"
       }
     ]
   },
   {
     "id": 11,
-    "num": 11,
     "name": "Metapod",
     "img_front": "pokemon_11_front.png",
     "img_back": "pokemon_11_back.png",
@@ -299,22 +388,31 @@
     "spawn_time": "02:11",
     "multipliers": [3.55, 3.79],
     "weaknesses": ["Fire", "Flying", "Rock"],
+    "abilities": ["Shed Skin"],
+    "experience": 72,
+    "stats": {
+      "hp": 50,
+      "attack": 20,
+      "defense": 55,
+      "sp_attack": 25,
+      "sp_defense": 25,
+      "speed": 30
+    },
     "prev_evolution": [
       {
-        "num": 10,
+        "id": 10,
         "name": "Caterpie"
       }
     ],
     "next_evolution": [
       {
-        "num": 12,
+        "id": 12,
         "name": "Butterfree"
       }
     ]
   },
   {
     "id": 12,
-    "num": 12,
     "name": "Butterfree",
     "img_front": "pokemon_12_front.png",
     "img_back": "pokemon_12_back.png",
@@ -328,20 +426,29 @@
     "spawn_time": "05:23",
     "multipliers": null,
     "weaknesses": ["Fire", "Electric", "Ice", "Flying", "Rock"],
+    "abilities": ["Compound Eyes", "Tinted Lens"],
+    "experience": 178,
+    "stats": {
+      "hp": 60,
+      "attack": 45,
+      "defense": 50,
+      "sp_attack": 90,
+      "sp_defense": 80,
+      "speed": 70
+    },
     "prev_evolution": [
       {
-        "num": 10,
+        "id": 10,
         "name": "Caterpie"
       },
       {
-        "num": 11,
+        "id": 11,
         "name": "Metapod"
       }
     ]
   },
   {
     "id": 13,
-    "num": 13,
     "name": "Weedle",
     "img_front": "pokemon_13_front.png",
     "img_back": "pokemon_13_back.png",
@@ -356,20 +463,29 @@
     "spawn_time": "02:21",
     "multipliers": [1.01, 1.09],
     "weaknesses": ["Fire", "Flying", "Psychic", "Rock"],
+    "abilities": ["Shield Dust", "Run Away"],
+    "experience": 39,
+    "stats": {
+      "hp": 40,
+      "attack": 35,
+      "defense": 30,
+      "sp_attack": 20,
+      "sp_defense": 20,
+      "speed": 50
+    },
     "next_evolution": [
       {
-        "num": 14,
+        "id": 14,
         "name": "Kakuna"
       },
       {
-        "num": 15,
+        "id": 15,
         "name": "Beedrill"
       }
     ]
   },
   {
     "id": 14,
-    "num": 14,
     "name": "Kakuna",
     "img_front": "pokemon_14_front.png",
     "img_back": "pokemon_14_back.png",
@@ -384,22 +500,31 @@
     "spawn_time": "02:30",
     "multipliers": [3.01, 3.41],
     "weaknesses": ["Fire", "Flying", "Psychic", "Rock"],
+    "abilities": ["Shed Skin"],
+    "experience": 72,
+    "stats": {
+      "hp": 45,
+      "attack": 25,
+      "defense": 50,
+      "sp_attack": 25,
+      "sp_defense": 25,
+      "speed": 35
+    },
     "prev_evolution": [
       {
-        "num": 13,
+        "id": 13,
         "name": "Weedle"
       }
     ],
     "next_evolution": [
       {
-        "num": 15,
+        "id": 15,
         "name": "Beedrill"
       }
     ]
   },
   {
     "id": 15,
-    "num": 15,
     "name": "Beedrill",
     "img_front": "pokemon_15_front.png",
     "img_back": "pokemon_15_back.png",
@@ -413,20 +538,29 @@
     "spawn_time": "04:50",
     "multipliers": null,
     "weaknesses": ["Fire", "Flying", "Psychic", "Rock"],
+    "abilities": ["Swarm"],
+    "experience": 178,
+    "stats": {
+      "hp": 65,
+      "attack": 90,
+      "defense": 40,
+      "sp_attack": 45,
+      "sp_defense": 80,
+      "speed": 75
+    },
     "prev_evolution": [
       {
-        "num": 13,
+        "id": 13,
         "name": "Weedle"
       },
       {
-        "num": 14,
+        "id": 14,
         "name": "Kakuna"
       }
     ]
   },
   {
     "id": 16,
-    "num": 16,
     "name": "Pidgey",
     "img_front": "pokemon_16_front.png",
     "img_back": "pokemon_16_back.png",
@@ -441,20 +575,29 @@
     "spawn_time": "01:34",
     "multipliers": [1.71, 1.92],
     "weaknesses": ["Electric", "Rock"],
+    "abilities": ["Keen Eye", "Tangled Feet", "Big Pecks"],
+    "experience": 50,
+    "stats": {
+      "hp": 40,
+      "attack": 45,
+      "defense": 40,
+      "sp_attack": 35,
+      "sp_defense": 35,
+      "speed": 56
+    },
     "next_evolution": [
       {
-        "num": 17,
+        "id": 17,
         "name": "Pidgeotto"
       },
       {
-        "num": 18,
+        "id": 18,
         "name": "Pidgeot"
       }
     ]
   },
   {
     "id": 17,
-    "num": 17,
     "name": "Pidgeotto",
     "img_front": "pokemon_17_front.png",
     "img_back": "pokemon_17_back.png",
@@ -469,22 +612,31 @@
     "spawn_time": "01:30",
     "multipliers": [1.79],
     "weaknesses": ["Electric", "Rock"],
+    "abilities": ["Keen Eye", "Tangled Feet", "Big Pecks"],
+    "experience": 122,
+    "stats": {
+      "hp": 63,
+      "attack": 60,
+      "defense": 55,
+      "sp_attack": 50,
+      "sp_defense": 50,
+      "speed": 71
+    },
     "prev_evolution": [
       {
-        "num": 16,
+        "id": 16,
         "name": "Pidgey"
       }
     ],
     "next_evolution": [
       {
-        "num": 18,
+        "id": 18,
         "name": "Pidgeot"
       }
     ]
   },
   {
     "id": 18,
-    "num": 18,
     "name": "Pidgeot",
     "img_front": "pokemon_18_front.png",
     "img_back": "pokemon_18_back.png",
@@ -498,20 +650,29 @@
     "spawn_time": "01:50",
     "multipliers": null,
     "weaknesses": ["Electric", "Rock"],
+    "abilities": ["Keen Eye", "Tangled Feet", "Big Pecks"],
+    "experience": 216,
+    "stats": {
+      "hp": 83,
+      "attack": 80,
+      "defense": 75,
+      "sp_attack": 70,
+      "sp_defense": 70,
+      "speed": 101
+    },
     "prev_evolution": [
       {
-        "num": 16,
+        "id": 16,
         "name": "Pidgey"
       },
       {
-        "num": 17,
+        "id": 17,
         "name": "Pidgeotto"
       }
     ]
   },
   {
     "id": 19,
-    "num": 19,
     "name": "Rattata",
     "img_front": "pokemon_19_front.png",
     "img_back": "pokemon_19_back.png",
@@ -526,16 +687,25 @@
     "spawn_time": "01:55",
     "multipliers": [2.55, 2.73],
     "weaknesses": ["Fighting"],
+    "abilities": ["Run Away", "Guts", "Hustle", "Gluttony", "Hustle"],
+    "experience": 51,
+    "stats": {
+      "hp": 30,
+      "attack": 56,
+      "defense": 35,
+      "sp_attack": 25,
+      "sp_defense": 35,
+      "speed": 72
+    },
     "next_evolution": [
       {
-        "num": 20,
+        "id": 20,
         "name": "Raticate"
       }
     ]
   },
   {
     "id": 20,
-    "num": 20,
     "name": "Raticate",
     "img_front": "pokemon_20_front.png",
     "img_back": "pokemon_20_back.png",
@@ -549,16 +719,25 @@
     "spawn_time": "01:56",
     "multipliers": null,
     "weaknesses": ["Fighting"],
+    "abilities": ["Run Away", "Guts", "Hustle", "Gluttony", "Hustle"],
+    "experience": 145,
+    "stats": {
+      "hp": 55,
+      "attack": 81,
+      "defense": 60,
+      "sp_attack": 50,
+      "sp_defense": 70,
+      "speed": 97
+    },
     "prev_evolution": [
       {
-        "num": 19,
+        "id": 19,
         "name": "Rattata"
       }
     ]
   },
   {
     "id": 21,
-    "num": 21,
     "name": "Spearow",
     "img_front": "pokemon_21_front.png",
     "img_back": "pokemon_21_back.png",
@@ -573,16 +752,25 @@
     "spawn_time": "12:25",
     "multipliers": [2.66, 2.68],
     "weaknesses": ["Electric", "Rock"],
+    "abilities": ["Keen Eye", "Sniper"],
+    "experience": 52,
+    "stats": {
+      "hp": 40,
+      "attack": 60,
+      "defense": 30,
+      "sp_attack": 31,
+      "sp_defense": 31,
+      "speed": 70
+    },
     "next_evolution": [
       {
-        "num": 22,
+        "id": 22,
         "name": "Fearow"
       }
     ]
   },
   {
     "id": 22,
-    "num": 22,
     "name": "Fearow",
     "img_front": "pokemon_22_front.png",
     "img_back": "pokemon_22_back.png",
@@ -596,16 +784,25 @@
     "spawn_time": "01:11",
     "multipliers": null,
     "weaknesses": ["Electric", "Rock"],
+    "abilities": ["Keen Eye", "Sniper"],
+    "experience": 155,
+    "stats": {
+      "hp": 65,
+      "attack": 90,
+      "defense": 65,
+      "sp_attack": 61,
+      "sp_defense": 61,
+      "speed": 100
+    },
     "prev_evolution": [
       {
-        "num": 21,
+        "id": 21,
         "name": "Spearow"
       }
     ]
   },
   {
     "id": 23,
-    "num": 23,
     "name": "Ekans",
     "img_front": "pokemon_23_front.png",
     "img_back": "pokemon_23_back.png",
@@ -620,16 +817,25 @@
     "spawn_time": "12:20",
     "multipliers": [2.21, 2.27],
     "weaknesses": ["Ground", "Psychic"],
+    "abilities": ["Intimidate", "Shed Skin", "Unnerve"],
+    "experience": 58,
+    "stats": {
+      "hp": 35,
+      "attack": 60,
+      "defense": 44,
+      "sp_attack": 40,
+      "sp_defense": 54,
+      "speed": 55
+    },
     "next_evolution": [
       {
-        "num": 24,
+        "id": 24,
         "name": "Arbok"
       }
     ]
   },
   {
     "id": 24,
-    "num": 24,
     "name": "Arbok",
     "img_front": "pokemon_24_front.png",
     "img_back": "pokemon_24_back.png",
@@ -643,16 +849,25 @@
     "spawn_time": "01:50",
     "multipliers": null,
     "weaknesses": ["Ground", "Psychic"],
+    "abilities": ["Intimidate", "Shed Skin", "Unnerve"],
+    "experience": 157,
+    "stats": {
+      "hp": 60,
+      "attack": 85,
+      "defense": 69,
+      "sp_attack": 65,
+      "sp_defense": 79,
+      "speed": 80
+    },
     "prev_evolution": [
       {
-        "num": 23,
+        "id": 23,
         "name": "Ekans"
       }
     ]
   },
   {
     "id": 25,
-    "num": 25,
     "name": "Pikachu",
     "img_front": "pokemon_25_front.png",
     "img_back": "pokemon_25_back.png",
@@ -667,16 +882,25 @@
     "spawn_time": "04:00",
     "multipliers": [2.34],
     "weaknesses": ["Ground"],
+    "abilities": ["Static"],
+    "experience": 112,
+    "stats": {
+      "hp": 35,
+      "attack": 55,
+      "defense": 40,
+      "sp_attack": 50,
+      "sp_defense": 50,
+      "speed": 90
+    },
     "next_evolution": [
       {
-        "num": 26,
+        "id": 26,
         "name": "Raichu"
       }
     ]
   },
   {
     "id": 26,
-    "num": 26,
     "name": "Raichu",
     "img_front": "pokemon_26_front.png",
     "img_back": "pokemon_26_back.png",
@@ -690,16 +914,25 @@
     "spawn_time": "23:58",
     "multipliers": null,
     "weaknesses": ["Ground"],
+    "abilities": ["Static"],
+    "experience": 218,
+    "stats": {
+      "hp": 60,
+      "attack": 90,
+      "defense": 55,
+      "sp_attack": 90,
+      "sp_defense": 80,
+      "speed": 110
+    },
     "prev_evolution": [
       {
-        "num": 25,
+        "id": 25,
         "name": "Pikachu"
       }
     ]
   },
   {
     "id": 27,
-    "num": 27,
     "name": "Sandshrew",
     "img_front": "pokemon_27_front.png",
     "img_back": "pokemon_27_back.png",
@@ -714,16 +947,25 @@
     "spawn_time": "01:58",
     "multipliers": [2.45],
     "weaknesses": ["Water", "Grass", "Ice"],
+    "abilities": ["Sand Veil", "Sand Rush", "Sand Force"],
+    "experience": 60,
+    "stats": {
+      "hp": 50,
+      "attack": 75,
+      "defense": 85,
+      "sp_attack": 20,
+      "sp_defense": 30,
+      "speed": 40
+    },
     "next_evolution": [
       {
-        "num": 28,
+        "id": 28,
         "name": "Sandslash"
       }
     ]
   },
   {
     "id": 28,
-    "num": 28,
     "name": "Sandslash",
     "img_front": "pokemon_28_front.png",
     "img_back": "pokemon_28_back.png",
@@ -737,16 +979,25 @@
     "spawn_time": "12:34",
     "multipliers": null,
     "weaknesses": ["Water", "Grass", "Ice"],
+    "abilities": ["Sand Veil", "Sand Rush", "Sand Force"],
+    "experience": 158,
+    "stats": {
+      "hp": 75,
+      "attack": 100,
+      "defense": 110,
+      "sp_attack": 45,
+      "sp_defense": 55,
+      "speed": 65
+    },
     "prev_evolution": [
       {
-        "num": 27,
+        "id": 27,
         "name": "Sandshrew"
       }
     ]
   },
   {
     "id": 29,
-    "num": 29,
     "name": "Nidoran ♀",
     "img_front": "pokemon_29_front.png",
     "img_back": "pokemon_29_back.png",
@@ -761,20 +1012,29 @@
     "spawn_time": "01:51",
     "multipliers": [1.63, 2.48],
     "weaknesses": ["Ground", "Psychic"],
+    "abilities": ["Poison Point", "Rivalry", "Hustle"],
+    "experience": 55,
+    "stats": {
+      "hp": 55,
+      "attack": 47,
+      "defense": 52,
+      "sp_attack": 40,
+      "sp_defense": 40,
+      "speed": 41
+    },
     "next_evolution": [
       {
-        "num": 30,
+        "id": 30,
         "name": "Nidorina"
       },
       {
-        "num": 31,
+        "id": 31,
         "name": "Nidoqueen"
       }
     ]
   },
   {
     "id": 30,
-    "num": 30,
     "name": "Nidorina",
     "img_front": "pokemon_30_front.png",
     "img_back": "pokemon_30_back.png",
@@ -789,22 +1049,31 @@
     "spawn_time": "07:22",
     "multipliers": [1.83, 2.48],
     "weaknesses": ["Ground", "Psychic"],
+    "abilities": ["Poison Point", "Rivalry", "Hustle"],
+    "experience": 128,
+    "stats": {
+      "hp": 70,
+      "attack": 62,
+      "defense": 67,
+      "sp_attack": 55,
+      "sp_defense": 55,
+      "speed": 56
+    },
     "prev_evolution": [
       {
-        "num": 29,
+        "id": 29,
         "name": "Nidoran(Female)"
       }
     ],
     "next_evolution": [
       {
-        "num": 31,
+        "id": 31,
         "name": "Nidoqueen"
       }
     ]
   },
   {
     "id": 31,
-    "num": 31,
     "name": "Nidoqueen",
     "img_front": "pokemon_31_front.png",
     "img_back": "pokemon_31_back.png",
@@ -818,20 +1087,29 @@
     "spawn_time": "12:35",
     "multipliers": null,
     "weaknesses": ["Water", "Ice", "Ground", "Psychic"],
+    "abilities": ["Poison Point", "Rivalry", "Sheer Force"],
+    "experience": 223,
+    "stats": {
+      "hp": 90,
+      "attack": 92,
+      "defense": 87,
+      "sp_attack": 75,
+      "sp_defense": 85,
+      "speed": 76
+    },
     "prev_evolution": [
       {
-        "num": 29,
+        "id": 29,
         "name": "Nidoran(Female)"
       },
       {
-        "num": 30,
+        "id": 30,
         "name": "Nidorina"
       }
     ]
   },
   {
     "id": 32,
-    "num": 32,
     "name": "Nidoran ♂",
     "img_front": "pokemon_32_front.png",
     "img_back": "pokemon_32_back.png",
@@ -846,20 +1124,29 @@
     "spawn_time": "01:12",
     "multipliers": [1.64, 1.7],
     "weaknesses": ["Ground", "Psychic"],
+    "abilities": ["Poison Point", "Rivalry", "Hustle"],
+    "experience": 55,
+    "stats": {
+      "hp": 46,
+      "attack": 57,
+      "defense": 40,
+      "sp_attack": 40,
+      "sp_defense": 40,
+      "speed": 50
+    },
     "next_evolution": [
       {
-        "num": 33,
+        "id": 33,
         "name": "Nidorino"
       },
       {
-        "num": 34,
+        "id": 34,
         "name": "Nidoking"
       }
     ]
   },
   {
     "id": 33,
-    "num": 33,
     "name": "Nidorino",
     "img_front": "pokemon_33_front.png",
     "img_back": "pokemon_33_back.png",
@@ -874,22 +1161,31 @@
     "spawn_time": "09:02",
     "multipliers": [1.83],
     "weaknesses": ["Ground", "Psychic"],
+    "abilities": ["Poison Point", "Rivalry", "Hustle"],
+    "experience": 128,
+    "stats": {
+      "hp": 61,
+      "attack": 72,
+      "defense": 57,
+      "sp_attack": 55,
+      "sp_defense": 55,
+      "speed": 65
+    },
     "prev_evolution": [
       {
-        "num": 32,
+        "id": 32,
         "name": "Nidoran(Male)"
       }
     ],
     "next_evolution": [
       {
-        "num": 34,
+        "id": 34,
         "name": "Nidoking"
       }
     ]
   },
   {
     "id": 34,
-    "num": 34,
     "name": "Nidoking",
     "img_front": "pokemon_34_front.png",
     "img_back": "pokemon_34_back.png",
@@ -903,20 +1199,29 @@
     "spawn_time": "12:16",
     "multipliers": null,
     "weaknesses": ["Water", "Ice", "Ground", "Psychic"],
+    "abilities": ["Poison Point", "Rivalry", "Sheer Force"],
+    "experience": 223,
+    "stats": {
+      "hp": 81,
+      "attack": 102,
+      "defense": 77,
+      "sp_attack": 85,
+      "sp_defense": 75,
+      "speed": 85
+    },
     "prev_evolution": [
       {
-        "num": 32,
+        "id": 32,
         "name": "Nidoran(Male)"
       },
       {
-        "num": 33,
+        "id": 33,
         "name": "Nidorino"
       }
     ]
   },
   {
     "id": 35,
-    "num": 35,
     "name": "Clefairy",
     "img_front": "pokemon_35_front.png",
     "img_back": "pokemon_35_back.png",
@@ -931,16 +1236,25 @@
     "spawn_time": "03:30",
     "multipliers": [2.03, 2.14],
     "weaknesses": ["Fighting"],
+    "abilities": ["Cute Charm", "Magic Guard", "Friend Guard"],
+    "experience": 113,
+    "stats": {
+      "hp": 70,
+      "attack": 45,
+      "defense": 48,
+      "sp_attack": 60,
+      "sp_defense": 65,
+      "speed": 35
+    },
     "next_evolution": [
       {
-        "num": 36,
+        "id": 36,
         "name": "Clefable"
       }
     ]
   },
   {
     "id": 36,
-    "num": 36,
     "name": "Clefable",
     "img_front": "pokemon_36_front.png",
     "img_back": "pokemon_36_back.png",
@@ -954,16 +1268,25 @@
     "spawn_time": "03:29",
     "multipliers": null,
     "weaknesses": ["Fighting"],
+    "abilities": ["Cute Charm", "Magic Guard", "Unaware"],
+    "experience": 217,
+    "stats": {
+      "hp": 95,
+      "attack": 70,
+      "defense": 73,
+      "sp_attack": 95,
+      "sp_defense": 90,
+      "speed": 60
+    },
     "prev_evolution": [
       {
-        "num": 35,
+        "id": 35,
         "name": "Clefairy"
       }
     ]
   },
   {
     "id": 37,
-    "num": 37,
     "name": "Vulpix",
     "img_front": "pokemon_37_front.png",
     "img_back": "pokemon_37_back.png",
@@ -978,16 +1301,25 @@
     "spawn_time": "13:43",
     "multipliers": [2.74, 2.81],
     "weaknesses": ["Water", "Ground", "Rock"],
+    "abilities": ["Flash Fire", "Drought"],
+    "experience": 60,
+    "stats": {
+      "hp": 38,
+      "attack": 41,
+      "defense": 40,
+      "sp_attack": 50,
+      "sp_defense": 65,
+      "speed": 65
+    },
     "next_evolution": [
       {
-        "num": 38,
+        "id": 38,
         "name": "Ninetales"
       }
     ]
   },
   {
     "id": 38,
-    "num": 38,
     "name": "Ninetales",
     "img_front": "pokemon_38_front.png",
     "img_back": "pokemon_38_back.png",
@@ -1001,16 +1333,25 @@
     "spawn_time": "01:32",
     "multipliers": null,
     "weaknesses": ["Water", "Ground", "Rock"],
+    "abilities": ["Flash Fire", "Drought"],
+    "experience": 177,
+    "stats": {
+      "hp": 73,
+      "attack": 76,
+      "defense": 75,
+      "sp_attack": 81,
+      "sp_defense": 100,
+      "speed": 100
+    },
     "prev_evolution": [
       {
-        "num": 37,
+        "id": 37,
         "name": "Vulpix"
       }
     ]
   },
   {
     "id": 39,
-    "num": 39,
     "name": "Jigglypuff",
     "img_front": "pokemon_39_front.png",
     "img_back": "pokemon_39_back.png",
@@ -1025,16 +1366,25 @@
     "spawn_time": "08:46",
     "multipliers": [1.85],
     "weaknesses": ["Fighting"],
+    "abilities": ["Cute Charm", "Competitive", "Friend Guard"],
+    "experience": 95,
+    "stats": {
+      "hp": 115,
+      "attack": 45,
+      "defense": 20,
+      "sp_attack": 45,
+      "sp_defense": 25,
+      "speed": 20
+    },
     "next_evolution": [
       {
-        "num": 40,
+        "id": 40,
         "name": "Wigglytuff"
       }
     ]
   },
   {
     "id": 40,
-    "num": 40,
     "name": "Wigglytuff",
     "img_front": "pokemon_40_front.png",
     "img_back": "pokemon_40_back.png",
@@ -1048,16 +1398,25 @@
     "spawn_time": "12:28",
     "multipliers": null,
     "weaknesses": ["Fighting"],
+    "abilities": ["Cute Charm", "Competitive", "Frisk"],
+    "experience": 196,
+    "stats": {
+      "hp": 140,
+      "attack": 70,
+      "defense": 45,
+      "sp_attack": 85,
+      "sp_defense": 50,
+      "speed": 45
+    },
     "prev_evolution": [
       {
-        "num": 39,
+        "id": 39,
         "name": "Jigglypuff"
       }
     ]
   },
   {
     "id": 41,
-    "num": 41,
     "name": "Zubat",
     "img_front": "pokemon_41_front.png",
     "img_back": "pokemon_41_back.png",
@@ -1072,16 +1431,25 @@
     "spawn_time": "12:28",
     "multipliers": [2.6, 3.67],
     "weaknesses": ["Electric", "Ice", "Psychic", "Rock"],
+    "abilities": ["Inner Focus"],
+    "experience": 49,
+    "stats": {
+      "hp": 40,
+      "attack": 45,
+      "defense": 35,
+      "sp_attack": 30,
+      "sp_defense": 40,
+      "speed": 55
+    },
     "next_evolution": [
       {
-        "num": 42,
+        "id": 42,
         "name": "Golbat"
       }
     ]
   },
   {
     "id": 42,
-    "num": 42,
     "name": "Golbat",
     "img_front": "pokemon_42_front.png",
     "img_back": "pokemon_42_back.png",
@@ -1095,16 +1463,25 @@
     "spawn_time": "02:15",
     "multipliers": null,
     "weaknesses": ["Electric", "Ice", "Psychic", "Rock"],
+    "abilities": ["Inner Focus"],
+    "experience": 159,
+    "stats": {
+      "hp": 75,
+      "attack": 80,
+      "defense": 70,
+      "sp_attack": 65,
+      "sp_defense": 75,
+      "speed": 90
+    },
     "prev_evolution": [
       {
-        "num": 41,
+        "id": 41,
         "name": "Zubat"
       }
     ]
   },
   {
     "id": 43,
-    "num": 43,
     "name": "Oddish",
     "img_front": "pokemon_43_front.png",
     "img_back": "pokemon_43_back.png",
@@ -1119,20 +1496,29 @@
     "spawn_time": "03:58",
     "multipliers": [1.5],
     "weaknesses": ["Fire", "Ice", "Flying", "Psychic"],
+    "abilities": ["Chlorophyll", "Run Away"],
+    "experience": 64,
+    "stats": {
+      "hp": 45,
+      "attack": 50,
+      "defense": 55,
+      "sp_attack": 75,
+      "sp_defense": 65,
+      "speed": 30
+    },
     "next_evolution": [
       {
-        "num": 44,
+        "id": 44,
         "name": "Gloom"
       },
       {
-        "num": 45,
+        "id": 45,
         "name": "Vileplume"
       }
     ]
   },
   {
     "id": 44,
-    "num": 44,
     "name": "Gloom",
     "img_front": "pokemon_44_front.png",
     "img_back": "pokemon_44_back.png",
@@ -1147,22 +1533,31 @@
     "spawn_time": "11:33",
     "multipliers": [1.49],
     "weaknesses": ["Fire", "Ice", "Flying", "Psychic"],
+    "abilities": ["Chlorophyll", "Stench"],
+    "experience": 138,
+    "stats": {
+      "hp": 60,
+      "attack": 65,
+      "defense": 70,
+      "sp_attack": 85,
+      "sp_defense": 75,
+      "speed": 40
+    },
     "prev_evolution": [
       {
-        "num": 43,
+        "id": 43,
         "name": "Oddish"
       }
     ],
     "next_evolution": [
       {
-        "num": 45,
+        "id": 45,
         "name": "Vileplume"
       }
     ]
   },
   {
     "id": 45,
-    "num": 45,
     "name": "Vileplume",
     "img_front": "pokemon_45_front.png",
     "img_back": "pokemon_45_back.png",
@@ -1176,20 +1571,29 @@
     "spawn_time": "23:58",
     "multipliers": null,
     "weaknesses": ["Fire", "Ice", "Flying", "Psychic"],
+    "abilities": ["Chlorophyll", "Effect Spore"],
+    "experience": 221,
+    "stats": {
+      "hp": 75,
+      "attack": 80,
+      "defense": 85,
+      "sp_attack": 110,
+      "sp_defense": 90,
+      "speed": 50
+    },
     "prev_evolution": [
       {
-        "num": 43,
+        "id": 43,
         "name": "Oddish"
       },
       {
-        "num": 44,
+        "id": 44,
         "name": "Gloom"
       }
     ]
   },
   {
     "id": 46,
-    "num": 46,
     "name": "Paras",
     "img_front": "pokemon_46_front.png",
     "img_back": "pokemon_46_back.png",
@@ -1204,16 +1608,25 @@
     "spawn_time": "01:42",
     "multipliers": [2.02],
     "weaknesses": ["Fire", "Ice", "Poison", "Flying", "Bug", "Rock"],
+    "abilities": ["Effect Spore", "Dry Skin", "Damp"],
+    "experience": 57,
+    "stats": {
+      "hp": 35,
+      "attack": 70,
+      "defense": 55,
+      "sp_attack": 45,
+      "sp_defense": 55,
+      "speed": 25
+    },
     "next_evolution": [
       {
-        "num": 47,
+        "id": 47,
         "name": "Parasect"
       }
     ]
   },
   {
     "id": 47,
-    "num": 47,
     "name": "Parasect",
     "img_front": "pokemon_47_front.png",
     "img_back": "pokemon_47_back.png",
@@ -1227,16 +1640,25 @@
     "spawn_time": "01:22",
     "multipliers": null,
     "weaknesses": ["Fire", "Ice", "Poison", "Flying", "Bug", "Rock"],
+    "abilities": ["Effect Spore", "Dry Skin", "Damp"],
+    "experience": 142,
+    "stats": {
+      "hp": 60,
+      "attack": 95,
+      "defense": 80,
+      "sp_attack": 60,
+      "sp_defense": 80,
+      "speed": 30
+    },
     "prev_evolution": [
       {
-        "num": 46,
+        "id": 46,
         "name": "Paras"
       }
     ]
   },
   {
     "id": 48,
-    "num": 48,
     "name": "Venonat",
     "img_front": "pokemon_48_front.png",
     "img_back": "pokemon_48_back.png",
@@ -1251,16 +1673,25 @@
     "spawn_time": "02:31",
     "multipliers": [1.86, 1.9],
     "weaknesses": ["Fire", "Flying", "Psychic", "Rock"],
+    "abilities": ["Compound Eyes", "Tinted Lens"],
+    "experience": 61,
+    "stats": {
+      "hp": 60,
+      "attack": 55,
+      "defense": 50,
+      "sp_attack": 40,
+      "sp_defense": 55,
+      "speed": 45
+    },
     "next_evolution": [
       {
-        "num": 49,
+        "id": 49,
         "name": "Venomoth"
       }
     ]
   },
   {
     "id": 49,
-    "num": 49,
     "name": "Venomoth",
     "img_front": "pokemon_49_front.png",
     "img_back": "pokemon_49_back.png",
@@ -1274,16 +1705,25 @@
     "spawn_time": "23:40",
     "multipliers": null,
     "weaknesses": ["Fire", "Flying", "Psychic", "Rock"],
+    "abilities": ["Shield Dust", "Tinted Lens"],
+    "experience": 158,
+    "stats": {
+      "hp": 70,
+      "attack": 65,
+      "defense": 60,
+      "sp_attack": 90,
+      "sp_defense": 75,
+      "speed": 90
+    },
     "prev_evolution": [
       {
-        "num": 48,
+        "id": 48,
         "name": "Venonat"
       }
     ]
   },
   {
     "id": 50,
-    "num": 50,
     "name": "Diglett",
     "img_front": "pokemon_50_front.png",
     "img_back": "pokemon_50_back.png",
@@ -1298,16 +1738,25 @@
     "spawn_time": "02:22",
     "multipliers": [2.69],
     "weaknesses": ["Water", "Grass", "Ice"],
+    "abilities": ["Sand Veil", "Arena Trap", "Sand Force"],
+    "experience": 53,
+    "stats": {
+      "hp": 10,
+      "attack": 55,
+      "defense": 25,
+      "sp_attack": 35,
+      "sp_defense": 45,
+      "speed": 95
+    },
     "next_evolution": [
       {
-        "num": 51,
+        "id": 51,
         "name": "Dugtrio"
       }
     ]
   },
   {
     "id": 51,
-    "num": 51,
     "name": "Dugtrio",
     "img_front": "pokemon_51_front.png",
     "img_back": "pokemon_51_back.png",
@@ -1321,16 +1770,25 @@
     "spawn_time": "12:37",
     "multipliers": null,
     "weaknesses": ["Water", "Grass", "Ice"],
+    "abilities": ["Sand Veil", "Arena Trap", "Sand Force"],
+    "experience": 142,
+    "stats": {
+      "hp": 35,
+      "attack": 100,
+      "defense": 50,
+      "sp_attack": 50,
+      "sp_defense": 70,
+      "speed": 120
+    },
     "prev_evolution": [
       {
-        "num": 50,
+        "id": 50,
         "name": "Diglett"
       }
     ]
   },
   {
     "id": 52,
-    "num": 52,
     "name": "Meowth",
     "img_front": "pokemon_52_front.png",
     "img_back": "pokemon_52_back.png",
@@ -1345,16 +1803,25 @@
     "spawn_time": "02:54",
     "multipliers": [1.98],
     "weaknesses": ["Fighting"],
+    "abilities": ["Pickup", "Technician", "Unnerve"],
+    "experience": 58,
+    "stats": {
+      "hp": 40,
+      "attack": 45,
+      "defense": 35,
+      "sp_attack": 40,
+      "sp_defense": 40,
+      "speed": 90
+    },
     "next_evolution": [
       {
-        "num": 53,
+        "id": 53,
         "name": "Persian"
       }
     ]
   },
   {
     "id": 53,
-    "num": 53,
     "name": "Persian",
     "img_front": "pokemon_53_front.png",
     "img_back": "pokemon_53_back.png",
@@ -1368,16 +1835,25 @@
     "spawn_time": "02:44",
     "multipliers": null,
     "weaknesses": ["Fighting"],
+    "abilities": ["Limber", "Technician", "Unnerve"],
+    "experience": 154,
+    "stats": {
+      "hp": 65,
+      "attack": 70,
+      "defense": 60,
+      "sp_attack": 65,
+      "sp_defense": 65,
+      "speed": 115
+    },
     "prev_evolution": [
       {
-        "num": 52,
+        "id": 52,
         "name": "Meowth"
       }
     ]
   },
   {
     "id": 54,
-    "num": 54,
     "name": "Psyduck",
     "img_front": "pokemon_54_front.png",
     "img_back": "pokemon_54_back.png",
@@ -1392,16 +1868,25 @@
     "spawn_time": "03:41",
     "multipliers": [2.27],
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Damp", "Cloud Nine", "Swift Swim"],
+    "experience": 64,
+    "stats": {
+      "hp": 50,
+      "attack": 52,
+      "defense": 48,
+      "sp_attack": 65,
+      "sp_defense": 50,
+      "speed": 55
+    },
     "next_evolution": [
       {
-        "num": 55,
+        "id": 55,
         "name": "Golduck"
       }
     ]
   },
   {
     "id": 55,
-    "num": 55,
     "name": "Golduck",
     "img_front": "pokemon_55_front.png",
     "img_back": "pokemon_55_back.png",
@@ -1415,16 +1900,25 @@
     "spawn_time": "23:06",
     "multipliers": null,
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Damp", "Cloud Nine", "Swift Swim"],
+    "experience": 175,
+    "stats": {
+      "hp": 80,
+      "attack": 82,
+      "defense": 78,
+      "sp_attack": 95,
+      "sp_defense": 80,
+      "speed": 85
+    },
     "prev_evolution": [
       {
-        "num": 54,
+        "id": 54,
         "name": "Psyduck"
       }
     ]
   },
   {
     "id": 56,
-    "num": 56,
     "name": "Mankey",
     "img_front": "pokemon_56_front.png",
     "img_back": "pokemon_56_back.png",
@@ -1439,16 +1933,25 @@
     "spawn_time": "12:52",
     "multipliers": [2.17, 2.28],
     "weaknesses": ["Flying", "Psychic", "Fairy"],
+    "abilities": ["Vital Spirit", "Anger Point", "Defiant"],
+    "experience": 61,
+    "stats": {
+      "hp": 40,
+      "attack": 80,
+      "defense": 35,
+      "sp_attack": 35,
+      "sp_defense": 45,
+      "speed": 70
+    },
     "next_evolution": [
       {
-        "num": 57,
+        "id": 57,
         "name": "Primeape"
       }
     ]
   },
   {
     "id": 57,
-    "num": 57,
     "name": "Primeape",
     "img_front": "pokemon_57_front.png",
     "img_back": "pokemon_57_back.png",
@@ -1462,16 +1965,25 @@
     "spawn_time": "12:33",
     "multipliers": null,
     "weaknesses": ["Flying", "Psychic", "Fairy"],
+    "abilities": ["Vital Spirit", "Anger Point", "Defiant"],
+    "experience": 159,
+    "stats": {
+      "hp": 65,
+      "attack": 105,
+      "defense": 60,
+      "sp_attack": 60,
+      "sp_defense": 70,
+      "speed": 95
+    },
     "prev_evolution": [
       {
-        "num": 56,
+        "id": 56,
         "name": "Mankey"
       }
     ]
   },
   {
     "id": 58,
-    "num": 58,
     "name": "Growlithe",
     "img_front": "pokemon_58_front.png",
     "img_back": "pokemon_58_back.png",
@@ -1486,16 +1998,25 @@
     "spawn_time": "03:57",
     "multipliers": [2.31, 2.36],
     "weaknesses": ["Water", "Ground", "Rock"],
+    "abilities": ["Intimidate", "Flash Fire", "Justified"],
+    "experience": 70,
+    "stats": {
+      "hp": 55,
+      "attack": 70,
+      "defense": 45,
+      "sp_attack": 70,
+      "sp_defense": 50,
+      "speed": 60
+    },
     "next_evolution": [
       {
-        "num": 59,
+        "id": 59,
         "name": "Arcanine"
       }
     ]
   },
   {
     "id": 59,
-    "num": 59,
     "name": "Arcanine",
     "img_front": "pokemon_59_front.png",
     "img_back": "pokemon_59_back.png",
@@ -1509,16 +2030,25 @@
     "spawn_time": "03:11",
     "multipliers": null,
     "weaknesses": ["Water", "Ground", "Rock"],
+    "abilities": ["Intimidate", "Flash Fire", "Justified"],
+    "experience": 194,
+    "stats": {
+      "hp": 90,
+      "attack": 110,
+      "defense": 80,
+      "sp_attack": 100,
+      "sp_defense": 80,
+      "speed": 95
+    },
     "prev_evolution": [
       {
-        "num": 58,
+        "id": 58,
         "name": "Growlithe"
       }
     ]
   },
   {
     "id": 60,
-    "num": 60,
     "name": "Poliwag",
     "img_front": "pokemon_60_front.png",
     "img_back": "pokemon_60_back.png",
@@ -1533,20 +2063,29 @@
     "spawn_time": "03:40",
     "multipliers": [1.72, 1.73],
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Water Absorb", "Damp", "Swift Swim"],
+    "experience": 60,
+    "stats": {
+      "hp": 40,
+      "attack": 50,
+      "defense": 40,
+      "sp_attack": 40,
+      "sp_defense": 40,
+      "speed": 90
+    },
     "next_evolution": [
       {
-        "num": 61,
+        "id": 61,
         "name": "Poliwhirl"
       },
       {
-        "num": 62,
+        "id": 62,
         "name": "Poliwrath"
       }
     ]
   },
   {
     "id": 61,
-    "num": 61,
     "name": "Poliwhirl",
     "img_front": "pokemon_61_front.png",
     "img_back": "pokemon_61_back.png",
@@ -1561,22 +2100,31 @@
     "spawn_time": "09:14",
     "multipliers": [1.95],
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Water Absorb", "Damp", "Swift Swim"],
+    "experience": 135,
+    "stats": {
+      "hp": 65,
+      "attack": 65,
+      "defense": 65,
+      "sp_attack": 50,
+      "sp_defense": 50,
+      "speed": 90
+    },
     "prev_evolution": [
       {
-        "num": 60,
+        "id": 60,
         "name": "Poliwag"
       }
     ],
     "next_evolution": [
       {
-        "num": 62,
+        "id": 62,
         "name": "Poliwrath"
       }
     ]
   },
   {
     "id": 62,
-    "num": 62,
     "name": "Poliwrath",
     "img_front": "pokemon_62_front.png",
     "img_back": "pokemon_62_back.png",
@@ -1590,20 +2138,29 @@
     "spawn_time": "01:32",
     "multipliers": null,
     "weaknesses": ["Electric", "Grass", "Flying", "Psychic", "Fairy"],
+    "abilities": ["Water Absorb", "Damp", "Swift Swim"],
+    "experience": 225,
+    "stats": {
+      "hp": 90,
+      "attack": 95,
+      "defense": 95,
+      "sp_attack": 70,
+      "sp_defense": 90,
+      "speed": 70
+    },
     "prev_evolution": [
       {
-        "num": 60,
+        "id": 60,
         "name": "Poliwag"
       },
       {
-        "num": 61,
+        "id": 61,
         "name": "Poliwhirl"
       }
     ]
   },
   {
     "id": 63,
-    "num": 63,
     "name": "Abra",
     "img_front": "pokemon_63_front.png",
     "img_back": "pokemon_63_back.png",
@@ -1618,20 +2175,29 @@
     "spawn_time": "04:30",
     "multipliers": [1.36, 1.95],
     "weaknesses": ["Bug", "Ghost", "Dark"],
+    "abilities": ["Synchronize", "Inner Focus", "Magic Guard"],
+    "experience": 62,
+    "stats": {
+      "hp": 25,
+      "attack": 20,
+      "defense": 15,
+      "sp_attack": 105,
+      "sp_defense": 55,
+      "speed": 90
+    },
     "next_evolution": [
       {
-        "num": 64,
+        "id": 64,
         "name": "Kadabra"
       },
       {
-        "num": 65,
+        "id": 65,
         "name": "Alakazam"
       }
     ]
   },
   {
     "id": 64,
-    "num": 64,
     "name": "Kadabra",
     "img_front": "pokemon_64_front.png",
     "img_back": "pokemon_64_back.png",
@@ -1646,22 +2212,31 @@
     "spawn_time": "11:25",
     "multipliers": [1.4],
     "weaknesses": ["Bug", "Ghost", "Dark"],
+    "abilities": ["Synchronize", "Inner Focus", "Magic Guard"],
+    "experience": 140,
+    "stats": {
+      "hp": 40,
+      "attack": 35,
+      "defense": 30,
+      "sp_attack": 120,
+      "sp_defense": 70,
+      "speed": 105
+    },
     "prev_evolution": [
       {
-        "num": 63,
+        "id": 63,
         "name": "Abra"
       }
     ],
     "next_evolution": [
       {
-        "num": 65,
+        "id": 65,
         "name": "Alakazam"
       }
     ]
   },
   {
     "id": 65,
-    "num": 65,
     "name": "Alakazam",
     "img_front": "pokemon_65_front.png",
     "img_back": "pokemon_65_back.png",
@@ -1675,20 +2250,29 @@
     "spawn_time": "12:33",
     "multipliers": null,
     "weaknesses": ["Bug", "Ghost", "Dark"],
+    "abilities": ["Synchronize", "Inner Focus", "Magic Guard"],
+    "experience": 221,
+    "stats": {
+      "hp": 55,
+      "attack": 50,
+      "defense": 45,
+      "sp_attack": 135,
+      "sp_defense": 95,
+      "speed": 120
+    },
     "prev_evolution": [
       {
-        "num": 63,
+        "id": 63,
         "name": "Abra"
       },
       {
-        "num": 64,
+        "id": 64,
         "name": "Kadabra"
       }
     ]
   },
   {
     "id": 66,
-    "num": 66,
     "name": "Machop",
     "img_front": "pokemon_66_front.png",
     "img_back": "pokemon_66_back.png",
@@ -1703,20 +2287,29 @@
     "spawn_time": "01:55",
     "multipliers": [1.64, 1.65],
     "weaknesses": ["Flying", "Psychic", "Fairy"],
+    "abilities": ["Guts", "No Guard", "Steadfast"],
+    "experience": 61,
+    "stats": {
+      "hp": 70,
+      "attack": 80,
+      "defense": 50,
+      "sp_attack": 35,
+      "sp_defense": 35,
+      "speed": 35
+    },
     "next_evolution": [
       {
-        "num": 67,
+        "id": 67,
         "name": "Machoke"
       },
       {
-        "num": 68,
+        "id": 68,
         "name": "Machamp"
       }
     ]
   },
   {
     "id": 67,
-    "num": 67,
     "name": "Machoke",
     "img_front": "pokemon_67_front.png",
     "img_back": "pokemon_67_back.png",
@@ -1731,22 +2324,31 @@
     "spawn_time": "10:32",
     "multipliers": [1.7],
     "weaknesses": ["Flying", "Psychic", "Fairy"],
+    "abilities": ["Guts", "No Guard", "Steadfast"],
+    "experience": 142,
+    "stats": {
+      "hp": 80,
+      "attack": 100,
+      "defense": 70,
+      "sp_attack": 50,
+      "sp_defense": 60,
+      "speed": 45
+    },
     "prev_evolution": [
       {
-        "num": 66,
+        "id": 66,
         "name": "Machop"
       }
     ],
     "next_evolution": [
       {
-        "num": 68,
+        "id": 68,
         "name": "Machamp"
       }
     ]
   },
   {
     "id": 68,
-    "num": 68,
     "name": "Machamp",
     "img_front": "pokemon_68_front.png",
     "img_back": "pokemon_68_back.png",
@@ -1760,20 +2362,29 @@
     "spawn_time": "02:55",
     "multipliers": null,
     "weaknesses": ["Flying", "Psychic", "Fairy"],
+    "abilities": ["Guts", "No Guard", "Steadfast"],
+    "experience": 227,
+    "stats": {
+      "hp": 90,
+      "attack": 130,
+      "defense": 80,
+      "sp_attack": 65,
+      "sp_defense": 85,
+      "speed": 55
+    },
     "prev_evolution": [
       {
-        "num": 66,
+        "id": 66,
         "name": "Machop"
       },
       {
-        "num": 67,
+        "id": 67,
         "name": "Machoke"
       }
     ]
   },
   {
     "id": 69,
-    "num": 69,
     "name": "Bellsprout",
     "img_front": "pokemon_69_front.png",
     "img_back": "pokemon_69_back.png",
@@ -1788,20 +2399,29 @@
     "spawn_time": "04:10",
     "multipliers": [1.57],
     "weaknesses": ["Fire", "Ice", "Flying", "Psychic"],
+    "abilities": ["Chlorophyll", "Gluttony"],
+    "experience": 60,
+    "stats": {
+      "hp": 50,
+      "attack": 75,
+      "defense": 35,
+      "sp_attack": 70,
+      "sp_defense": 30,
+      "speed": 40
+    },
     "next_evolution": [
       {
-        "num": 70,
+        "id": 70,
         "name": "Weepinbell"
       },
       {
-        "num": 71,
+        "id": 71,
         "name": "Victreebel"
       }
     ]
   },
   {
     "id": 70,
-    "num": 70,
     "name": "Weepinbell",
     "img_front": "pokemon_70_front.png",
     "img_back": "pokemon_70_back.png",
@@ -1816,22 +2436,31 @@
     "spawn_time": "09:45",
     "multipliers": [1.59],
     "weaknesses": ["Fire", "Ice", "Flying", "Psychic"],
+    "abilities": ["Chlorophyll", "Gluttony"],
+    "experience": 137,
+    "stats": {
+      "hp": 65,
+      "attack": 90,
+      "defense": 50,
+      "sp_attack": 85,
+      "sp_defense": 45,
+      "speed": 55
+    },
     "prev_evolution": [
       {
-        "num": 69,
+        "id": 69,
         "name": "Bellsprout"
       }
     ],
     "next_evolution": [
       {
-        "num": 71,
+        "id": 71,
         "name": "Victreebel"
       }
     ]
   },
   {
     "id": 71,
-    "num": 71,
     "name": "Victreebel",
     "img_front": "pokemon_71_front.png",
     "img_back": "pokemon_71_back.png",
@@ -1844,21 +2473,30 @@
     "avg_spawns": 0.59,
     "spawn_time": "12:19",
     "multipliers": null,
-    "weaknesses": ["Fire", "Ice", "Flying", "Psychic"],
+    "weaknesses": ["Fire", "Ice", "Flying", "Psychic"], 
+    "abilities": ["Chlorophyll", "Gluttony"],
+    "experience": 221,
+    "stats": {
+      "hp": 80,
+      "attack": 105,
+      "defense": 65,
+      "sp_attack": 100,
+      "sp_defense": 70,
+      "speed": 70
+    },
     "prev_evolution": [
       {
-        "num": 69,
+        "id": 69,
         "name": "Bellsprout"
       },
       {
-        "num": 70,
+        "id": 70,
         "name": "Weepinbell"
       }
     ]
   },
   {
     "id": 72,
-    "num": 72,
     "name": "Tentacool",
     "img_front": "pokemon_72_front.png",
     "img_back": "pokemon_72_back.png",
@@ -1873,16 +2511,25 @@
     "spawn_time": "03:20",
     "multipliers": [2.52],
     "weaknesses": ["Electric", "Ground", "Psychic"],
+    "abilities": ["Clear Body", "Liquid Ooze", "Rain Dish"],
+    "experience": 67,
+    "stats": {
+      "hp": 40,
+      "attack": 40,
+      "defense": 35,
+      "sp_attack": 50,
+      "sp_defense": 100,
+      "speed": 70
+    },
     "next_evolution": [
       {
-        "num": 73,
+        "id": 73,
         "name": "Tentacruel"
       }
     ]
   },
   {
     "id": 73,
-    "num": 73,
     "name": "Tentacruel",
     "img_front": "pokemon_73_front.png",
     "img_back": "pokemon_73_back.png",
@@ -1896,16 +2543,25 @@
     "spawn_time": "23:36",
     "multipliers": null,
     "weaknesses": ["Electric", "Ground", "Psychic"],
+    "abilities": ["Clear Body", "Liquid Ooze", "Rain Dish"],
+    "experience": 180,
+    "stats": {
+      "hp": 80,
+      "attack": 70,
+      "defense": 65,
+      "sp_attack": 80,
+      "sp_defense": 120,
+      "speed": 100
+    },
     "prev_evolution": [
       {
-        "num": 72,
+        "id": 72,
         "name": "Tentacool"
       }
     ]
   },
   {
     "id": 74,
-    "num": 74,
     "name": "Geodude",
     "img_front": "pokemon_74_front.png",
     "img_back": "pokemon_74_back.png",
@@ -1920,20 +2576,29 @@
     "spawn_time": "12:40",
     "multipliers": [1.75, 1.76],
     "weaknesses": ["Water", "Grass", "Ice", "Fighting", "Ground", "Steel"],
+    "abilities": ["Rock Head", "Sturdy", "Sand Veil"],
+    "experience": 60,
+    "stats": {
+      "hp": 40,
+      "attack": 80,
+      "defense": 100,
+      "sp_attack": 30,
+      "sp_defense": 30,
+      "speed": 20
+    },
     "next_evolution": [
       {
-        "num": 75,
+        "id": 75,
         "name": "Graveler"
       },
       {
-        "num": 76,
+        "id": 76,
         "name": "Golem"
       }
     ]
   },
   {
     "id": 75,
-    "num": 75,
     "name": "Graveler",
     "img_front": "pokemon_75_front.png",
     "img_back": "pokemon_75_back.png",
@@ -1948,22 +2613,31 @@
     "spawn_time": "04:53",
     "multipliers": [1.64, 1.72],
     "weaknesses": ["Water", "Grass", "Ice", "Fighting", "Ground", "Steel"],
+    "abilities": ["Rock Head", "Sturdy", "Sand Veil"],
+    "experience": 137,
+    "stats": {
+      "hp": 55,
+      "attack": 95,
+      "defense": 115,
+      "sp_attack": 45,
+      "sp_defense": 45,
+      "speed": 35
+    },
     "prev_evolution": [
       {
-        "num": 74,
+        "id": 74,
         "name": "Geodude"
       }
     ],
     "next_evolution": [
       {
-        "num": 76,
+        "id": 76,
         "name": "Golem"
       }
     ]
   },
   {
     "id": 76,
-    "num": 76,
     "name": "Golem",
     "img_front": "pokemon_76_front.png",
     "img_back": "pokemon_76_back.png",
@@ -1977,20 +2651,29 @@
     "spawn_time": "12:16",
     "multipliers": null,
     "weaknesses": ["Water", "Grass", "Ice", "Fighting", "Ground", "Steel"],
+    "abilities": ["Rock Head", "Sturdy", "Sand Veil"],
+    "experience": 223,
+    "stats": {
+      "hp": 80,
+      "attack": 120,
+      "defense": 130,
+      "sp_attack": 55,
+      "sp_defense": 65,
+      "speed": 45
+    },
     "prev_evolution": [
       {
-        "num": 74,
+        "id": 74,
         "name": "Geodude"
       },
       {
-        "num": 75,
+        "id": 75,
         "name": "Graveler"
       }
     ]
   },
   {
     "id": 77,
-    "num": 77,
     "name": "Ponyta",
     "img_front": "pokemon_77_front.png",
     "img_back": "pokemon_77_back.png",
@@ -2005,16 +2688,25 @@
     "spawn_time": "02:50",
     "multipliers": [1.48, 1.5],
     "weaknesses": ["Water", "Ground", "Rock"],
+    "abilities": ["Run Away", "Flash Fire", "Flame Body"],
+    "experience": 82,
+    "stats": {
+      "hp": 50,
+      "attack": 85,
+      "defense": 55,
+      "sp_attack": 65,
+      "sp_defense": 65,
+      "speed": 90
+    },
     "next_evolution": [
       {
-        "num": 78,
+        "id": 78,
         "name": "Rapidash"
       }
     ]
   },
   {
     "id": 78,
-    "num": 78,
     "name": "Rapidash",
     "img_front": "pokemon_78_front.png",
     "img_back": "pokemon_78_back.png",
@@ -2028,16 +2720,25 @@
     "spawn_time": "04:00",
     "multipliers": null,
     "weaknesses": ["Water", "Ground", "Rock"],
+    "abilities": ["Run Away", "Flash Fire", "Flame Body"],
+    "experience": 175,
+    "stats": {
+      "hp": 65,
+      "attack": 100,
+      "defense": 70,
+      "sp_attack": 80,
+      "sp_defense": 80,
+      "speed": 105
+    },
     "prev_evolution": [
       {
-        "num": 77,
+        "id": 77,
         "name": "Ponyta"
       }
     ]
   },
   {
     "id": 79,
-    "num": 79,
     "name": "Slowpoke",
     "img_front": "pokemon_79_front.png",
     "img_back": "pokemon_79_back.png",
@@ -2052,16 +2753,25 @@
     "spawn_time": "07:12",
     "multipliers": [2.21],
     "weaknesses": ["Electric", "Grass", "Bug", "Ghost", "Dark"],
+    "abilities": ["Oblivious", "Own Tempo", "Regenerator"],
+    "experience": 63,
+    "stats": {
+      "hp": 90,
+      "attack": 65,
+      "defense": 65,
+      "sp_attack": 40,
+      "sp_defense": 40,
+      "speed": 15
+    },
     "next_evolution": [
       {
-        "num": 80,
+        "id": 80,
         "name": "Slowbro"
       }
     ]
   },
   {
     "id": 80,
-    "num": 80,
     "name": "Slowbro",
     "img_front": "pokemon_80_front.png",
     "img_back": "pokemon_80_back.png",
@@ -2075,16 +2785,25 @@
     "spawn_time": "02:56",
     "multipliers": null,
     "weaknesses": ["Electric", "Grass", "Bug", "Ghost", "Dark"],
+    "abilities":  ["Oblivious", "Own Tempo", "Regenerator"],
+    "experience": 172,
+    "stats": {
+      "hp": 95,
+      "attack": 75,
+      "defense": 110,
+      "sp_attack": 100,
+      "sp_defense": 80,
+      "speed": 30
+    },
     "prev_evolution": [
       {
-        "num": 79,
+        "id": 79,
         "name": "Slowpoke"
       }
     ]
   },
   {
     "id": 81,
-    "num": 81,
     "name": "Magnemite",
     "img_front": "pokemon_81_front.png",
     "img_back": "pokemon_81_back.png",
@@ -2099,16 +2818,25 @@
     "spawn_time": "04:04",
     "multipliers": [2.16, 2.17],
     "weaknesses": ["Fire", "Water", "Ground"],
+    "abilities": ["Magnet Pull", "Sturdy", "Analytic"],
+    "experience": 65,
+    "stats": {
+      "hp": 25,
+      "attack": 35,
+      "defense": 70,
+      "sp_attack": 95,
+      "sp_defense": 55,
+      "speed": 45
+    },
     "next_evolution": [
       {
-        "num": 82,
+        "id": 82,
         "name": "Magneton"
       }
     ]
   },
   {
     "id": 82,
-    "num": 82,
     "name": "Magneton",
     "img_front": "pokemon_82_front.png",
     "img_back": "pokemon_82_back.png",
@@ -2122,16 +2850,25 @@
     "spawn_time": "15:25",
     "multipliers": null,
     "weaknesses": ["Fire", "Water", "Ground"],
+    "abilities": ["Magnet Pull", "Sturdy", "Analytic"],
+    "experience": 163,
+    "stats": {
+      "hp": 50,
+      "attack": 60,
+      "defense": 95,
+      "sp_attack": 120,
+      "sp_defense": 70,
+      "speed": 70
+    },
     "prev_evolution": [
       {
-        "num": 81,
+        "id": 81,
         "name": "Magnemite"
       }
     ]
   },
   {
     "id": 83,
-    "num": 83,
     "name": "Farfetch'd",
     "img_front": "pokemon_83_front.png",
     "img_back": "pokemon_83_back.png",
@@ -2144,11 +2881,20 @@
     "avg_spawns": 2.12,
     "spawn_time": "01:09",
     "multipliers": null,
-    "weaknesses": ["Electric", "Rock"]
+    "weaknesses": ["Electric", "Rock"],
+    "abilities": ["Keen Eye", "Inner Focus", "Defiant"],
+    "experience": 132,
+    "stats": {
+      "hp": 52,
+      "attack": 65,
+      "defense": 55,
+      "sp_attack": 58,
+      "sp_defense": 62,
+      "speed": 60
+    }
   },
   {
     "id": 84,
-    "num": 84,
     "name": "Doduo",
     "img_front": "pokemon_84_front.png",
     "img_back": "pokemon_84_back.png",
@@ -2163,16 +2909,25 @@
     "spawn_time": "05:10",
     "multipliers": [2.19, 2.24],
     "weaknesses": ["Electric", "Rock"],
+    "abilities": ["Run Away", "Early Bird", "Tangled Feet"],
+    "experience": 62,
+    "stats": {
+      "hp": 35,
+      "attack": 85,
+      "defense": 45,
+      "sp_attack": 35,
+      "sp_defense": 35,
+      "speed": 75
+    },
     "next_evolution": [
       {
-        "num": 85,
+        "id": 85,
         "name": "Dodrio"
       }
     ]
   },
   {
     "id": 85,
-    "num": 85,
     "name": "Dodrio",
     "img_front": "pokemon_85_front.png",
     "img_back": "pokemon_85_back.png",
@@ -2186,16 +2941,25 @@
     "spawn_time": "02:12",
     "multipliers": null,
     "weaknesses": ["Electric", "Rock"],
+    "abilities": ["Run Away", "Early Bird", "Tangled Feet"],
+    "experience": 165,
+    "stats": {
+      "hp": 60,
+      "attack": 110,
+      "defense": 70,
+      "sp_attack": 60,
+      "sp_defense": 60,
+      "speed": 110
+    },
     "prev_evolution": [
       {
-        "num": 84,
+        "id": 84,
         "name": "Doduo"
       }
     ]
   },
   {
     "id": 86,
-    "num": 86,
     "name": "Seel",
     "img_front": "pokemon_86_front.png",
     "img_back": "pokemon_86_back.png",
@@ -2210,16 +2974,25 @@
     "spawn_time": "06:46",
     "multipliers": [1.04, 1.96],
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Thick Fat", "Hydration", "Ice Body"],
+    "experience": 65,
+    "stats": {
+      "hp": 65,
+      "attack": 45,
+      "defense": 55,
+      "sp_attack": 45,
+      "sp_defense": 70,
+      "speed": 45
+    },
     "next_evolution": [
       {
-        "num": 87,
+        "id": 87,
         "name": "Dewgong"
       }
     ]
   },
   {
     "id": 87,
-    "num": 87,
     "name": "Dewgong",
     "img_front": "pokemon_87_front.png",
     "img_back": "pokemon_87_back.png",
@@ -2233,16 +3006,25 @@
     "spawn_time": "06:04",
     "multipliers": null,
     "weaknesses": ["Electric", "Grass", "Fighting", "Rock"],
+    "abilities": ["Thick Fat", "Hydration", "Ice Body"],
+    "experience": 166,
+    "stats": {
+      "hp": 90,
+      "attack": 70,
+      "defense": 80,
+      "sp_attack": 70,
+      "sp_defense": 95,
+      "speed": 70
+    },
     "prev_evolution": [
       {
-        "num": 86,
+        "id": 86,
         "name": "Seel"
       }
     ]
   },
   {
     "id": 88,
-    "num": 88,
     "name": "Grimer",
     "img_front": "pokemon_88_front.png",
     "img_back": "pokemon_88_back.png",
@@ -2257,16 +3039,25 @@
     "spawn_time": "15:11",
     "multipliers": [2.44],
     "weaknesses": ["Ground", "Psychic"],
+    "abilities": ["Stench", "Sticky Hold", "Poison Touch"],
+    "experience": 65,
+    "stats": {
+      "hp": 80,
+      "attack": 80,
+      "defense": 50,
+      "sp_attack": 40,
+      "sp_defense": 50,
+      "speed": 25
+    },
     "next_evolution": [
       {
-        "num": 89,
+        "id": 89,
         "name": "Muk"
       }
     ]
   },
   {
     "id": 89,
-    "num": 89,
     "name": "Muk",
     "img_front": "pokemon_89_front.png",
     "img_back": "pokemon_89_back.png",
@@ -2280,16 +3071,25 @@
     "spawn_time": "01:28",
     "multipliers": null,
     "weaknesses": ["Ground", "Psychic"],
+    "abilities": ["Stench", "Sticky Hold", "Poison Touch"],
+    "experience": 175,
+    "stats": {
+      "hp": 105,
+      "attack": 105,
+      "defense": 75,
+      "sp_attack": 65,
+      "sp_defense": 100,
+      "speed": 50
+    },
     "prev_evolution": [
       {
-        "num": 88,
+        "id": 88,
         "name": "Grimer"
       }
     ]
   },
   {
     "id": 90,
-    "num": 90,
     "name": "Shellder",
     "img_front": "pokemon_90_front.png",
     "img_back": "pokemon_90_back.png",
@@ -2304,16 +3104,25 @@
     "spawn_time": "07:39",
     "multipliers": [2.65],
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Shell Armor", "Skill Link", "Overcoat"],
+    "experience": 61,
+    "stats": {
+      "hp": 30,
+      "attack": 65,
+      "defense": 100,
+      "sp_attack": 45,
+      "sp_defense": 25,
+      "speed": 40
+    },
     "next_evolution": [
       {
-        "num": 91,
+        "id": 91,
         "name": "Cloyster"
       }
     ]
   },
   {
     "id": 91,
-    "num": 91,
     "name": "Cloyster",
     "img_front": "pokemon_91_front.png",
     "img_back": "pokemon_91_back.png",
@@ -2327,16 +3136,25 @@
     "spawn_time": "02:33",
     "multipliers": null,
     "weaknesses": ["Electric", "Grass", "Fighting", "Rock"],
+    "abilities": ["Shell Armor", "Skill Link", "Overcoat"],
+    "experience": 184,
+    "stats": {
+      "hp": 50,
+      "attack": 95,
+      "defense": 180,
+      "sp_attack": 85,
+      "sp_defense": 45,
+      "speed": 70
+    },
     "prev_evolution": [
       {
-        "num": 90,
+        "id": 90,
         "name": "Shellder"
       }
     ]
   },
   {
     "id": 92,
-    "num": 92,
     "name": "Gastly",
     "img_front": "pokemon_92_front.png",
     "img_back": "pokemon_92_back.png",
@@ -2351,20 +3169,29 @@
     "spawn_time": "04:21",
     "multipliers": [1.78],
     "weaknesses": ["Ground", "Psychic", "Ghost", "Dark"],
+    "abilities": ["Levitate"],
+    "experience": 62,
+    "stats": {
+      "hp": 30,
+      "attack": 35,
+      "defense": 30,
+      "sp_attack": 100,
+      "sp_defense": 35,
+      "speed": 80
+    },
     "next_evolution": [
       {
-        "num": 93,
+        "id": 93,
         "name": "Haunter"
       },
       {
-        "num": 94,
+        "id": 94,
         "name": "Gengar"
       }
     ]
   },
   {
     "id": 93,
-    "num": 93,
     "name": "Haunter",
     "img_front": "pokemon_93_front.png",
     "img_back": "pokemon_93_back.png",
@@ -2379,22 +3206,31 @@
     "spawn_time": "00:10",
     "multipliers": [1.56, 1.8],
     "weaknesses": ["Ground", "Psychic", "Ghost", "Dark"],
+    "abilities": ["Levitate"],
+    "experience": 142,
+    "stats": {
+      "hp": 45,
+      "attack": 50,
+      "defense": 45,
+      "sp_attack": 115,
+      "sp_defense": 55,
+      "speed": 95
+    },
     "prev_evolution": [
       {
-        "num": 92,
+        "id": 92,
         "name": "Gastly"
       }
     ],
     "next_evolution": [
       {
-        "num": 94,
+        "id": 94,
         "name": "Gengar"
       }
     ]
   },
   {
     "id": 94,
-    "num": 94,
     "name": "Gengar",
     "img_front": "pokemon_94_front.png",
     "img_back": "pokemon_94_back.png",
@@ -2408,20 +3244,29 @@
     "spawn_time": "03:55",
     "multipliers": null,
     "weaknesses": ["Ground", "Psychic", "Ghost", "Dark"],
+    "abilities": ["Cursed Body"],
+    "experience": 225,
+    "stats": {
+      "hp": 60,
+      "attack": 65,
+      "defense": 60,
+      "sp_attack": 130,
+      "sp_defense": 75,
+      "speed": 110
+    },
     "prev_evolution": [
       {
-        "num": 92,
+        "id": 92,
         "name": "Gastly"
       },
       {
-        "num": 93,
+        "id": 93,
         "name": "Haunter"
       }
     ]
   },
   {
     "id": 95,
-    "num": 95,
     "name": "Onix",
     "img_front": "pokemon_95_front.png",
     "img_back": "pokemon_95_back.png",
@@ -2434,11 +3279,20 @@
     "avg_spawns": 10,
     "spawn_time": "01:18",
     "multipliers": null,
-    "weaknesses": ["Water", "Grass", "Ice", "Fighting", "Ground", "Steel"]
+    "weaknesses": ["Water", "Grass", "Ice", "Fighting", "Ground", "Steel"],
+    "abilities": ["Rock Head", "Sturdy", "Weak Armor"],
+    "experience": 77,
+    "stats": {
+      "hp": 35,
+      "attack": 45,
+      "defense": 160,
+      "sp_attack": 30,
+      "sp_defense": 45,
+      "speed": 70
+    }
   },
   {
     "id": 96,
-    "num": 96,
     "name": "Drowzee",
     "img_front": "pokemon_96_front.png",
     "img_back": "pokemon_96_back.png",
@@ -2453,16 +3307,25 @@
     "spawn_time": "01:51",
     "multipliers": [2.08, 2.09],
     "weaknesses": ["Bug", "Ghost", "Dark"],
+    "abilities": ["Insomnia", "Forewarn", "Inner Focus"],
+    "experience": 66,
+    "stats": {
+      "hp": 60,
+      "attack": 48,
+      "defense": 45,
+      "sp_attack": 43,
+      "sp_defense": 90,
+      "speed": 42
+    },
     "next_evolution": [
       {
-        "num": 97,
+        "id": 97,
         "name": "Hypno"
       }
     ]
   },
   {
     "id": 97,
-    "num": 97,
     "name": "Hypno",
     "img_front": "pokemon_97_front.png",
     "img_back": "pokemon_97_back.png",
@@ -2476,16 +3339,25 @@
     "spawn_time": "02:17",
     "multipliers": null,
     "weaknesses": ["Bug", "Ghost", "Dark"],
+    "abilities": ["Insomnia", "Forewarn", "Inner Focus"],
+    "experience": 169,
+    "stats": {
+      "hp": 85,
+      "attack": 73,
+      "defense": 70,
+      "sp_attack": 73,
+      "sp_defense": 115,
+      "speed": 67
+    },
     "prev_evolution": [
       {
-        "num": 96,
+        "id": 96,
         "name": "Drowzee"
       }
     ]
   },
   {
     "id": 98,
-    "num": 98,
     "name": "Krabby",
     "img_front": "pokemon_98_front.png",
     "img_back": "pokemon_98_back.png",
@@ -2500,16 +3372,25 @@
     "spawn_time": "03:33",
     "multipliers": [2.36, 2.4],
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Hyper Cutter", "Shell Armor", "Sheer Force"],
+    "experience": 65,
+    "stats": {
+      "hp": 30,
+      "attack": 105,
+      "defense": 90,
+      "sp_attack": 25,
+      "sp_defense": 25,
+      "speed": 50
+    },
     "next_evolution": [
       {
-        "num": 99,
+        "id": 99,
         "name": "Kingler"
       }
     ]
   },
   {
     "id": 99,
-    "num": 99,
     "name": "Kingler",
     "img_front": "pokemon_99_front.png",
     "img_back": "pokemon_99_back.png",
@@ -2523,16 +3404,25 @@
     "spawn_time": "03:44",
     "multipliers": null,
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Hyper Cutter", "Shell Armor", "Sheer Force"],
+    "experience": 166,
+    "stats": {
+      "hp": 55,
+      "attack": 130,
+      "defense": 115,
+      "sp_attack": 50,
+      "sp_defense": 50,
+      "speed": 75
+    },
     "prev_evolution": [
       {
-        "num": 98,
+        "id": 98,
         "name": "Krabby"
       }
     ]
   },
   {
     "id": 100,
-    "num": "100",
     "name": "Voltorb",
     "img_front": "pokemon_100_front.png",
     "img_back": "pokemon_100_back.png",
@@ -2547,16 +3437,25 @@
     "spawn_time": "04:36",
     "multipliers": [2.01, 2.02],
     "weaknesses": ["Ground"],
+    "abilities": ["Soundproof", "Static", "Aftermath"],
+    "experience": 66,
+    "stats": {
+      "hp": 40,
+      "attack": 30,
+      "defense": 50,
+      "sp_attack": 55,
+      "sp_defense": 55,
+      "speed": 100
+    },
     "next_evolution": [
       {
-        "num": "101",
+        "id": 101,
         "name": "Electrode"
       }
     ]
   },
   {
     "id": 101,
-    "num": "101",
     "name": "Electrode",
     "img_front": "pokemon_101_front.png",
     "img_back": "pokemon_101_back.png",
@@ -2570,16 +3469,25 @@
     "spawn_time": "04:10",
     "multipliers": null,
     "weaknesses": ["Ground"],
+    "abilities": ["Soundproof", "Static", "Aftermath"],
+    "experience": 168,
+    "stats": {
+      "hp": 60,
+      "attack": 50,
+      "defense": 70,
+      "sp_attack": 80,
+      "sp_defense": 80,
+      "speed": 140
+    },
     "prev_evolution": [
       {
-        "num": "100",
+        "id": 100,
         "name": "Voltorb"
       }
     ]
   },
   {
     "id": 102,
-    "num": "102",
     "name": "Exeggcute",
     "img_front": "pokemon_102_front.png",
     "img_back": "pokemon_102_back.png",
@@ -2594,16 +3502,25 @@
     "spawn_time": "09:09",
     "multipliers": [2.7, 3.18],
     "weaknesses": ["Fire", "Ice", "Poison", "Flying", "Bug", "Ghost", "Dark"],
+    "abilities": ["Chlorophyll", "Harvest"],
+    "experience": 65,
+    "stats": {
+      "hp": 60,
+      "attack": 40,
+      "defense": 80,
+      "sp_attack": 60,
+      "sp_defense": 45,
+      "speed": 40
+    },
     "next_evolution": [
       {
-        "num": "103",
+        "id": 103,
         "name": "Exeggutor"
       }
     ]
   },
   {
     "id": 103,
-    "num": "103",
     "name": "Exeggutor",
     "img_front": "pokemon_103_front.png",
     "img_back": "pokemon_103_back.png",
@@ -2617,16 +3534,25 @@
     "spawn_time": "12:34",
     "multipliers": null,
     "weaknesses": ["Fire", "Ice", "Poison", "Flying", "Bug", "Ghost", "Dark"],
+    "abilities": ["Chlorophyll", "Harvest"],
+    "experience": 186,
+    "stats": {
+      "hp": 95,
+      "attack": 95,
+      "defense": 85,
+      "sp_attack": 125,
+      "sp_defense": 65,
+      "speed": 55
+    },
     "prev_evolution": [
       {
-        "num": "102",
+        "id": 102,
         "name": "Exeggcute"
       }
     ]
   },
   {
     "id": 104,
-    "num": "104",
     "name": "Cubone",
     "img_front": "pokemon_104_front.png",
     "img_back": "pokemon_104_back.png",
@@ -2641,16 +3567,25 @@
     "spawn_time": "01:51",
     "multipliers": [1.67],
     "weaknesses": ["Water", "Grass", "Ice"],
+    "abilities": ["Rock Head", "Lightning Rod", "Battle Armor"],
+    "experience": 64,
+    "stats": {
+      "hp": 50,
+      "attack": 50,
+      "defense": 95,
+      "sp_attack": 40,
+      "sp_defense": 50,
+      "speed": 35
+    },
     "next_evolution": [
       {
-        "num": "105",
+        "id": 105,
         "name": "Marowak"
       }
     ]
   },
   {
     "id": 105,
-    "num": "105",
     "name": "Marowak",
     "img_front": "pokemon_105_front.png",
     "img_back": "pokemon_105_back.png",
@@ -2664,16 +3599,25 @@
     "spawn_time": "03:59",
     "multipliers": null,
     "weaknesses": ["Water", "Grass", "Ice"],
+    "abilities": ["Rock Head", "Lightning Rod", "Battle Armor"],
+    "experience": 149,
+    "stats": {
+      "hp": 60,
+      "attack": 80,
+      "defense": 110,
+      "sp_attack": 50,
+      "sp_defense": 80,
+      "speed": 45
+    },
     "prev_evolution": [
       {
-        "num": "104",
+        "id": 104,
         "name": "Cubone"
       }
     ]
   },
   {
     "id": 106,
-    "num": "106",
     "name": "Hitmonlee",
     "img_front": "pokemon_106_front.png",
     "img_back": "pokemon_106_back.png",
@@ -2686,11 +3630,20 @@
     "avg_spawns": 2,
     "spawn_time": "03:59",
     "multipliers": null,
-    "weaknesses": ["Flying", "Psychic", "Fairy"]
+    "weaknesses": ["Flying", "Psychic", "Fairy"],
+    "abilities": ["Limber", "Reckless", "Unburden"],
+    "experience": 159,
+    "stats": {
+      "hp": 50,
+      "attack": 120,
+      "defense": 53,
+      "sp_attack": 35,
+      "sp_defense": 110,
+      "speed": 87
+    }
   },
   {
     "id": 107,
-    "num": "107",
     "name": "Hitmonchan",
     "img_front": "pokemon_107_front.png",
     "img_back": "pokemon_107_back.png",
@@ -2703,11 +3656,20 @@
     "avg_spawns": 2.2,
     "spawn_time": "05:58",
     "multipliers": null,
-    "weaknesses": ["Flying", "Psychic", "Fairy"]
+    "weaknesses": ["Flying", "Psychic", "Fairy"],
+    "abilities": ["Keen Eye", "Iron Fist", "Inner Focus"],
+    "experience": 159,
+    "stats": {
+      "hp": 50,
+      "attack": 105,
+      "defense": 79,
+      "sp_attack": 35,
+      "sp_defense": 110,
+      "speed": 76
+    }
   },
   {
     "id": 108,
-    "num": "108",
     "name": "Lickitung",
     "img_front": "pokemon_108_front.png",
     "img_back": "pokemon_108_back.png",
@@ -2720,11 +3682,20 @@
     "avg_spawns": 1.1,
     "spawn_time": "02:46",
     "multipliers": null,
-    "weaknesses": ["Fighting"]
+    "weaknesses": ["Fighting"],
+    "abilities": ["Own Tempo", "Oblivious", "Cloud Nine"],
+    "experience": 77,
+    "stats": {
+      "hp": 90,
+      "attack": 55,
+      "defense": 75,
+      "sp_attack": 60,
+      "sp_defense": 75,
+      "speed": 30
+    }
   },
   {
     "id": 109,
-    "num": "109",
     "name": "Koffing",
     "img_front": "pokemon_109_front.png",
     "img_back": "pokemon_109_back.png",
@@ -2739,16 +3710,25 @@
     "spawn_time": "08:16",
     "multipliers": [1.11],
     "weaknesses": ["Ground", "Psychic"],
+    "abilities": ["Levitate"],
+    "experience": 68,
+    "stats": {
+      "hp": 40,
+      "attack": 65,
+      "defense": 95,
+      "sp_attack": 60,
+      "sp_defense": 45,
+      "speed": 35
+    },
     "next_evolution": [
       {
-        "num": "110",
+        "id": 110,
         "name": "Weezing"
       }
     ]
   },
   {
     "id": 110,
-    "num": "110",
     "name": "Weezing",
     "img_front": "pokemon_110_front.png",
     "img_back": "pokemon_110_back.png",
@@ -2762,16 +3742,25 @@
     "spawn_time": "12:17",
     "multipliers": null,
     "weaknesses": ["Ground", "Psychic"],
+    "abilities": ["Levitate"],
+    "experience": 172,
+    "stats": {
+      "hp": 65,
+      "attack": 90,
+      "defense": 120,
+      "sp_attack": 85,
+      "sp_defense": 70,
+      "speed": 60
+    },
     "prev_evolution": [
       {
-        "num": "109",
+        "id": 109,
         "name": "Koffing"
       }
     ]
   },
   {
     "id": 111,
-    "num": "111",
     "name": "Rhyhorn",
     "img_front": "pokemon_111_front.png",
     "img_back": "pokemon_111_back.png",
@@ -2786,16 +3775,25 @@
     "spawn_time": "03:21",
     "multipliers": [1.91],
     "weaknesses": ["Water", "Grass", "Ice", "Fighting", "Ground", "Steel"],
+    "abilities": ["Lightning Rod", "Rock Head", "Reckless"],
+    "experience": 69,
+    "stats": {
+      "hp": 80,
+      "attack": 85,
+      "defense": 95,
+      "sp_attack": 30,
+      "sp_defense": 30,
+      "speed": 25
+    },
     "next_evolution": [
       {
-        "num": "112",
+        "id": 112,
         "name": "Rhydon"
       }
     ]
   },
   {
     "id": 112,
-    "num": "112",
     "name": "Rhydon",
     "img_front": "pokemon_112_front.png",
     "img_back": "pokemon_112_back.png",
@@ -2809,16 +3807,25 @@
     "spawn_time": "05:50",
     "multipliers": null,
     "weaknesses": ["Water", "Grass", "Ice", "Fighting", "Ground", "Steel"],
+    "abilities": ["Lightning Rod", "Rock Head", "Reckless"],
+    "experience": 170,
+    "stats": {
+      "hp": 105,
+      "attack": 130,
+      "defense": 120,
+      "sp_attack": 45,
+      "sp_defense": 45,
+      "speed": 40
+    },
     "prev_evolution": [
       {
-        "num": "111",
+        "id": 111,
         "name": "Rhyhorn"
       }
     ]
   },
   {
     "id": 113,
-    "num": "113",
     "name": "Chansey",
     "img_front": "pokemon_113_front.png",
     "img_back": "pokemon_113_back.png",
@@ -2831,11 +3838,20 @@
     "avg_spawns": 1.3,
     "spawn_time": "04:46",
     "multipliers": null,
-    "weaknesses": ["Fighting"]
+    "weaknesses": ["Fighting"],
+    "abilities": ["Natural Cure", "Serene Grace", "Healer"],
+    "experience": 395,
+    "stats": {
+      "hp": 250,
+      "attack": 5,
+      "defense": 5,
+      "sp_attack": 35,
+      "sp_defense": 105,
+      "speed": 50
+    }
   },
   {
     "id": 114,
-    "num": "114",
     "name": "Tangela",
     "img_front": "pokemon_114_front.png",
     "img_back": "pokemon_114_back.png",
@@ -2848,11 +3864,20 @@
     "avg_spawns": 22.8,
     "spawn_time": "23:13",
     "multipliers": null,
-    "weaknesses": ["Fire", "Ice", "Poison", "Flying", "Bug"]
+    "weaknesses": ["Fire", "Ice", "Poison", "Flying", "Bug"],
+    "abilities": ["Chlorophyll", "Leaf Guard", "Regenerator"],
+    "experience": 87,
+    "stats": {
+      "hp": 65,
+      "attack": 55,
+      "defense": 115,
+      "sp_attack": 100,
+      "sp_defense": 40,
+      "speed": 60
+    }
   },
   {
     "id": 115,
-    "num": "115",
     "name": "Kangaskhan",
     "img_front": "pokemon_115_front.png",
     "img_back": "pokemon_115_back.png",
@@ -2865,11 +3890,20 @@
     "avg_spawns": 0.86,
     "spawn_time": "02:40",
     "multipliers": null,
-    "weaknesses": ["Fighting"]
+    "weaknesses": ["Fighting"],
+    "abilities": ["Early Bird", "Scrappy", "Inner Focus"],
+    "experience": 172,
+    "stats": {
+      "hp": 105,
+      "attack": 95,
+      "defense": 80,
+      "sp_attack": 40,
+      "sp_defense": 80,
+      "speed": 90
+    }
   },
   {
     "id": 116,
-    "num": "116",
     "name": "Horsea",
     "img_front": "pokemon_116_front.png",
     "img_back": "pokemon_116_back.png",
@@ -2884,16 +3918,25 @@
     "spawn_time": "02:53",
     "multipliers": [2.23],
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Swift Swim", "Sniper"],
+    "experience": 59,
+    "stats": {
+      "hp": 30,
+      "attack": 40,
+      "defense": 70,
+      "sp_attack": 70,
+      "sp_defense": 25,
+      "speed": 60
+    },
     "next_evolution": [
       {
-        "num": "117",
+        "id": 117,
         "name": "Seadra"
       }
     ]
   },
   {
     "id": 117,
-    "num": "117",
     "name": "Seadra",
     "img_front": "pokemon_117_front.png",
     "img_back": "pokemon_117_back.png",
@@ -2907,16 +3950,25 @@
     "spawn_time": "03:18",
     "multipliers": null,
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Poison Point", "Sniper"],
+    "experience": 154,
+    "stats": {
+      "hp": 55,
+      "attack": 65,
+      "defense": 95,
+      "sp_attack": 95,
+      "sp_defense": 45,
+      "speed": 85
+    },
     "prev_evolution": [
       {
-        "num": "116",
+        "id": 116,
         "name": "Horsea"
       }
     ]
   },
   {
     "id": 118,
-    "num": "118",
     "name": "Goldeen",
     "img_front": "pokemon_118_front.png",
     "img_back": "pokemon_118_back.png",
@@ -2931,16 +3983,25 @@
     "spawn_time": "03:14",
     "multipliers": [2.15, 2.2],
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Swift Swim", "Water Veil", "Lightning Rod"],
+    "experience": 64,
+    "stats": {
+      "hp": 45,
+      "attack": 67,
+      "defense": 60,
+      "sp_attack": 35,
+      "sp_defense": 50,
+      "speed": 63
+    },
     "next_evolution": [
       {
-        "num": "119",
+        "id": 119,
         "name": "Seaking"
       }
     ]
   },
   {
     "id": 119,
-    "num": "119",
     "name": "Seaking",
     "img_front": "pokemon_119_front.png",
     "img_back": "pokemon_119_back.png",
@@ -2954,16 +4015,25 @@
     "spawn_time": "05:21",
     "multipliers": null,
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Swift Swim", "Water Veil", "Lightning Rod"],
+    "experience": 158,
+    "stats": {
+      "hp": 80,
+      "attack": 92,
+      "defense": 65,
+      "sp_attack": 65,
+      "sp_defense": 80,
+      "speed": 68
+    },
     "prev_evolution": [
       {
-        "num": "118",
+        "id": 118,
         "name": "Goldeen"
       }
     ]
   },
   {
     "id": 120,
-    "num": "120",
     "name": "Staryu",
     "img_front": "pokemon_120_front.png",
     "img_back": "pokemon_120_back.png",
@@ -2978,16 +4048,25 @@
     "spawn_time": "22:59",
     "multipliers": [2.38, 2.41],
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Illuminate", "Natural Cure"],
+    "experience": 68,
+    "stats": {
+      "hp": 30,
+      "attack": 45,
+      "defense": 55,
+      "sp_attack": 70,
+      "sp_defense": 55,
+      "speed": 85
+    },
     "next_evolution": [
       {
-        "num": "121",
+        "id": 121,
         "name": "Starmie"
       }
     ]
   },
   {
     "id": 121,
-    "num": "121",
     "name": "Starmie",
     "img_front": "pokemon_121_front.png",
     "img_back": "pokemon_121_back.png",
@@ -3001,16 +4080,25 @@
     "spawn_time": "06:57",
     "multipliers": null,
     "weaknesses": ["Electric", "Grass", "Bug", "Ghost", "Dark"],
+    "abilities": ["Illuminate", "Natural Cure", "Analytic"],
+    "experience": 182,
+    "stats": {
+      "hp": 60,
+      "attack": 75,
+      "defense": 85,
+      "sp_attack": 100,
+      "sp_defense": 85,
+      "speed": 115
+    },
     "prev_evolution": [
       {
-        "num": "120",
+        "id": 120,
         "name": "Staryu"
       }
     ]
   },
   {
     "id": 122,
-    "num": "122",
     "name": "Mr. Mime",
     "img_front": "pokemon_122_front.png",
     "img_back": "pokemon_122_back.png",
@@ -3023,11 +4111,20 @@
     "avg_spawns": 0.31,
     "spawn_time": "01:51",
     "multipliers": null,
-    "weaknesses": ["Bug", "Ghost", "Dark"]
+    "weaknesses": ["Bug", "Ghost", "Dark"],
+    "abilities": ["Soundproof", "Filter", "Technician"],
+    "experience": 161,
+    "stats": {
+      "hp": 40,
+      "attack": 45,
+      "defense": 65,
+      "sp_attack": 100,
+      "sp_defense": 120,
+      "speed": 90
+    }
   },
   {
     "id": 123,
-    "num": "123",
     "name": "Scyther",
     "img_front": "pokemon_123_front.png",
     "img_back": "pokemon_123_back.png",
@@ -3040,11 +4137,20 @@
     "avg_spawns": 14,
     "spawn_time": "05:43",
     "multipliers": null,
-    "weaknesses": ["Fire", "Electric", "Ice", "Flying", "Rock"]
+    "weaknesses": ["Fire", "Electric", "Ice", "Flying", "Rock"],
+    "abilities": ["Swarm", "Technician", "Steadfast"],
+    "experience": 100,
+    "stats": {
+      "hp": 70,
+      "attack": 110,
+      "defense": 80,
+      "sp_attack": 55,
+      "sp_defense": 80,
+      "speed": 105
+    }
   },
   {
     "id": 124,
-    "num": "124",
     "name": "Jynx",
     "img_front": "pokemon_124_front.png",
     "img_back": "pokemon_124_back.png",
@@ -3057,11 +4163,20 @@
     "avg_spawns": 35,
     "spawn_time": "05:41",
     "multipliers": null,
-    "weaknesses": ["Fire", "Bug", "Rock", "Ghost", "Dark", "Steel"]
+    "weaknesses": ["Fire", "Bug", "Rock", "Ghost", "Dark", "Steel"],
+    "abilities": ["Oblivious", "Forewarn", "Dry Skin"],
+    "experience": 159,
+    "stats": {
+      "hp": 65,
+      "attack": 50,
+      "defense": 35,
+      "sp_attack": 115,
+      "sp_defense": 95,
+      "speed": 95
+    }
   },
   {
     "id": 125,
-    "num": "125",
     "name": "Electabuzz",
     "img_front": "pokemon_125_front.png",
     "img_back": "pokemon_125_back.png",
@@ -3074,11 +4189,20 @@
     "avg_spawns": 7.4,
     "spawn_time": "04:28",
     "multipliers": null,
-    "weaknesses": ["Ground"]
+    "weaknesses": ["Ground"],
+    "abilities": ["Static", "Vital Spirit"],
+    "experience": 172,
+    "stats": {
+      "hp": 65,
+      "attack": 83,
+      "defense": 57,
+      "sp_attack": 95,
+      "sp_defense": 85,
+      "speed": 105
+    }
   },
   {
     "id": 126,
-    "num": "126",
     "name": "Magmar",
     "img_front": "pokemon_126_front.png",
     "img_back": "pokemon_126_back.png",
@@ -3091,11 +4215,20 @@
     "avg_spawns": 10,
     "spawn_time": "20:36",
     "multipliers": null,
-    "weaknesses": ["Water", "Ground", "Rock"]
+    "weaknesses": ["Water", "Ground", "Rock"],
+    "abilities": ["Flame Body", "Vital Spirit"],
+    "experience": 173,
+    "stats": {
+      "hp": 65,
+      "attack": 95,
+      "defense": 57,
+      "sp_attack": 100,
+      "sp_defense": 85,
+      "speed": 93
+    }
   },
   {
     "id": 127,
-    "num": "127",
     "name": "Pinsir",
     "img_front": "pokemon_127_front.png",
     "img_back": "pokemon_127_back.png",
@@ -3108,11 +4241,20 @@
     "avg_spawns": 99,
     "spawn_time": "03:25",
     "multipliers": null,
-    "weaknesses": ["Fire", "Flying", "Rock"]
+    "weaknesses": ["Fire", "Flying", "Rock"],
+    "abilities": ["Hyper Cutter", "Mold Breaker", "Moxie"],
+    "experience": 175,
+    "stats": {
+      "hp": 65,
+      "attack": 125,
+      "defense": 100,
+      "sp_attack": 55,
+      "sp_defense": 70,
+      "speed": 85
+    }
   },
   {
     "id": 128,
-    "num": "128",
     "name": "Tauros",
     "img_front": "pokemon_128_front.png",
     "img_back": "pokemon_128_back.png",
@@ -3125,11 +4267,20 @@
     "avg_spawns": 12,
     "spawn_time": "00:37",
     "multipliers": null,
-    "weaknesses": ["Fighting"]
+    "weaknesses": ["Fighting"],
+    "abilities": ["Intimidate", "Anger Point", "Sheer Force"],
+    "experience": 172,
+    "stats": {
+      "hp": 75,
+      "attack": 100,
+      "defense": 95,
+      "sp_attack": 40,
+      "sp_defense": 70,
+      "speed": 110
+    }
   },
   {
     "id": 129,
-    "num": "129",
     "name": "Magikarp",
     "img_front": "pokemon_129_front.png",
     "img_back": "pokemon_129_back.png",
@@ -3144,16 +4295,25 @@
     "spawn_time": "14:26",
     "multipliers": [10.1, 11.8],
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Swift Swim", "Rattled"],
+    "experience": 40,
+    "stats": {
+      "hp": 20,
+      "attack": 10,
+      "defense": 55,
+      "sp_attack": 15,
+      "sp_defense": 20,
+      "speed": 80
+    },
     "next_evolution": [
       {
-        "num": "130",
+        "id": 130,
         "name": "Gyarados"
       }
     ]
   },
   {
     "id": 130,
-    "num": "130",
     "name": "Gyarados",
     "img_front": "pokemon_130_front.png",
     "img_back": "pokemon_130_back.png",
@@ -3167,16 +4327,25 @@
     "spawn_time": "02:15",
     "multipliers": null,
     "weaknesses": ["Electric", "Rock"],
+    "abilities": ["Intimidate"],
+    "experience": 189,
+    "stats": {
+      "hp": 95,
+      "attack": 125,
+      "defense": 79,
+      "sp_attack": 60,
+      "sp_defense": 100,
+      "speed": 81
+    },
     "prev_evolution": [
       {
-        "num": "129",
+        "id": 129,
         "name": "Magikarp"
       }
     ]
   },
   {
     "id": 131,
-    "num": "131",
     "name": "Lapras",
     "img_front": "pokemon_131_front.png",
     "img_back": "pokemon_131_back.png",
@@ -3189,11 +4358,20 @@
     "avg_spawns": 0.6,
     "spawn_time": "08:59",
     "multipliers": null,
-    "weaknesses": ["Electric", "Grass", "Fighting", "Rock"]
+    "weaknesses": ["Electric", "Grass", "Fighting", "Rock"],
+    "abilities": ["Water Absorb", "Shell Armor", "Hydration"],
+    "experience": 187,
+    "stats": {
+      "hp": 130,
+      "attack": 85,
+      "defense": 80,
+      "sp_attack": 85,
+      "sp_defense": 95,
+      "speed": 60
+    }
   },
   {
     "id": 132,
-    "num": "132",
     "name": "Ditto",
     "img_front": "pokemon_132_front.png",
     "img_back": "pokemon_132_back.png",
@@ -3206,11 +4384,20 @@
     "avg_spawns": 0,
     "spawn_time": "N/A",
     "multipliers": null,
-    "weaknesses": ["Fighting"]
+    "weaknesses": ["Fighting"],
+    "abilities": ["Limber", "Imposter"],
+    "experience": 101,
+    "stats": {
+      "hp": 48,
+      "attack": 48,
+      "defense": 48,
+      "sp_attack": 48,
+      "sp_defense": 48,
+      "speed": 48
+    }
   },
   {
     "id": 133,
-    "num": "133",
     "name": "Eevee",
     "img_front": "pokemon_133_front.png",
     "img_back": "pokemon_133_back.png",
@@ -3225,24 +4412,33 @@
     "spawn_time": "05:32",
     "multipliers": [2.02, 2.64],
     "weaknesses": ["Fighting"],
+    "abilities": ["Run Away", "Adaptability", "Anticipation"],
+    "experience": 65,
+    "stats": {
+      "hp": 55,
+      "attack": 55,
+      "defense": 50,
+      "sp_attack": 45,
+      "sp_defense": 65,
+      "speed": 55
+    },
     "next_evolution": [
       {
-        "num": "134",
+        "id": 134,
         "name": "Vaporeon"
       },
       {
-        "num": "135",
+        "id": 135,
         "name": "Jolteon"
       },
       {
-        "num": "136",
+        "id": 136,
         "name": "Flareon"
       }
     ]
   },
   {
     "id": 134,
-    "num": "134",
     "name": "Vaporeon",
     "img_front": "pokemon_134_front.png",
     "img_back": "pokemon_134_back.png",
@@ -3256,16 +4452,25 @@
     "spawn_time": "10:54",
     "multipliers": null,
     "weaknesses": ["Electric", "Grass"],
+    "abilities": ["Water Absorb", "Hydration"],
+    "experience": 184,
+    "stats": {
+      "hp": 130,
+      "attack": 65,
+      "defense": 60,
+      "sp_attack": 110,
+      "sp_defense": 95,
+      "speed": 65
+    },
     "prev_evolution": [
       {
-        "num": "133",
+        "id": 133,
         "name": "Eevee"
       }
     ]
   },
   {
     "id": 135,
-    "num": "135",
     "name": "Jolteon",
     "img_front": "pokemon_135_front.png",
     "img_back": "pokemon_135_back.png",
@@ -3279,16 +4484,25 @@
     "spawn_time": "02:30",
     "multipliers": null,
     "weaknesses": ["Ground"],
+    "abilities": ["Volt Absorb", "Quick Feet"],
+    "experience": 184,
+    "stats": {
+      "hp": 65,
+      "attack": 65,
+      "defense": 60,
+      "sp_attack": 110,
+      "sp_defense": 95,
+      "speed": 130
+    },
     "prev_evolution": [
       {
-        "num": "133",
+        "id": 133,
         "name": "Eevee"
       }
     ]
   },
   {
     "id": 136,
-    "num": "136",
     "name": "Flareon",
     "img_front": "pokemon_136_front.png",
     "img_back": "pokemon_136_back.png",
@@ -3302,16 +4516,25 @@
     "spawn_time": "07:02",
     "multipliers": null,
     "weaknesses": ["Water", "Ground", "Rock"],
+    "abilities": ["Flash Fire", "Guts"],
+    "experience": 184,
+    "stats": {
+      "hp": 65,
+      "attack": 130,
+      "defense": 60,
+      "sp_attack": 95,
+      "sp_defense": 110,
+      "speed": 65
+    },
     "prev_evolution": [
       {
-        "num": "133",
+        "id": 133,
         "name": "Eevee"
       }
     ]
   },
   {
     "id": 137,
-    "num": "137",
     "name": "Porygon",
     "img_front": "pokemon_137_front.png",
     "img_back": "pokemon_137_back.png",
@@ -3324,11 +4547,20 @@
     "avg_spawns": 1.2,
     "spawn_time": "02:49",
     "multipliers": null,
-    "weaknesses": ["Fighting"]
+    "weaknesses": ["Fighting"],
+    "abilities": ["Trace", "Download", "Analytic"],
+    "experience": 79,
+    "stats": {
+      "hp": 65,
+      "attack": 60,
+      "defense": 70,
+      "sp_attack": 85,
+      "sp_defense": 75,
+      "speed": 40
+    }
   },
   {
     "id": 138,
-    "num": "138",
     "name": "Omanyte",
     "img_front": "pokemon_138_front.png",
     "img_back": "pokemon_138_back.png",
@@ -3343,16 +4575,25 @@
     "spawn_time": "10:23",
     "multipliers": [2.12],
     "weaknesses": ["Electric", "Grass", "Fighting", "Ground"],
+    "abilities": ["Swift Swim", "Shell Armor", "Weak Armor"],
+    "experience": 71,
+    "stats": {
+      "hp": 35,
+      "attack": 40,
+      "defense": 100,
+      "sp_attack": 90,
+      "sp_defense": 55,
+      "speed": 35
+    },
     "next_evolution": [
       {
-        "num": "139",
+        "id": 139,
         "name": "Omastar"
       }
     ]
   },
   {
     "id": 139,
-    "num": "139",
     "name": "Omastar",
     "img_front": "pokemon_139_front.png",
     "img_back": "pokemon_139_back.png",
@@ -3366,16 +4607,25 @@
     "spawn_time": "05:04",
     "multipliers": null,
     "weaknesses": ["Electric", "Grass", "Fighting", "Ground"],
+    "abilities": ["Swift Swim", "Shell Armor", "Weak Armor"],
+    "experience": 173,
+    "stats": {
+      "hp": 70,
+      "attack": 60,
+      "defense": 125,
+      "sp_attack": 115,
+      "sp_defense": 70,
+      "speed": 55
+    },
     "prev_evolution": [
       {
-        "num": "138",
+        "id": 138,
         "name": "Omanyte"
       }
     ]
   },
   {
     "id": 140,
-    "num": "140",
     "name": "Kabuto",
     "img_front": "pokemon_140_front.png",
     "img_back": "pokemon_140_back.png",
@@ -3390,16 +4640,25 @@
     "spawn_time": "00:05",
     "multipliers": [1.97, 2.37],
     "weaknesses": ["Electric", "Grass", "Fighting", "Ground"],
+    "abilities": ["Swift Swim", "Battle Armor", "Weak Armor"],
+    "experience": 71,
+    "stats": {
+      "hp": 30,
+      "attack": 80,
+      "defense": 90,
+      "sp_attack": 55,
+      "sp_defense": 45,
+      "speed": 55
+    },
     "next_evolution": [
       {
-        "num": "141",
+        "id": 141,
         "name": "Kabutops"
       }
     ]
   },
   {
     "id": 141,
-    "num": "141",
     "name": "Kabutops",
     "img_front": "pokemon_141_front.png",
     "img_back": "pokemon_141_back.png",
@@ -3413,16 +4672,25 @@
     "spawn_time": "23:40",
     "multipliers": null,
     "weaknesses": ["Electric", "Grass", "Fighting", "Ground"],
+    "abilities": ["Swift Swim", "Battle Armor", "Weak Armor"],
+    "experience": 173,
+    "stats": {
+      "hp": 60,
+      "attack": 115,
+      "defense": 105,
+      "sp_attack": 65,
+      "sp_defense": 70,
+      "speed": 80
+    },
     "prev_evolution": [
       {
-        "num": "140",
+        "id": 140,
         "name": "Kabuto"
       }
     ]
   },
   {
     "id": 142,
-    "num": "142",
     "name": "Aerodactyl",
     "img_front": "pokemon_142_front.png",
     "img_back": "pokemon_142_back.png",
@@ -3435,11 +4703,20 @@
     "avg_spawns": 1.8,
     "spawn_time": "23:40",
     "multipliers": null,
-    "weaknesses": ["Water", "Electric", "Ice", "Rock", "Steel"]
+    "weaknesses": ["Water", "Electric", "Ice", "Rock", "Steel"],
+    "abilities": ["Rock Head", "Pressure", "Unnerve"],
+    "experience": 180,
+    "stats": {
+      "hp": 80,
+      "attack": 105,
+      "defense": 65,
+      "sp_attack": 60,
+      "sp_defense": 75,
+      "speed": 130
+    }
   },
   {
     "id": 143,
-    "num": "143",
     "name": "Snorlax",
     "img_front": "pokemon_143_front.png",
     "img_back": "pokemon_143_back.png",
@@ -3452,11 +4729,20 @@
     "avg_spawns": 1.6,
     "spawn_time": "23:40",
     "multipliers": null,
-    "weaknesses": ["Fighting"]
+    "weaknesses": ["Fighting"],
+    "abilities": ["Immunity", "Thick Fat", "Gluttony"],
+    "experience": 189,
+    "stats": {
+      "hp": 160,
+      "attack": 110,
+      "defense": 65,
+      "sp_attack": 65,
+      "sp_defense": 110,
+      "speed": 30
+    }
   },
   {
     "id": 144,
-    "num": "144",
     "name": "Articuno",
     "img_front": "pokemon_144_front.png",
     "img_back": "pokemon_144_back.png",
@@ -3469,11 +4755,20 @@
     "avg_spawns": 0,
     "spawn_time": "N/A",
     "multipliers": null,
-    "weaknesses": ["Fire", "Electric", "Rock", "Steel"]
+    "weaknesses": ["Fire", "Electric", "Rock", "Steel"],
+    "abilities": ["Pressure", "Snow Cloak"],
+    "experience": 261,
+    "stats": {
+      "hp": 90,
+      "attack": 85,
+      "defense": 100,
+      "sp_attack": 95,
+      "sp_defense": 125,
+      "speed": 85
+    }
   },
   {
     "id": 145,
-    "num": "145",
     "name": "Zapdos",
     "img_front": "pokemon_145_front.png",
     "img_back": "pokemon_145_back.png",
@@ -3486,11 +4781,20 @@
     "avg_spawns": 0,
     "spawn_time": "N/A",
     "multipliers": null,
-    "weaknesses": ["Ice", "Rock"]
+    "weaknesses": ["Ice", "Rock"],
+    "abilities": ["Pressure", "Static"],
+    "experience": 261,
+    "stats": {
+      "hp": 90,
+      "attack": 90,
+      "defense": 85,
+      "sp_attack": 125,
+      "sp_defense": 90,
+      "speed": 100
+    }
   },
   {
     "id": 146,
-    "num": "146",
     "name": "Moltres",
     "img_front": "pokemon_146_front.png",
     "img_back": "pokemon_146_back.png",
@@ -3503,11 +4807,20 @@
     "avg_spawns": 0,
     "spawn_time": "N/A",
     "multipliers": null,
-    "weaknesses": ["Water", "Electric", "Rock"]
+    "weaknesses": ["Water", "Electric", "Rock"],
+    "abilities": ["Pressure", "Flame Body"],
+    "experience": 261,
+    "stats": {
+      "hp": 90,
+      "attack": 100,
+      "defense": 90,
+      "sp_attack": 125,
+      "sp_defense": 85,
+      "speed": 90
+    }
   },
   {
     "id": 147,
-    "num": "147",
     "name": "Dratini",
     "img_front": "pokemon_147_front.png",
     "img_back": "pokemon_147_back.png",
@@ -3522,20 +4835,29 @@
     "spawn_time": "06:41",
     "multipliers": [1.83, 1.84],
     "weaknesses": ["Ice", "Dragon", "Fairy"],
+    "abilities": ["Shed Skin"],
+    "experience": 60,
+    "stats": {
+      "hp": 41,
+      "attack": 64,
+      "defense": 45,
+      "sp_attack": 50,
+      "sp_defense": 50,
+      "speed": 50
+    },
     "next_evolution": [
       {
-        "num": "148",
+        "id": 148,
         "name": "Dragonair"
       },
       {
-        "num": "149",
+        "id": 149,
         "name": "Dragonite"
       }
     ]
   },
   {
     "id": 148,
-    "num": "148",
     "name": "Dragonair",
     "img_front": "pokemon_148_front.png",
     "img_back": "pokemon_148_back.png",
@@ -3550,22 +4872,31 @@
     "spawn_time": "11:57",
     "multipliers": [2.05],
     "weaknesses": ["Ice", "Dragon", "Fairy"],
+    "abilities": ["Shed Skin"],
+    "experience": 147,
+    "stats": {
+      "hp": 61,
+      "attack": 84,
+      "defense": 65,
+      "sp_attack": 70,
+      "sp_defense": 70,
+      "speed": 70
+    },
     "prev_evolution": [
       {
-        "num": "147",
+        "id": 147,
         "name": "Dratini"
       }
     ],
     "next_evolution": [
       {
-        "num": "149",
+        "id": 149,
         "name": "Dragonite"
       }
     ]
   },
   {
     "id": 149,
-    "num": "149",
     "name": "Dragonite",
     "img_front": "pokemon_149_front.png",
     "img_back": "pokemon_149_back.png",
@@ -3579,20 +4910,29 @@
     "spawn_time": "23:38",
     "multipliers": null,
     "weaknesses": ["Ice", "Rock", "Dragon", "Fairy"],
+    "abilities": ["Inner Focus", "Multiscale"],
+    "experience": 270,
+    "stats": {
+      "hp": 91,
+      "attack": 134,
+      "defense": 95,
+      "sp_attack": 100,
+      "sp_defense": 100,
+      "speed": 80
+    },
     "prev_evolution": [
       {
-        "num": "147",
+        "id": 147,
         "name": "Dratini"
       },
       {
-        "num": "148",
+        "id": 148,
         "name": "Dragonair"
       }
     ]
   },
   {
     "id": 150,
-    "num": "150",
     "name": "Mewtwo",
     "img_front": "pokemon_150_front.png",
     "img_back": "pokemon_150_back.png",
@@ -3605,11 +4945,20 @@
     "avg_spawns": 0,
     "spawn_time": "N/A",
     "multipliers": null,
-    "weaknesses": ["Bug", "Ghost", "Dark"]
+    "weaknesses": ["Bug", "Ghost", "Dark"],
+    "abilities": ["Pressure", "Unnerve"],
+    "experience": 306,
+    "stats": {
+      "hp": 106,
+      "attack": 110,
+      "defense": 90,
+      "sp_attack": 154,
+      "sp_defense": 90,
+      "speed": 130
+    }
   },
   {
     "id": 151,
-    "num": "151",
     "name": "Mew",
     "img_front": "pokemon_151_front.png",
     "img_back": "pokemon_151_back.png",
@@ -3622,6 +4971,16 @@
     "avg_spawns": 0,
     "spawn_time": "N/A",
     "multipliers": null,
-    "weaknesses": ["Bug", "Ghost", "Dark"]
+    "weaknesses": ["Bug", "Ghost", "Dark"],
+    "abilities": ["Synchronize"],
+    "experience": 270,
+    "stats": {
+      "hp": 100,
+      "attack": 100,
+      "defense": 100,
+      "sp_attack": 100,
+      "sp_defense": 100,
+      "speed": 100
+    }
   }
 ]

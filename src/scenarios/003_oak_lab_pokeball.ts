@@ -9,9 +9,6 @@ import {
 import { openDialog } from "../utils/ui";
 import pokemons from "../constants/pokemons.json";
 
-import bulbasaurImg from "../../public/assets/images/pokemons/front/1.png";
-import charmanderImg from "../../public/assets/images/pokemons/front/4.png";
-import squirtleImg from "../../public/assets/images/pokemons/front/7.png";
 import { Layers, Objects, Sprites } from "../constants/assets";
 import { Direction } from "grid-engine";
 import { wait } from "../utils/time";
@@ -34,20 +31,11 @@ export default ([pokeball], scene: WorldScene) => {
 
   const pokemon_inside_id = getTiledObjectProperty("pokemon_inside", pokeball);
   const pokemon = pokemons.find(({ id }) => id === Number(pokemon_inside_id));
-  const pokemonImg = [
-    bulbasaurImg,
-    null,
-    null,
-    charmanderImg,
-    null,
-    null,
-    squirtleImg,
-  ][pokemon.id - 1];
   const type = pokemon.type[0].toLowerCase();
 
   openDialog({
     content: `OAK: So! You want the ${type} Pokemon, ${pokemon.name}?`,
-    image: pokemonImg,
+    image: `assets/images/pokemons/front/${pokemon.id}.png`,
     choices: ["Yes", "No"],
     callback: async (choice) => {
       if (choice === "Yes") {

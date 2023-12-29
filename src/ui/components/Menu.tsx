@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { UIEvents } from "../../constants/events";
-import { openDialog, toggleMenu } from "../../utils/ui";
+import { openDialog } from "../../utils/ui";
 import { useUIStore } from "../../stores/ui";
 import { SettingsMenu } from "./menus/SettingsMenu";
 import { useEventsListeners } from "../../utils/events";

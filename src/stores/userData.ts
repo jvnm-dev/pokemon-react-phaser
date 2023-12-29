@@ -4,30 +4,33 @@ import { persist, devtools } from "zustand/middleware";
 import type { Direction } from "grid-engine";
 
 import type { Maps } from "../constants/assets";
+import pokemons from '../constants/pokemons.json';
 
-interface IPosition {
+export interface IPosition {
   map: Maps;
   x?: number;
   y?: number;
   facingDirection: Direction;
 }
 
-interface IInventoryObject {
+export interface IInventoryObject {
   objectId: number;
 }
 
-interface IPokemon {
+export interface IPokemon {
   id: number;
   uniqId: number;
+  hp: number;
+  ability: string;
 }
 
-interface ISettings {
+export interface ISettings {
   general: {
     enableSound: boolean;
   };
 }
 
-interface IUserDataStore {
+export interface IUserDataStore {
   onBicycle: boolean;
   position?: IPosition;
   inventory: IInventoryObject[];
@@ -45,7 +48,7 @@ interface IUserDataStore {
 export const useUserDataStore = create<IUserDataStore>()(
   devtools(
     persist(
-      (set) => ({
+      (set, get) => ({
         update: (updates: Partial<IUserDataStore>) => {
           set((state) => ({
             ...state,
@@ -65,6 +68,8 @@ export const useUserDataStore = create<IUserDataStore>()(
 
         addPokemon: (id: number) => {
           const uniqId = Date.now();
+          const pokemon = pokemons.find(pokemon => pokemon.id === id); 
+          const ability = pokemon.abilities[Math.floor(Math.random() * pokemon.abilities.length)];
 
           set((state) => ({
             ...state,
@@ -73,6 +78,8 @@ export const useUserDataStore = create<IUserDataStore>()(
               {
                 id,
                 uniqId,
+                hp: pokemon.stats.hp,
+                ability,
               },
             ],
           }));
@@ -91,9 +98,7 @@ export const useUserDataStore = create<IUserDataStore>()(
         },
 
         hasCompletedScenario: (scenarioId: number) => {
-          return useUserDataStore
-            .getState()
-            .scenariosCompleted.includes(scenarioId);
+          return get().scenariosCompleted.includes(scenarioId);
         },
 
         completeScenario: (scenarioId: number) => {

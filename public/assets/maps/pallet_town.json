@@ -146,9 +146,9 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 450, 450, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 450, 450, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 450, 450, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -564,6 +564,114 @@
                  "width":0,
                  "x":261.333333333333,
                  "y":746.666666666667
+                }, 
+                {
+                 "height":0,
+                 "id":121,
+                 "name":"pokeball",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"pokemon_inside",
+                         "type":"string",
+                         "value":"46"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":551.724137931035,
+                 "y":1034.48275862069
+                }, 
+                {
+                 "height":0,
+                 "id":122,
+                 "name":"pokeball",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"pokemon_inside",
+                         "type":"string",
+                         "value":"145"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":601.311931536831,
+                 "y":1033.23132734454
+                }, 
+                {
+                 "height":0,
+                 "id":123,
+                 "name":"pokeball",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"pokemon_inside",
+                         "type":"string",
+                         "value":"98"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":597.542501262414,
+                 "y":1081.74830275487
+                }, 
+                {
+                 "height":0,
+                 "id":124,
+                 "name":"pokeball",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"pokemon_inside",
+                         "type":"string",
+                         "value":"65"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":552.095606800202,
+                 "y":1082.87044829714
+                }, 
+                {
+                 "height":0,
+                 "id":125,
+                 "name":"pokeball",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"pokemon_inside",
+                         "type":"string",
+                         "value":"100"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":551.534534029064,
+                 "y":1132.80592492846
+                }, 
+                {
+                 "height":0,
+                 "id":126,
+                 "name":"pokeball",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"pokemon_inside",
+                         "type":"string",
+                         "value":"141"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":599.225719575829,
+                 "y":1132.24485215732
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -572,7 +680,7 @@
          "y":0
         }],
  "nextlayerid":14,
- "nextobjectid":121,
+ "nextobjectid":127,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
