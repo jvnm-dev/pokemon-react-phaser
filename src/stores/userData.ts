@@ -4,7 +4,8 @@ import { persist, devtools } from "zustand/middleware";
 import type { Direction } from "grid-engine";
 
 import type { Maps } from "../constants/assets";
-import pokemons from '../constants/pokemons.json';
+import { IPokemon } from "../constants/types";
+import { generatePokemon } from "../utils/pokemon";
 
 export interface IPosition {
   map: Maps;
@@ -15,13 +16,9 @@ export interface IPosition {
 
 export interface IInventoryObject {
   objectId: number;
-}
 
-export interface IPokemon {
-  id: number;
-  uniqId: number;
-  hp: number;
-  ability: string;
+  // The map where the object was collected
+  collectedMap: Maps;
 }
 
 export interface ISettings {
@@ -39,7 +36,7 @@ export interface IUserDataStore {
   scenariosCompleted: number[];
 
   update: (state: Partial<IUserDataStore>) => void;
-  addObjectToInventory: (objectId: number) => void;
+  addObjectToInventory: (objectId: number, currentMap: Maps) => void;
   addPokemon: (id: number) => void;
   hasCompletedScenario: (scenarioId: number) => boolean;
   completeScenario: (scenarioId: number) => void;
@@ -67,31 +64,23 @@ export const useUserDataStore = create<IUserDataStore>()(
         scenariosCompleted: [],
 
         addPokemon: (id: number) => {
-          const uniqId = Date.now();
-          const pokemon = pokemons.find(pokemon => pokemon.id === id); 
-          const ability = pokemon.abilities[Math.floor(Math.random() * pokemon.abilities.length)];
-
           set((state) => ({
             ...state,
             pokemons: [
               ...state.pokemons,
-              {
-                id,
-                uniqId,
-                hp: pokemon.stats.hp,
-                ability,
-              },
+              generatePokemon(id)
             ],
           }));
         },
 
-        addObjectToInventory: (objectId: number) => {
+        addObjectToInventory: (objectId: number, currentMap: Maps) => {
           set((state) => ({
             ...state,
             inventory: [
               ...state.inventory,
               {
                 objectId,
+                collectedMap: currentMap,
               },
             ],
           }));

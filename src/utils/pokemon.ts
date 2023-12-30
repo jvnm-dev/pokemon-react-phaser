@@ -1,5 +1,6 @@
 import zones from "../constants/zones.json";
 import pokemons from "../constants/pokemons.json";
+import { IPokemon, PokemonGender } from "../constants/types";
 
 export const getRandomPokemonFromZone = (zoneId: number) => {
   const zone = zones.find(({ id }) => id === zoneId);
@@ -29,3 +30,22 @@ export const getRandomPokemonFromZone = (zoneId: number) => {
 
   return pokemons.find(({ id }) => id === pokemonId);
 };
+
+export const generatePokemon = (pokemonId: number): IPokemon => {
+  const pokemon = pokemons.find(({ id }) => id === pokemonId);
+
+  if (!pokemon) {
+    throw new Error(`Pokemon ${pokemonId} not found`);
+  }
+
+  const ability = pokemon.abilities[Math.floor(Math.random() * pokemon.abilities.length)];
+  const gender = Object.values(PokemonGender)[Math.floor(Math.random() * Object.values(PokemonGender).length)];
+
+  return {
+    ...pokemon,
+    uniqId: Date.now(),
+    hp: pokemon.stats.hp,
+    ability,
+    gender,
+  }
+}

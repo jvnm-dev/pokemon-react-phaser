@@ -359,7 +359,7 @@ export const handlePokeball = (
 
   removeObject(scene, pokeball);
 
-  useUserDataStore.getState().addObjectToInventory(pokeball.id);
+  useUserDataStore.getState().addObjectToInventory(pokeball.id, scene.map);
 
   if (pokemonInside) {
     const pokemon = pokemons[pokemonInside - 1];

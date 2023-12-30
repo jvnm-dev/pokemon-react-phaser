@@ -328,11 +328,10 @@ export default class WorldScene extends Scene {
 
   applyUserDataAfterRender(): void {
     const inventory = useUserDataStore.getState().inventory;
-    const userItemIds = inventory.map(({ objectId }) => objectId);
 
     // Remove objects that has been already taken
     this.tilemap.objects?.[0].objects.forEach((object) => {
-      if (userItemIds.includes(object.id)) {
+      if (inventory.find(({ objectId, collectedMap }) => objectId === object.id && collectedMap === this.map)) {
         removeObject(this, convertObjectPositionToTilePosition(object));
       }
     });

@@ -70,7 +70,7 @@ export default ([pokeball], scene: WorldScene) => {
                         removeObject(scene, bluePokeball);
                         useUserDataStore
                           .getState()
-                          .addObjectToInventory(bluePokeball.id);
+                          .addObjectToInventory(bluePokeball.id, scene.map);
                         completeScenario(3);
                       },
                     });

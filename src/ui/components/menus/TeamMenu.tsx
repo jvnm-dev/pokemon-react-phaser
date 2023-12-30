@@ -6,8 +6,10 @@ import { UIEvents } from "../../../constants/events";
 import { useUIStore } from "../../../stores/ui";
 
 import type { Options as ParentOptions } from "../Menu";
-import { IPokemon, useUserDataStore } from "../../../stores/userData";
+import { useUserDataStore } from "../../../stores/userData";
 import pokemons from '../../../constants/pokemons.json';
+import { IPokemon } from "../../../constants/types";
+import { Gender } from "../Gender";
 
 export enum Options {
   GENERAL = "general",
@@ -143,7 +145,7 @@ export const TeamMenu = ({ setSelectedOption }: TeamMenuProps) => {
   }, [hoveringRegion]);
 
   const teamChunks = team?.reduce(
-    (result: IPokemon[][], value, index, array) => {
+    (result: IPokemon[][], _, index, array) => {
       if (index < 2) {
         result.push(array.slice(index * 3, index * 3 + 3));
       }
@@ -164,14 +166,14 @@ export const TeamMenu = ({ setSelectedOption }: TeamMenuProps) => {
 
         {teamChunks?.map((chunk) => (
           <div className="column">
-            {chunk?.map(({ id, hp }) => {
+            {chunk?.map(({ id, hp, gender }) => {
               const pokemon = pokemons.find((p) => p.id === id);
 
               return (
                 <div key={pokemon.id} className="entry">
                   <img src={`/assets/images/pokemons/front/${pokemon.id}.png`} alt={pokemon.name} height={192} />
                   <div>
-                    {capitalize(pokemon.name)}
+                    <div className="title">{capitalize(pokemon.name)} <Gender gender={gender} /></div>
                     <div className="hp-bar">
                       <div className="hp">
                           <div className="label">HP</div>

@@ -250,7 +250,21 @@ div.hovered label {
 #ui .team .entry {
   display: flex;
   align-items: center;
+}
+
+#ui .team .entry .title {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
 } 
+
+#ui .team .entry .title .gender-female, #ui .team .entry .title .gender-male {
+  margin-left: 8px;
+}
+
+#ui .team .entry .title .gender-female {
+  margin-bottom: 4px;
+}
 
 #ui .team .entry .hp {
   margin-top: 8px;
@@ -264,13 +278,21 @@ div.hovered label {
 }
 
 #ui .team .entry progress {
-  height: 15px;
+  height: 12px;
   appearance: none;
-  border-radius: 16px;
-  border: 2px solid green;
+  border-radius: 4px;
+  border: 2px solid #000;
 }
 
 #ui .team .entry .hp-bar {
   display: flex;
   flex-direction: column;
+}
+
+.gender-male {
+  color: #92b5ea;
+}
+
+.gender-female {
+  color: #f9789f;
 }
