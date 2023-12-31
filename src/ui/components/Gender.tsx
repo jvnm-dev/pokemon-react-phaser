@@ -1,9 +1,17 @@
-import { PokemonGender } from "../../constants/types"
+import { PokemonGender } from "../../constants/types";
 
 export type GenderProps = {
-    gender: PokemonGender;
-}
+  gender: PokemonGender;
+};
 
 export const Gender = ({ gender }: GenderProps) => {
-    return <span className={gender === PokemonGender.MALE ? 'gender-male' : 'gender-female'}>{gender}</span>
-}
+  return (
+    <span
+      className={
+        gender === PokemonGender.MALE ? "gender-male" : "gender-female"
+      }
+    >
+      {gender}
+    </span>
+  );
+};

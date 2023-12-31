@@ -11,27 +11,21 @@ import {
   triggerUIRight,
 } from "../utils/ui";
 import { useUserDataStore } from "../stores/userData";
-import { getRandomNumber } from "../utils/number";
-
-export type EnnemyPokemon = {
-  image?: GameObjects.Image;
-  data?: Record<string, string>;
-};
+import { IPokemon } from "../constants/types";
 
 export default class BattleScene extends Scene {
   trainerBack: GameObjects.Image;
   pokemonFromTeam: GameObjects.Image;
-  ennemyPokemon: EnnemyPokemon = {};
-  isShiny: boolean;
+
+  ennemySprite: GameObjects.Image;
+  ennemyPokemon: IPokemon;
 
   constructor() {
     super("Battle");
-    this.isShiny = false;
   }
 
-  init(data: { pokemon: Record<string, string> }) {
-    this.ennemyPokemon.data = data.pokemon;
-    this.isShiny = getRandomNumber(0, 512) === 0;
+  init(data: { pokemon: IPokemon }) {
+    this.ennemyPokemon = data.pokemon;
   }
 
   create(): void {
@@ -71,20 +65,19 @@ export default class BattleScene extends Scene {
     this.trainerBack.y = Number(this.game.config.height) / 1.9;
     this.trainerBack.x = 0;
 
-    this.ennemyPokemon.image = this.add.image(
+    this.ennemySprite = this.add.image(
       this.scale.width / 2,
       this.scale.height / 2,
-      `pokemon_${this.ennemyPokemon.data.id}_front${
-        this.isShiny ? "_shiny" : ""
+      `pokemon_${this.ennemyPokemon.id}_front${
+        this.ennemyPokemon.isShiny ? "_shiny" : ""
       }`,
     );
 
-    this.ennemyPokemon.image.displayHeight =
-      Number(this.game.config.height) / 4;
-    this.ennemyPokemon.image.scaleX = this.ennemyPokemon.image.scaleY;
-    this.ennemyPokemon.image.y = Number(this.game.config.height) / 3.5;
-    this.ennemyPokemon.image.x = Number(this.game.config.width);
-    this.ennemyPokemon.image.tint = 0x000000;
+    this.ennemySprite.displayHeight = Number(this.game.config.height) / 4;
+    this.ennemySprite.scaleX = this.ennemySprite.scaleY;
+    this.ennemySprite.y = Number(this.game.config.height) / 3.5;
+    this.ennemySprite.x = Number(this.game.config.width);
+    this.ennemySprite.tint = 0x000000;
 
     const positionTransitionDelay = 1000;
 
@@ -96,7 +89,7 @@ export default class BattleScene extends Scene {
     });
 
     this.tweens.add({
-      targets: this.ennemyPokemon.image,
+      targets: this.ennemySprite,
       x: Number(this.game.config.width) / 1.52,
       duration: 1000,
     });
@@ -104,24 +97,24 @@ export default class BattleScene extends Scene {
     this.add.existing(background);
     this.add.existing(grass);
     this.add.existing(this.trainerBack);
-    this.add.existing(this.ennemyPokemon.image);
+    this.add.existing(this.ennemySprite);
 
     // Display UI
     useUIStore.getState().toggleBattle();
 
     // When sliding is done, show ennemy
     this.time.delayedCall(positionTransitionDelay, () => {
-      if (this.ennemyPokemon.image) {
-        this.ennemyPokemon.image.setDepth(99);
-        this.ennemyPokemon.image.tint = 0xffffff;
+      if (this.ennemySprite) {
+        this.ennemySprite.setDepth(99);
+        this.ennemySprite.tint = 0xffffff;
 
         const circle = new Phaser.Geom.Circle(
-          this.ennemyPokemon.image.x - 15,
-          this.ennemyPokemon.image.y,
-          this.ennemyPokemon.image.displayHeight / 2,
+          this.ennemySprite.x - 15,
+          this.ennemySprite.y,
+          this.ennemySprite.displayHeight / 2,
         );
 
-        if (this.isShiny) {
+        if (this.ennemyPokemon.isShiny) {
           const starsEmitter = this.add.particles(0, 0, "object_star", {
             speed: 0.5,
             lifespan: 1500,

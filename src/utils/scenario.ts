@@ -5,7 +5,8 @@ import { useUserDataStore } from "../stores/userData";
 export const getFirstPossibleScenario = (
   object: Types.Tilemaps.TiledObject,
 ) => {
-  const scenarioIds = getTiledObjectProperty("scenario_ids", object)?.split(",") ?? [];
+  const scenarioIds =
+    getTiledObjectProperty("scenario_ids", object)?.split(",") ?? [];
   const loopLastScenario = !!getTiledObjectProperty(
     "loop_last_scenario",
     object,

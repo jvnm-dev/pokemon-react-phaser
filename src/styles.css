@@ -256,9 +256,10 @@ div.hovered label {
   display: flex;
   align-items: center;
   font-size: 24px;
-} 
+}
 
-#ui .team .entry .title .gender-female, #ui .team .entry .title .gender-male {
+#ui .team .entry .title .gender-female,
+#ui .team .entry .title .gender-male {
   margin-left: 8px;
 }
 

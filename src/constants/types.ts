@@ -5,8 +5,8 @@ export type ObjectProperties = {
 };
 
 export enum PokemonGender {
-  MALE = '♂',
-  FEMALE = '♀',
+  MALE = "♂",
+  FEMALE = "♀",
 }
 
 export interface IPokemon {
@@ -15,4 +15,5 @@ export interface IPokemon {
   hp: number;
   ability: string;
   gender: PokemonGender;
+  isShiny: boolean;
 }

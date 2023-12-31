@@ -27,6 +27,7 @@ import {
 } from "../utils/ui";
 import { useUserDataStore } from "../stores/userData";
 import { useUIStore } from "../stores/ui";
+import { moves } from "../constants/moves";
 
 export interface WorldReceivedData {
   facingDirection: Direction;
@@ -64,6 +65,7 @@ export default class WorldScene extends Scene {
     daylightOverlay.setScrollFactor(0);
 
     this.daylightOverlay = daylightOverlay;
+    console.log(Object.keys(moves));
   }
 
   create(): void {
@@ -288,7 +290,11 @@ export default class WorldScene extends Scene {
         });
 
         if (!collides) {
-          this.gridEngine.setPosition(Sprites.PLAYER, tilePosition, Layers.WORLD2);
+          this.gridEngine.setPosition(
+            Sprites.PLAYER,
+            tilePosition,
+            Layers.WORLD2,
+          );
         }
       }
     });
@@ -331,7 +337,12 @@ export default class WorldScene extends Scene {
 
     // Remove objects that has been already taken
     this.tilemap.objects?.[0].objects.forEach((object) => {
-      if (inventory.find(({ objectId, collectedMap }) => objectId === object.id && collectedMap === this.map)) {
+      if (
+        inventory.find(
+          ({ objectId, collectedMap }) =>
+            objectId === object.id && collectedMap === this.map,
+        )
+      ) {
         removeObject(this, convertObjectPositionToTilePosition(object));
       }
     });

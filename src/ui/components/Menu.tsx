@@ -45,11 +45,7 @@ export const Menu = () => {
 
   const selectOption = () => {
     if (store.menu.isOpen && !selected && !store.dialog.isOpen) {
-      if (
-        [Options.POKEDEX, Options.BAG, Options.YOU].includes(
-          hovered,
-          )
-      ) {
+      if ([Options.POKEDEX, Options.BAG, Options.YOU].includes(hovered)) {
         return openDialog({
           content: `This feature is not ready yet.`,
         });

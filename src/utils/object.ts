@@ -9,8 +9,8 @@ import { isDialogOpen, isUIOpen, openDialog, triggerUINextStep } from "./ui";
 import { useUserDataStore } from "../stores/userData";
 import { getRandomNumber } from "./number";
 
-import pokemons from "../constants/pokemons.json";
-import { getRandomPokemonFromZone } from "./pokemon";
+import { pokemons } from "../constants/pokemons";
+import { generatePokemon, getRandomPokemon } from "./pokemon";
 import { scenarios } from "../scenarios";
 import { ObjectProperties } from "../constants/types";
 import { moveRandomly } from "./npc";
@@ -306,13 +306,7 @@ export const handleMoveOnGrass = (
         const battleStarted = scene.data.get("battleStarted");
 
         if (!battleStarted) {
-          const pokemon = getRandomPokemonFromZone(
-            Number(
-              grass.properties.find(
-                (property: ObjectProperties) => property.name === "id",
-              )?.value,
-            ),
-          );
+          const pokemon = generatePokemon(getRandomPokemon().id);
 
           scene.sound.stopAll();
           scene.sound.play(Audios.BATTLE, getAudioConfig());

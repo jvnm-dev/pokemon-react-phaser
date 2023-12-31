@@ -7,7 +7,7 @@ import { useUIStore } from "../../../stores/ui";
 
 import type { Options as ParentOptions } from "../Menu";
 import { useUserDataStore } from "../../../stores/userData";
-import pokemons from '../../../constants/pokemons.json';
+import { pokemons } from "../../../constants/pokemons";
 import { IPokemon } from "../../../constants/types";
 import { Gender } from "../Gender";
 
@@ -89,9 +89,7 @@ export const TeamMenu = ({ setSelectedOption }: TeamMenuProps) => {
     setSelectedOption(undefined);
   };
 
-  const processHoveredOption = () => {
-   
-  };
+  const processHoveredOption = () => {};
 
   useEventsListeners(
     [
@@ -144,15 +142,13 @@ export const TeamMenu = ({ setSelectedOption }: TeamMenuProps) => {
     }
   }, [hoveringRegion]);
 
-  const teamChunks = team?.reduce(
-    (result: IPokemon[][], _, index, array) => {
-      if (index < 2) {
-        result.push(array.slice(index * 3, index * 3 + 3));
-      }
-
-      return result;
+  const teamChunks = team?.reduce((result: IPokemon[][], _, index, array) => {
+    if (index < 2) {
+      result.push(array.slice(index * 3, index * 3 + 3));
     }
-  , []);
+
+    return result;
+  }, []);
 
   return (
     <div className="menu full">
@@ -171,23 +167,34 @@ export const TeamMenu = ({ setSelectedOption }: TeamMenuProps) => {
 
               return (
                 <div key={pokemon.id} className="entry">
-                  <img src={`/assets/images/pokemons/front/${pokemon.id}.png`} alt={pokemon.name} height={192} />
+                  <img
+                    src={`/assets/images/pokemons/front/${pokemon.id}.png`}
+                    alt={pokemon.name}
+                    height={192}
+                  />
                   <div>
-                    <div className="title">{capitalize(pokemon.name)} <Gender gender={gender} /></div>
+                    <div className="title">
+                      {capitalize(pokemon.name)} <Gender gender={gender} />
+                    </div>
                     <div className="hp-bar">
                       <div className="hp">
-                          <div className="label">HP</div>
-                          <div className="value">{hp}/{pokemon.stats.hp}</div>
+                        <div className="label">HP</div>
+                        <div className="value">
+                          {hp}/{pokemon.stats.hp}
+                        </div>
                       </div>
-                      <progress value={pokemon.stats.hp} max={pokemon.stats.hp} />
+                      <progress
+                        value={pokemon.stats.hp}
+                        max={pokemon.stats.hp}
+                      />
                     </div>
                   </div>
                 </div>
-             )
+              );
             })}
           </div>
         ))}
       </div>
     </div>
   );
-}
+};

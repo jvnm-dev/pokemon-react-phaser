@@ -66,10 +66,7 @@ export const useUserDataStore = create<IUserDataStore>()(
         addPokemon: (id: number) => {
           set((state) => ({
             ...state,
-            pokemons: [
-              ...state.pokemons,
-              generatePokemon(id)
-            ],
+            pokemons: [...state.pokemons, generatePokemon(id)],
           }));
         },
 

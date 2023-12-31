@@ -7,7 +7,7 @@ import {
   removeObject,
 } from "../utils/object";
 import { openDialog } from "../utils/ui";
-import pokemons from "../constants/pokemons.json";
+import { pokemons } from "../constants/pokemons";
 
 import { Layers, Objects, Sprites } from "../constants/assets";
 import { Direction } from "grid-engine";
