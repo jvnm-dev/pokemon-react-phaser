@@ -1,17 +1,4 @@
-![PokéCraft Logo](https://i.imgur.com/boQASfE.png)
 ![PokéCraft Preview](https://i.ibb.co/7WMMqJj/image.png)
-
-**Welcome to PokéCraft: Scarlet Blaze Roulette!**
-
-PokéCraft: Scarlet Blaze Roulette is a Pokémon game that takes inspiration from the classic FireRed version but introduces a new level of excitement with randomized elements. Brace yourself for unpredictable Pokémon encounters, challenging trainer battles, and a crafting system for attacks.
-
-## Key Features
-
-- **Randomized World:** Explore a Pokémon world where every step is a surprise. Pokémon encounters, trainer teams, and even move sets are randomized, providing a fresh and unpredictable experience.
-
-- **Craft Your Moves:** Take control of your Pokémon's destiny by crafting custom moves. Once learned, these crafted moves are permanent, adding a strategic layer to your battles.
-
-- **Scarlet Blaze Challenge:** Immerse yourself in a challenging gameplay experience. Test your skills as a Pokémon Trainer in an environment where adaptability and strategy are key to success.
 
 ## Play demo (wip)
 
